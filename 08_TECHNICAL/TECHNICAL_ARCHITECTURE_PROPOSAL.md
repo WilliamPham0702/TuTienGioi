@@ -6,7 +6,7 @@
 | Người viết | Claude — Lead Developer & Technical Architect |
 | Người phản biện | ChatGPT — Product Design Lead |
 | Người quyết định | Product Owner (WilliamPham0702) |
-| Trạng thái | **ĐỀ XUẤT — chờ PO phê duyệt.** Chưa có gì trong tài liệu này là quyết định cuối. |
+| Trạng thái | **ĐÃ ĐƯỢC PO XEM XÉT (24/11/2026, C-002).** Phaser 4 là phương án ưu tiên nhưng **chưa khóa**; quyết định cuối sau PoC so sánh với Godot 4. Xem mục 0.1. |
 | Tài liệu nguồn | `PROJECT_BRIEF.md`, `DECISION_LOG.md` (D-001…D-008), `AI_TASK_ASSIGNMENTS.md`, `GDD_v0.1.md` (v0.2), `ART_DIRECTION_BRIEF_v0.1.md`, tại commit `06bf4c1` trên `main` |
 | Ngày kiểm tra nguồn | **24/11/2026** (mọi giá, giấy phép, giới hạn miễn phí ở mục 11 đều được tra ngày này) |
 | Phạm vi | Chỉ là báo cáo. Không có code triển khai, không có secret, không đăng ký dịch vụ, không sửa tài liệu sản phẩm đã duyệt. |
@@ -15,7 +15,19 @@
 
 ---
 
-## 0. Kết luận một trang
+## 0.1 Cập nhật sau quyết định của Product Owner (C-002, 24/11/2026)
+
+- **Kiến trúc mục tiêu được ưu tiên:** Phaser 4 + TypeScript (client) · Node.js + TypeScript (game core, LIVE bridge) · SQLite local · OBS Browser Source 9:16, 1080×1920 · adapter-based LIVE integration có Local Simulation Mode. **Chưa khóa** cho tới khi PoC so sánh với Godot 4 hoàn tất (DECISION_LOG D-005).
+- **Đánh số PoC theo PO**, thay cho mục 8 của bản đầu:
+  - **PoC-1** Hình ảnh và animation, dựng song song Phaser 4 và Godot 4;
+  - **PoC-2** Runtime và hiệu năng trong OBS (40/60/80 nhân vật);
+  - **PoC-3** Game core và dữ liệu, mô phỏng 500–1.000 người chơi.
+- Bài đo kết nối TikTok thật (trước đây là PoC-1) được đổi tên thành **PoC-LIVE** và **hoãn**: không dùng connector không chính thức trên tài khoản thật khi chưa được PO cho phép.
+- **Tài liệu PoC chính thức:** `08_TECHNICAL/POC_PLAN.md`. Khi mục 8 dưới đây khác `POC_PLAN.md`, **`POC_PLAN.md` được ưu tiên**.
+- **Lưu ý mã quyết định:** các mã D-008b, D-009…D-016 ở mục 13 là **mã đề xuất trong báo cáo này**, không phải mã trong `DECISION_LOG.md`. Trong DECISION_LOG, **D-009 = cho phép PoC C-002**.
+- **D-016 (một phần):** PO xác nhận tài khoản đã phát LIVE được trên điện thoại (ảnh chụp ngày 24/11/2026). **Quyền phát từ PC (LIVE Studio/stream key) vẫn chưa xác minh.** PoC không cần phát LIVE nên không bị chặn bởi điểm này.
+
+## 0. Kết luận một trang (bản đầu, trước quyết định C-002)
 
 **Phương án duy nhất được khuyến nghị — "Phương án W":**
 
@@ -30,7 +42,7 @@ Vì sao chọn phương án này:
 **Điểm yếu chính của phương án W, nói thẳng:**
 - Không có công cụ dựng **skeletal animation** miễn phí, trực quan, tích hợp sẵn như Godot. Spine phải trả phí nên bị loại [S10].
 - Animation chibi sẽ làm theo kiểu **cutout bằng dữ liệu**: tách nhân vật thành lớp, mỗi lớp có điểm xoay, keyframe lưu ở JSON và tween trong code; kết hợp sprite sheet cho động tác phức tạp.
-- Cách này AI làm được, nhưng **chất lượng phải chứng minh ở PoC-2** (mục 8).
+- Cách này AI làm được, nhưng **chất lượng phải chứng minh ở PoC-1** (xem `POC_PLAN.md`).
 - **Điều kiện chuyển sang Godot 4:** nếu ChatGPT và PO đánh giá animation không đạt chuẩn "chibi tiên hiệp cao cấp". Kiến trúc đã tách sẵn nên đổi phần vẽ không phải viết lại cầu nối LIVE và dữ liệu (mục 4).
 
 **Điểm chấm (thang 100):** Phaser/Web **89,5** · Godot 4 **81,0** · Unity 2D **77,0** (chi tiết mục 2).
@@ -125,11 +137,11 @@ Cách tính: Σ(trọng số × điểm) ÷ 5. Ví dụ W = (20×5 + 15×3,5 + 1
 ### 2.4 Độ nhạy của kết quả
 
 - Nếu nâng **T2 Hình ảnh lên 25** và hạ **T7 AI bảo trì xuống 10**: W = **86,5**, G = **83,0**, U = **80,0**. W vẫn dẫn nhưng khoảng cách với G thu hẹp từ 8,5 xuống 3,5 điểm.
-- **Kết luận độ nhạy:** lựa chọn giữa W và G phụ thuộc chủ yếu vào việc **animation cutout của W có đạt chuẩn nghệ thuật hay không**. Vì vậy báo cáo đặt **PoC-2 làm cổng quyết định** (mục 8): đạt thì giữ W, không đạt thì chuyển G.
+- **Kết luận độ nhạy:** lựa chọn giữa W và G phụ thuộc chủ yếu vào việc **animation cutout của W có đạt chuẩn nghệ thuật hay không**. Vì vậy báo cáo đặt **PoC-1 làm cổng quyết định** (mục 8): đạt thì giữ W, không đạt thì chuyển G.
 
 ### 2.5 Lý do loại các phương án còn lại
 
-- **Godot 4:** là phương án B mạnh nhất, không bị loại vĩnh viễn. Chưa chọn vì (1) tích hợp LIVE phải thêm sidecar ngôn ngữ khác, (2) AI bảo trì kém hơn, (3) phần animation phải chỉnh tay trong editor, đi ngược mục tiêu "PO + AI". Godot sẽ được chọn nếu PoC-2 không đạt.
+- **Godot 4:** là phương án B mạnh nhất, không bị loại vĩnh viễn. Chưa chọn vì (1) tích hợp LIVE phải thêm sidecar ngôn ngữ khác, (2) AI bảo trì kém hơn, (3) phần animation phải chỉnh tay trong editor, đi ngược mục tiêu "PO + AI". Godot sẽ được chọn nếu PoC-1 không đạt.
 - **Unity 2D:** chất lượng hình ảnh tốt nhưng nặng, phụ thuộc editor, AI khó bảo trì, và có rủi ro điều khoản giá trong tương lai. Không có lợi thế nào vượt Godot ở bối cảnh này.
 - **Các lựa chọn khác đã cân nhắc:**
   - *PixiJS* (MIT): renderer 2D mạnh nhưng không phải game framework; phải tự làm scene, tween, input. Phaser đã có sẵn.
@@ -158,7 +170,7 @@ Cách tính: Σ(trọng số × điểm) ÷ 5. Ví dụ W = (20×5 + 15×3,5 + 1
 | Bình luận | Có: user id, username, nickname, nội dung | Tín hiệu "đang tham gia" tin cậy nhất; dùng cho lệnh chat |
 | Like | Theo lô, kèm số lượng. Với stream đông người, sự kiện like không phải lúc nào cũng được TikTok gửi [S14] | Like chỉ là nguồn linh khí phụ, có trần; không thiết kế luật phụ thuộc vào từng lượt like |
 | Quà | Có: mã quà, giá trị, số lần lặp (streak). Combo báo tổng cộng dồn trong lúc chạy hiệu ứng nên dễ **cộng trùng** [S15] | Ingest phải tính phần chênh lệch theo streak |
-| Người vào phòng | Có sự kiện join; **chưa xác minh** có gửi đủ cho mọi người | PoC-1 đo tỉ lệ |
+| Người vào phòng | Có sự kiện join; **chưa xác minh** có gửi đủ cho mọi người | PoC-LIVE đo tỉ lệ |
 | Người đang xem | Chỉ có **tổng số** và **danh sách top viewer** [S16]; **không có danh sách đầy đủ, không có sự kiện rời phòng** | **Không đo chính xác được "thời gian xem" của từng người** → xem đề xuất D-008b ở mục 4.4 |
 
 ### 3.3 Tài khoản và khu vực Việt Nam
@@ -169,7 +181,7 @@ Cách tính: Σ(trọng số × điểm) ÷ 5. Ví dụ W = (20×5 + 15×3,5 + 1
 | Mức follower phổ biến 1.000, **có thể khác theo khu vực** | Nguồn thứ cấp [S18]; **chưa xác minh riêng cho Việt Nam** |
 | LIVE Studio / stream key **không mở cho mọi tài khoản**, kể cả khi đủ follower | Nguồn thứ cấp [S18]; **chưa xác minh cho tài khoản của PO** |
 | Người xem phải đủ 18 tuổi mới mua xu / tặng quà | **Xác minh** [S17] → người dưới 18 vẫn phải chơi được bằng thời gian, comment, like |
-| Thư viện không chính thức hoạt động với phòng LIVE ở Việt Nam | **Chưa xác minh.** Thư viện kết nối theo username, không thấy ghi giới hạn vùng, nhưng phải đo bằng PoC-1 trên LIVE thật |
+| Thư viện không chính thức hoạt động với phòng LIVE ở Việt Nam | **Chưa xác minh.** Thư viện kết nối theo username, không thấy ghi giới hạn vùng, nhưng phải đo bằng PoC-LIVE trên LIVE thật |
 | Quy định pháp lý Việt Nam về dữ liệu cá nhân người xem (ID, tên hiển thị) | **Chưa rà soát.** Claude không phải luật sư; đề xuất lưu tối thiểu và có thời hạn xóa (mục 4.5) |
 
 ### 3.4 Điều khoản và chính sách
@@ -233,7 +245,7 @@ flowchart LR
 | `console/` | Trang web tĩnh nhẹ | Pause intake, ẩn/đổi tên/ban, bơm sự kiện test, xem log và sức khỏe, sao lưu, kết thúc phiên | — |
 | `tools/` | Node script | Ghi và phát lại sự kiện, xuất animation JSON, kiểm tra license asset | — |
 
-**Hệ quả tách lớp:** `game/` chỉ nói chuyện với `bridge/` qua protocol trong `shared/`. **Nếu PoC-2 buộc chuyển sang Godot, chỉ phải viết lại `game/`.** `bridge/`, DB, console và test giữ nguyên.
+**Hệ quả tách lớp:** `game/` chỉ nói chuyện với `bridge/` qua protocol trong `shared/`. **Nếu PoC-1 buộc chuyển sang Godot, chỉ phải viết lại `game/`.** `bridge/`, DB, console và test giữ nguyên.
 
 ### 4.3 Luồng sự kiện và các cơ chế bắt buộc
 
@@ -374,7 +386,7 @@ Mọi số liệu hiệu năng trong tài liệu này là **giả định** cho 
 
 | Giai đoạn | Nội dung | Thời gian ước tính | Cổng duyệt |
 |---|---|---|---|
-| **P0 — PoC** | PoC-1/2/3 (mục 8) | 1–2 tuần | PO chốt D-005/D-007; ChatGPT duyệt chất lượng animation (PoC-2) |
+| **P0 — PoC** | PoC-1/2/3 (mục 8) | 1–2 tuần | PO chốt D-005/D-007; ChatGPT duyệt chất lượng animation (PoC-1) |
 | **P1 — Lõi** | `bridge` đầy đủ (adapter, ingest, core, DB, sim, backup), `console`, test tự động; `game` dùng placeholder | 2–4 tuần | Chạy mô phỏng 2 giờ không lỗi; test pass có log |
 | **P2 — Hình ảnh** | Sảnh nhiều lớp, Tông chủ, 2 Trưởng lão, đệ tử + biến thể, 4 animation, VFX lõi, overlay | 3–6 tuần (phụ thuộc asset) | ChatGPT review theo Art Brief §9 |
 | **P3 — Chạy thử kín** | 3–5 phiên LIVE thật có người dẫn; sửa lỗi; cân bằng | 1–2 tuần | PO nghiệm thu MVP theo GDD §12 |
@@ -386,7 +398,7 @@ Mọi số liệu hiệu năng trong tài liệu này là **giả định** cho 
 
 PoC là **mã thử nghiệm**, nằm trên nhánh riêng, **không phải mã game**, chi phí **0 VNĐ**. PoC chỉ chạy khi PO duyệt D-014.
 
-### PoC-1 — Đo luồng sự kiện LIVE (chỉ `bridge`, không đồ họa)
+### PoC-LIVE — Đo luồng sự kiện LIVE (chỉ `bridge`, không đồ họa) — **HOÃN**: chưa được PO cho phép dùng connector trên tài khoản thật
 
 **Cách làm:**
 - Script Node dùng `tiktok-live-connector` với gói ký miễn phí, không dùng API key.
@@ -406,7 +418,7 @@ PoC là **mã thử nghiệm**, nằm trên nhánh riêng, **không phải mã g
 | Số request ký dùng mỗi phiên | ≤ 20% hạn mức miễn phí/ngày |
 | Chạy song song nguồn dự phòng page capture | **Ghi nhận** loại sự kiện bắt được |
 
-### PoC-2 — Lát cắt hình ảnh (cổng quyết định Phaser hay Godot)
+### PoC-1 + PoC-2 — Lát cắt hình ảnh và hiệu năng (cổng quyết định Phaser hay Godot)
 
 **Cách làm:**
 - 1 nền sảnh 3–4 lớp parallax; 1 nhân vật chibi cutout (6–10 lớp) với animation idle, cultivate, celebrate, breakthrough theo JSON.
@@ -426,7 +438,7 @@ PoC là **mã thử nghiệm**, nằm trên nhánh riêng, **không phải mã g
 
 ### PoC-3 — Độ bền dữ liệu
 
-**Cách làm:** phát lại file từ PoC-1 (hoặc file mô phỏng) ở ×10 vào game core + SQLite; kill process ngẫu nhiên 10 lần.
+**Cách làm:** phát lại file từ PoC-LIVE (hoặc file mô phỏng) ở ×10 vào game core + SQLite; kill process ngẫu nhiên 10 lần.
 
 | Chỉ số | Ngưỡng đạt |
 |---|---|
@@ -450,9 +462,9 @@ PoC là **mã thử nghiệm**, nằm trên nhánh riêng, **không phải mã g
 - Chỉ dùng asset có giấy phép rõ ràng, lưu hồ sơ giấy phép (Art Brief §7).
 
 **Bất đồng / bổ sung (đưa ra để PO quyết):**
-1. **Engine:** Art Brief §7 nêu Godot trong danh sách công cụ. Claude **không chọn Godot làm engine mặc định** vì lý do ở mục 2.5, mà giữ Godot làm phương án B có điều kiện chuyển rõ ràng (PoC-2). Nếu ChatGPT đánh giá chất lượng animation quan trọng hơn trọng số Claude đặt, thì hai bên cần thống nhất trọng số ở mục 2.1 trước khi PO chốt.
+1. **Engine:** Art Brief §7 nêu Godot trong danh sách công cụ. Claude **không chọn Godot làm engine mặc định** vì lý do ở mục 2.5, mà giữ Godot làm phương án B có điều kiện chuyển rõ ràng (PoC-1). Nếu ChatGPT đánh giá chất lượng animation quan trọng hơn trọng số Claude đặt, thì hai bên cần thống nhất trọng số ở mục 2.1 trước khi PO chốt.
 2. **"Thời gian xem" (GDD §6.1, D-003):** về kỹ thuật **không đo được** cho từng người với nguồn dữ liệu hiện có. Đề xuất D-008b (thời gian tham gia tích cực) thay vì heartbeat thụ động.
-3. **Join làm điểm vào (GDD §4 bước 1):** sự kiện join chưa chắc đủ. Đề xuất bình luận lần đầu là cách vào chính thức, join chỉ là tín hiệu phụ (chờ PoC-1).
+3. **Join làm điểm vào (GDD §4 bước 1):** sự kiện join chưa chắc đủ. Đề xuất bình luận lần đầu là cách vào chính thức, join chỉ là tín hiệu phụ (chờ PoC-LIVE).
 4. **Vận hành tự động (Brief §4.5):** nên đặt mục tiêu "tự phục hồi" chứ không phải "không cần người". Vẫn cần người dẫn trong giờ chính vì chính sách LIVE [S20].
 5. **Ảnh AI tạo ra làm asset cuối (Art Brief §7):** đồng ý về nguyên tắc. Lưu ý kỹ thuật: cutout animation cần **tách lớp chuẩn** (đầu, tóc, thân, tay…) và **giữ nhất quán giữa các nhân vật**. Ảnh AI một khối thường không tách lớp được, nên cần quy trình tách lớp trong Krita/GIMP. Đây là công sức, không phải chi phí.
 
@@ -467,7 +479,7 @@ PoC là **mã thử nghiệm**, nằm trên nhánh riêng, **không phải mã g
 | X3 | Tài khoản PO **không có LIVE Studio lẫn stream key** | **Không phát được game từ PC** → không vận hành được | **Kiểm tra ngay**, trước PoC (D-016) |
 | X4 | TikTok xử lý tài khoản vì dùng công cụ không chính thức | Mất kênh | PO chấp nhận rủi ro (D-015); PoC dùng tài khoản phụ nếu có |
 | X5 | Stream bị coi là không người trông, mất đề xuất/kiếm tiền | Giảm tiếp cận | Có người dẫn (D-009) |
-| X6 | Asset miễn phí/tự làm không đạt chuẩn "chibi cao cấp" | Thiếu tính hấp dẫn | Không có giải pháp 0 VNĐ ngoài **thời gian sản xuất**; PoC-2 đo sớm |
+| X6 | Asset miễn phí/tự làm không đạt chuẩn "chibi cao cấp" | Thiếu tính hấp dẫn | Không có giải pháp 0 VNĐ ngoài **thời gian sản xuất**; PoC-1 đo sớm |
 | X7 | Ai đó thêm thẻ thanh toán vào GitHub hoặc tạo API key gắn thẻ | Có thể phát sinh phí | Quy tắc: **không thêm phương thức thanh toán** vào tài khoản dự án; không đăng ký dịch vụ |
 | X8 | PC của PO không đủ sức render và encode cùng lúc | Giật hình, rớt khung | PoC-2 đo; hạ N, hạ VFX, hoặc phát 720×1280 |
 | X9 | Rủi ro pháp lý dữ liệu cá nhân | Phải đổi cách lưu | Lưu tối thiểu, xóa theo hạn; nhờ người có chuyên môn rà soát trước khi chạy công khai |
@@ -519,7 +531,7 @@ PoC là **mã thử nghiệm**, nằm trên nhánh riêng, **không phải mã g
 
 > ### ✅ D-005 = Phương án W
 > **Phaser 4 + TypeScript (game) · Node.js + TypeScript (bridge, luật game) · SQLite (lưu trữ) · OBS Browser Source 1080×1920 · chạy local trên PC của PO · 0 VNĐ.**
-> Kèm điều kiện: **nếu PoC-2 không đạt tiêu chí chất lượng animation, chuyển phần `game/` sang Godot 4** (giữ nguyên `bridge/`, DB, console). Việc chuyển này cần PO xác nhận lại sau PoC.
+> Kèm điều kiện: **nếu PoC-1 không đạt tiêu chí chất lượng animation, chuyển phần `game/` sang Godot 4** (giữ nguyên `bridge/`, DB, console). Việc chuyển này cần PO xác nhận lại sau PoC.
 
 **Các điểm cần PO xác nhận cùng lúc:**
 
