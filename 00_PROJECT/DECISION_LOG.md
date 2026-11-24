@@ -21,6 +21,7 @@ Record only decisions explicitly approved by the Product Owner. Proposals must n
 | D-015 | Host và ghế Tông chủ | Khi người chơi giành ghế Tông chủ, nhân vật host trở thành Thái Thượng Tông Chủ, không thể bị khiêu chiến. | Product Owner | 2026-11-25 |
 | D-016 | Khiêu chiến | Chiến Lực mỗi bên được nhân ngẫu nhiên ±10% mỗi trận; bằng nhau thì bên bị khiêu chiến thắng. | Product Owner | 2026-11-25 |
 | D-017 | Con số kinh tế | Bảng linh căn, Tu Vi/giây, quy đổi linh thạch, thang cảnh giới, tỉ lệ cơ duyên trong GAME_FLOW_v0.1 được dùng tạm; chỉnh sau mô phỏng và cần PO duyệt lại trước khi khóa. | Product Owner | 2026-11-25 |
+| D-018 | Mục tiêu doanh thu | Quà tặng TikTok là nguồn doanh thu chính; thiết kế game khuyến khích tặng quà (vd. Cửa sổ Trợ Chiến 30 giây trong khiêu chiến). Phần thưởng từ quà phải cố định, biết trước; không có phần thưởng ngẫu nhiên trả tiền. Thay dòng "gifts must not be mandatory" ở GDD 6.3. | Product Owner | 2026-11-25 |
 
 ## Change-control rule
 Before changing an approved product decision, record the proposed change, rationale, impact, and obtain Product Owner approval.

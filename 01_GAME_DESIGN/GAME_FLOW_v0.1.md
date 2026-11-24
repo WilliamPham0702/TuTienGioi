@@ -134,6 +134,8 @@ Tu Vi gốc/giây (đề xuất) = 1
 **Giới hạn bắt buộc (theo GDD 6.2)**
 - Tim: gộp theo lô, có trần mỗi người/phút (vd. tối đa 60 Hạ Phẩm Linh Thạch/phút) để không quá tải và không lấn át thời gian xem.
 
+**Mục tiêu doanh thu (D-018):** quà tặng là nguồn doanh thu chính; thiết kế phải khuyến khích tặng quà.
+
 **PO đã quyết (D-010): phương án C — quà tính vào Chiến Lực, không giới hạn**
 - Đã cân nhắc các phương án giới hạn 30% (A) và quà chỉ để trang trí (B); PO chọn C.
 - Rủi ro đã ghi nhận: người tặng nhiều quà có thể giành chức Tông chủ; người chơi miễn phí có thể nản. Cần theo dõi khi chạy thật.
@@ -260,6 +262,20 @@ Chiến Lực trận = Chiến Lực × ngẫu nhiên(0,90 … 1,10)
 - Chiến Lực trận cao hơn → thắng. Bằng nhau → người giữ chức/người bị khiêu chiến thắng.
 - Hệ quả: bên yếu hơn tới ~18% vẫn có cơ hội lật kèo; chênh lệch lớn hơn thì gần như chắc thua.
 - Trận đấu: hiệu ứng 2 nhân vật giao chiêu 5–8 giây, hiện thanh Chiến Lực hai bên, đọc to kết quả.
+
+### 11.1 Cửa sổ Trợ Chiến (D-018)
+- Khi trận khiêu chiến bắt đầu, mở **30 giây Trợ Chiến** (đề xuất) trước khi phân thắng thua.
+- Trong thời gian này, quà tặng cộng Chiến Lực **ngay lập tức** cho bên được ủng hộ:
+  - Người tặng là một trong hai đấu thủ → cộng cho chính mình.
+  - Người xem khác tặng → cộng cho bên họ chọn (lệnh bình luận, vd. `!ung A`), mặc định là bên giữ chức nếu chưa chọn.
+- Màn hình: thanh Chiến Lực hai bên chạy theo thời gian thực, tên người trợ chiến bay vào phe, đồng hồ đếm ngược, đọc to khi có quà lớn.
+- Kết thúc 30 giây → áp dao động ±10% (D-016) → công bố thắng thua.
+- Quy đổi quà → Chiến Lực trợ chiến: bảng cố định, công khai, **không ngẫu nhiên**; con số chờ mô phỏng (D-017) và D-007.
+
+### 11.2 Ràng buộc chính sách khi kiếm tiền
+- Quà luôn cho phần thưởng **cố định, biết trước**. Không quay thưởng, hộp bí ẩn, rút thăm trả tiền.
+- Cơ duyên ngẫu nhiên (mục 10) chỉ chọn trong người đang hiện diện, không gắn với quà.
+- PO cần tự đọc LIVE Monetization Guidelines trong app (LIVE Safety Education Center) trước khi lên LIVE thật; Claude chưa xác minh được văn bản này.
 
 ---
 
