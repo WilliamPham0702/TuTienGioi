@@ -1,0 +1,165 @@
+{
+  "base": {
+    "w": 200,
+    "h": 260,
+    "scale": 1.5,
+    "root": [
+      100,
+      250
+    ]
+  },
+  "layers": [
+    {
+      "name": "shadow",
+      "pivot": [
+        100,
+        250
+      ]
+    },
+    {
+      "name": "hair_back",
+      "pivot": [
+        100,
+        60
+      ]
+    },
+    {
+      "name": "cape",
+      "pivot": [
+        100,
+        150
+      ]
+    },
+    {
+      "name": "body",
+      "pivot": [
+        100,
+        246
+      ]
+    },
+    {
+      "name": "arm_l",
+      "pivot": [
+        80,
+        156
+      ]
+    },
+    {
+      "name": "arm_r",
+      "pivot": [
+        120,
+        156
+      ]
+    },
+    {
+      "name": "beard",
+      "pivot": [
+        100,
+        134
+      ],
+      "optional": true
+    },
+    {
+      "name": "head",
+      "pivot": [
+        100,
+        146
+      ]
+    },
+    {
+      "name": "face",
+      "pivot": [
+        100,
+        146
+      ]
+    },
+    {
+      "name": "hair_front",
+      "pivot": [
+        100,
+        146
+      ]
+    },
+    {
+      "name": "hat",
+      "pivot": [
+        100,
+        146
+      ],
+      "optional": true
+    }
+  ],
+  "kinds": {
+    "disciple_t1": {
+      "shadow": "ch_shadow.png",
+      "hair_back": "ch_hair_back_dark.png",
+      "cape": "ch_cape_t1.png",
+      "arm_l": "ch_arm_l_t1.png",
+      "arm_r": "ch_arm_r_t1.png",
+      "body": "ch_body_t1.png",
+      "head": "ch_head.png",
+      "face": "ch_face.png",
+      "hair_front": "ch_hair_front_dark.png",
+      "hat": "ch_hat_hairpin.png"
+    },
+    "disciple_t2": {
+      "shadow": "ch_shadow.png",
+      "hair_back": "ch_hair_back_dark.png",
+      "cape": "ch_cape_t2.png",
+      "arm_l": "ch_arm_l_t2.png",
+      "arm_r": "ch_arm_r_t2.png",
+      "body": "ch_body_t2.png",
+      "head": "ch_head.png",
+      "face": "ch_face.png",
+      "hair_front": "ch_hair_front_dark.png",
+      "hat": "ch_hat_hairpin.png"
+    },
+    "disciple_t3": {
+      "shadow": "ch_shadow.png",
+      "hair_back": "ch_hair_back_dark.png",
+      "cape": "ch_cape_t3.png",
+      "arm_l": "ch_arm_l_t3.png",
+      "arm_r": "ch_arm_r_t3.png",
+      "body": "ch_body_t3.png",
+      "head": "ch_head.png",
+      "face": "ch_face.png",
+      "hair_front": "ch_hair_front_dark.png",
+      "hat": "ch_hat_hairpin.png"
+    },
+    "elder": {
+      "shadow": "ch_shadow.png",
+      "hair_back": "ch_hair_back_grey.png",
+      "cape": "ch_cape_elder.png",
+      "arm_l": "ch_arm_l_elder.png",
+      "arm_r": "ch_arm_r_elder.png",
+      "body": "ch_body_elder.png",
+      "head": "ch_head.png",
+      "face": "ch_face.png",
+      "hair_front": "ch_hair_front_grey.png",
+      "beard": "ch_beard_grey.png"
+    },
+    "master": {
+      "shadow": "ch_shadow.png",
+      "hair_back": "ch_hair_back_white.png",
+      "cape": "ch_cape_master.png",
+      "arm_l": "ch_arm_l_master.png",
+      "arm_r": "ch_arm_r_master.png",
+      "body": "ch_body_master.png",
+      "head": "ch_head.png",
+      "face": "ch_face.png",
+      "hair_front": "ch_hair_front_white.png",
+      "beard": "ch_beard_white.png",
+      "hat": "ch_hat_crown.png"
+    }
+  },
+  "tiers": [
+    "disciple_t1",
+    "disciple_t2",
+    "disciple_t3"
+  ],
+  "tier_names": [
+    "Luyện Khí",
+    "Trúc Cơ",
+    "Kim Đan"
+  ]
+}

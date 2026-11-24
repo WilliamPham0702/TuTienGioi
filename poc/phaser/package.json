@@ -1,0 +1,19 @@
+{
+  "name": "tutiengioi-poc-phaser",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "C-002 PoC-1A: sect hall scene in Phaser 4 (throwaway PoC code, not product code)",
+  "scripts": {
+    "sync": "node sync-assets.mjs",
+    "dev": "npm run sync && vite",
+    "build": "npm run sync && tsc --noEmit && vite build"
+  },
+  "dependencies": {
+    "phaser": "4.2.1"
+  },
+  "devDependencies": {
+    "typescript": "^5.9.3",
+    "vite": "^7.3.8"
+  }
+}

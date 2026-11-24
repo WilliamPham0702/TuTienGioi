@@ -1,0 +1,20 @@
+{
+  "_doc": "Stage layout in 1080x1920 pixels. Rows are filled front-first. 'scale' converts base rig units (200x260) to pixels. Names are shown only on rows with showName=true.",
+  "canvas": [1080, 1920],
+  "rows": [
+    {"y": 1760, "scale": 0.62, "cap": 9, "showName": true},
+    {"y": 1615, "scale": 0.56, "cap": 10, "showName": false},
+    {"y": 1480, "scale": 0.50, "cap": 11, "showName": false},
+    {"y": 1355, "scale": 0.44, "cap": 12, "showName": false},
+    {"y": 1240, "scale": 0.39, "cap": 13, "showName": false},
+    {"y": 1140, "scale": 0.34, "cap": 14, "showName": false},
+    {"y": 1050, "scale": 0.30, "cap": 15, "showName": false}
+  ],
+  "rowWidth": [960, 980, 980, 960, 940, 920, 900],
+  "npcs": [
+    {"kind": "master", "x": 540, "y": 965, "scale": 0.78, "name": "Tông chủ Vân Thiên"},
+    {"kind": "elder", "x": 330, "y": 1010, "scale": 0.6, "name": "Đại Trưởng lão"},
+    {"kind": "elder", "x": 750, "y": 1010, "scale": 0.6, "name": "Nhị Trưởng lão"}
+  ],
+  "backRowTint": 0.72
+}

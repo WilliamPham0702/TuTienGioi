@@ -1,0 +1,558 @@
+{
+ "name": "normal",
+ "length": 120.0,
+ "loop": true,
+ "events": [
+  {
+   "t": 1.0,
+   "type": "celebrate",
+   "slot": 57
+  },
+  {
+   "t": 2.0,
+   "type": "cultivate",
+   "slot": 2,
+   "duration": 6
+  },
+  {
+   "t": 3.5,
+   "type": "join",
+   "slot": 15,
+   "name": "Sư đệ Thảo"
+  },
+  {
+   "t": 5.23,
+   "type": "celebrate",
+   "slot": 59
+  },
+  {
+   "t": 5.25,
+   "type": "swap",
+   "slot": 1,
+   "slot2": 79
+  },
+  {
+   "t": 7.0,
+   "type": "cultivate",
+   "slot": 34,
+   "duration": 8
+  },
+  {
+   "t": 8.0,
+   "type": "breakthrough",
+   "slot": 45
+  },
+  {
+   "t": 8.64,
+   "type": "celebrate",
+   "slot": 75
+  },
+  {
+   "t": 9.5,
+   "type": "join",
+   "slot": 1,
+   "name": "Đạo hữu Long"
+  },
+  {
+   "t": 11.51,
+   "type": "celebrate",
+   "slot": 65
+  },
+  {
+   "t": 12.0,
+   "type": "cultivate",
+   "slot": 57,
+   "duration": 6
+  },
+  {
+   "t": 14.97,
+   "type": "celebrate",
+   "slot": 78
+  },
+  {
+   "t": 15.25,
+   "type": "swap",
+   "slot": 48,
+   "slot2": 48
+  },
+  {
+   "t": 15.5,
+   "type": "join",
+   "slot": 22,
+   "name": "Sư muội Long"
+  },
+  {
+   "t": 17.0,
+   "type": "cultivate",
+   "slot": 7,
+   "duration": 6
+  },
+  {
+   "t": 19.05,
+   "type": "celebrate",
+   "slot": 12
+  },
+  {
+   "t": 21.5,
+   "type": "join",
+   "slot": 16,
+   "name": "Huynh Hải 54"
+  },
+  {
+   "t": 22.0,
+   "type": "cultivate",
+   "slot": 22,
+   "duration": 8
+  },
+  {
+   "t": 22.45,
+   "type": "celebrate",
+   "slot": 18
+  },
+  {
+   "t": 23.0,
+   "type": "breakthrough",
+   "slot": 10
+  },
+  {
+   "t": 25.13,
+   "type": "celebrate",
+   "slot": 5
+  },
+  {
+   "t": 25.25,
+   "type": "swap",
+   "slot": 74,
+   "slot2": 1
+  },
+  {
+   "t": 27.0,
+   "type": "cultivate",
+   "slot": 47,
+   "duration": 10
+  },
+  {
+   "t": 27.5,
+   "type": "join",
+   "slot": 27,
+   "name": "Đạo hữu Dũng"
+  },
+  {
+   "t": 28.82,
+   "type": "celebrate",
+   "slot": 50
+  },
+  {
+   "t": 32.0,
+   "type": "cultivate",
+   "slot": 73,
+   "duration": 6
+  },
+  {
+   "t": 33.25,
+   "type": "celebrate",
+   "slot": 78
+  },
+  {
+   "t": 33.5,
+   "type": "join",
+   "slot": 75,
+   "name": "Lão Minh 51"
+  },
+  {
+   "t": 35.25,
+   "type": "swap",
+   "slot": 77,
+   "slot2": 9
+  },
+  {
+   "t": 37.0,
+   "type": "cultivate",
+   "slot": 11,
+   "duration": 8
+  },
+  {
+   "t": 37.05,
+   "type": "celebrate",
+   "slot": 79
+  },
+  {
+   "t": 38.0,
+   "type": "breakthrough",
+   "slot": 60
+  },
+  {
+   "t": 39.5,
+   "type": "join",
+   "slot": 77,
+   "name": "Tiểu Lan"
+  },
+  {
+   "t": 39.58,
+   "type": "celebrate",
+   "slot": 67
+  },
+  {
+   "t": 42.0,
+   "type": "cultivate",
+   "slot": 17,
+   "duration": 8
+  },
+  {
+   "t": 42.2,
+   "type": "celebrate",
+   "slot": 4
+  },
+  {
+   "t": 45.08,
+   "type": "celebrate",
+   "slot": 30
+  },
+  {
+   "t": 45.25,
+   "type": "swap",
+   "slot": 10,
+   "slot2": 11
+  },
+  {
+   "t": 45.5,
+   "type": "join",
+   "slot": 27,
+   "name": "Dũng 79"
+  },
+  {
+   "t": 47.0,
+   "type": "cultivate",
+   "slot": 42,
+   "duration": 10
+  },
+  {
+   "t": 48.78,
+   "type": "celebrate",
+   "slot": 59
+  },
+  {
+   "t": 51.5,
+   "type": "join",
+   "slot": 42,
+   "name": "Lão Hải 12"
+  },
+  {
+   "t": 51.94,
+   "type": "celebrate",
+   "slot": 75
+  },
+  {
+   "t": 52.0,
+   "type": "cultivate",
+   "slot": 66,
+   "duration": 10
+  },
+  {
+   "t": 53.0,
+   "type": "breakthrough",
+   "slot": 9
+  },
+  {
+   "t": 55.25,
+   "type": "swap",
+   "slot": 14,
+   "slot2": 32
+  },
+  {
+   "t": 56.12,
+   "type": "celebrate",
+   "slot": 66
+  },
+  {
+   "t": 57.0,
+   "type": "cultivate",
+   "slot": 17,
+   "duration": 10
+  },
+  {
+   "t": 57.5,
+   "type": "join",
+   "slot": 26,
+   "name": "Sư muội Minh"
+  },
+  {
+   "t": 59.09,
+   "type": "celebrate",
+   "slot": 37
+  },
+  {
+   "t": 62.0,
+   "type": "cultivate",
+   "slot": 4,
+   "duration": 6
+  },
+  {
+   "t": 62.59,
+   "type": "celebrate",
+   "slot": 10
+  },
+  {
+   "t": 63.5,
+   "type": "join",
+   "slot": 47,
+   "name": "Khoa"
+  },
+  {
+   "t": 65.25,
+   "type": "swap",
+   "slot": 53,
+   "slot2": 42
+  },
+  {
+   "t": 66.0,
+   "type": "celebrate",
+   "slot": 35
+  },
+  {
+   "t": 67.0,
+   "type": "cultivate",
+   "slot": 60,
+   "duration": 8
+  },
+  {
+   "t": 68.0,
+   "type": "breakthrough",
+   "slot": 53
+  },
+  {
+   "t": 69.32,
+   "type": "celebrate",
+   "slot": 70
+  },
+  {
+   "t": 69.5,
+   "type": "join",
+   "slot": 61,
+   "name": "Sư đệ Hải 20"
+  },
+  {
+   "t": 72.0,
+   "type": "cultivate",
+   "slot": 39,
+   "duration": 6
+  },
+  {
+   "t": 73.81,
+   "type": "celebrate",
+   "slot": 10
+  },
+  {
+   "t": 75.25,
+   "type": "swap",
+   "slot": 49,
+   "slot2": 74
+  },
+  {
+   "t": 75.5,
+   "type": "join",
+   "slot": 39,
+   "name": "Sư muội Nhi 25"
+  },
+  {
+   "t": 77.0,
+   "type": "cultivate",
+   "slot": 2,
+   "duration": 10
+  },
+  {
+   "t": 77.72,
+   "type": "celebrate",
+   "slot": 40
+  },
+  {
+   "t": 81.5,
+   "type": "join",
+   "slot": 20,
+   "name": "Sư muội Hải"
+  },
+  {
+   "t": 81.74,
+   "type": "celebrate",
+   "slot": 65
+  },
+  {
+   "t": 82.0,
+   "type": "cultivate",
+   "slot": 9,
+   "duration": 8
+  },
+  {
+   "t": 83.0,
+   "type": "breakthrough",
+   "slot": 3
+  },
+  {
+   "t": 84.82,
+   "type": "celebrate",
+   "slot": 8
+  },
+  {
+   "t": 85.25,
+   "type": "swap",
+   "slot": 58,
+   "slot2": 56
+  },
+  {
+   "t": 87.0,
+   "type": "cultivate",
+   "slot": 8,
+   "duration": 10
+  },
+  {
+   "t": 87.5,
+   "type": "join",
+   "slot": 77,
+   "name": "Tiểu My 14"
+  },
+  {
+   "t": 88.44,
+   "type": "celebrate",
+   "slot": 13
+  },
+  {
+   "t": 91.74,
+   "type": "celebrate",
+   "slot": 37
+  },
+  {
+   "t": 92.0,
+   "type": "cultivate",
+   "slot": 39,
+   "duration": 8
+  },
+  {
+   "t": 93.5,
+   "type": "join",
+   "slot": 4,
+   "name": "Lão Thảo"
+  },
+  {
+   "t": 95.02,
+   "type": "celebrate",
+   "slot": 2
+  },
+  {
+   "t": 95.25,
+   "type": "swap",
+   "slot": 59,
+   "slot2": 69
+  },
+  {
+   "t": 97.0,
+   "type": "cultivate",
+   "slot": 17,
+   "duration": 6
+  },
+  {
+   "t": 98.0,
+   "type": "breakthrough",
+   "slot": 63
+  },
+  {
+   "t": 99.21,
+   "type": "celebrate",
+   "slot": 0
+  },
+  {
+   "t": 99.5,
+   "type": "join",
+   "slot": 50,
+   "name": "Lão My"
+  },
+  {
+   "t": 102.0,
+   "type": "cultivate",
+   "slot": 9,
+   "duration": 8
+  },
+  {
+   "t": 102.14,
+   "type": "celebrate",
+   "slot": 6
+  },
+  {
+   "t": 105.25,
+   "type": "swap",
+   "slot": 10,
+   "slot2": 66
+  },
+  {
+   "t": 105.5,
+   "type": "join",
+   "slot": 76,
+   "name": "Vy"
+  },
+  {
+   "t": 105.58,
+   "type": "celebrate",
+   "slot": 50
+  },
+  {
+   "t": 107.0,
+   "type": "cultivate",
+   "slot": 69,
+   "duration": 8
+  },
+  {
+   "t": 108.92,
+   "type": "celebrate",
+   "slot": 72
+  },
+  {
+   "t": 111.5,
+   "type": "join",
+   "slot": 8,
+   "name": "Sư đệ Thảo"
+  },
+  {
+   "t": 112.0,
+   "type": "cultivate",
+   "slot": 5,
+   "duration": 10
+  },
+  {
+   "t": 112.68,
+   "type": "celebrate",
+   "slot": 34
+  },
+  {
+   "t": 113.0,
+   "type": "breakthrough",
+   "slot": 73
+  },
+  {
+   "t": 115.25,
+   "type": "swap",
+   "slot": 65,
+   "slot2": 3
+  },
+  {
+   "t": 115.85,
+   "type": "celebrate",
+   "slot": 39
+  },
+  {
+   "t": 117.0,
+   "type": "cultivate",
+   "slot": 16,
+   "duration": 8
+  },
+  {
+   "t": 117.5,
+   "type": "join",
+   "slot": 78,
+   "name": "Tiểu Dũng 27"
+  },
+  {
+   "t": 119.02,
+   "type": "celebrate",
+   "slot": 52
+  }
+ ]
+}
