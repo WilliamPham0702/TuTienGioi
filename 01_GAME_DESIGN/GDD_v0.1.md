@@ -1,43 +1,47 @@
-# Game Design Document — TuTienGioi v0.1
+# Game Design Document — TuTienGioi v0.2
 
-> Status: concept baseline. Items marked “proposal” require Product Owner approval.
+> Status: concept baseline updated to the Product Owner's approved art direction. Gameplay economy and technical implementation remain proposals until approved.
 
 ## 1. Game premise
-A cultivation sect's grand hall is continuously shown on TikTok LIVE. The Sect Master and Elders preside over the hall. Each participating viewer is represented as a disciple cultivating within the sect.
+A cultivation sect's grand hall is continuously shown on TikTok LIVE. The Tông chủ and Trưởng lão preside over the hall. Each participating viewer is represented as a chibi tiên hiệp đệ tử cultivating within the sect.
 
-## 2. Main LIVE scene
-- Central focal area: Sect Master and ceremonial platform.
-- Side areas: Elders and sect officials.
-- Main floor: disciple characters arranged in readable groups.
-- Character labels: TikTok display name, cultivation realm, and a compact progress indicator.
-- Broadcast overlays: sect name, current event, top cultivators, breakthrough notices, and participation instructions.
+## 2. Visual and presentation direction
+- Character style: chibi xianxia, expressive faces, attractive silhouettes, readable costumes and accessories.
+- Environment: beautiful sect hall with layered architecture, lanterns, banners, clouds, spiritual formations, gardens or distant mountain scenery as appropriate.
+- Effects: refined, high-contrast VFX for linh khí, realm-up, breakthrough, tribulation, pills, and special events.
+- Presentation: vertical 9:16 LIVE composition, clear focal hierarchy, readable names and realm labels.
+- Production priority: achieve a polished, visually coherent result quickly using reusable 2D assets, layered backgrounds, skeletal/sprite animation, particles, shaders, and selective parallax.
+- 2D/2.5D is the preferred starting hypothesis. Full 3D is not required and must not be assumed.
 
-The scene must remain readable on a vertical phone screen. Character count, nameplate density, and UI overlays need performance and legibility testing.
+## 3. Main LIVE scene
+- Central focal area: Tông chủ and ceremonial platform.
+- Side areas: Trưởng lão and sect officials.
+- Main floor: disciple characters arranged in readable rows or zones.
+- Character labels: TikTok display name, cultivation realm, compact progress indicator.
+- Broadcast overlays: sect name, current event, top cultivators, breakthrough notices, participation instructions.
+- Design for mobile readability and controlled crowd density. Store all eligible players even if only a subset can be rendered prominently.
 
-## 3. Player lifecycle
-1. Viewer enters or is detected in the LIVE session.
-2. System creates or restores the viewer's cultivator profile using a stable platform identifier where permitted.
-3. A character appears in the sect hall.
+## 4. Player lifecycle
+1. Viewer enters or is detected in the LIVE session, if the event source supports it.
+2. System creates or restores the viewer's cultivator profile using a permitted stable identifier.
+3. A chibi character appears in the sect hall.
 4. While eligible and present, the character accumulates time-based cultivation.
-5. Eligible interactions may add spiritual energy or grant an item.
-6. At a threshold, the player can attempt a breakthrough.
-7. Successful breakthrough updates realm, appearance, outfit tier, aura, and public milestone.
-8. At selected high realms, the player may enter a tribulation sequence.
+5. Eligible interactions may add linh khí or grant an item.
+6. At a threshold, the player can attempt or automatically trigger a breakthrough, subject to final design.
+7. Successful breakthrough updates realm, costume, aura, and public milestone.
+8. At selected milestones, the player may enter a dramatic độ kiếp sequence.
 
-Persistence, identity rules, and re-entry grace periods are implementation decisions to be finalized.
+## 5. Progression model
 
-## 4. Progression model
+### 5.1 Initial resources
+- Tu Vi: primary progression value.
+- Linh Khí: optional secondary resource.
+- Đan Dược: optional consumables.
 
-### 4.1 Cultivation resources
-- Tu Vi (tu vi): primary progression value.
-- Linh Khí (linh khí): optional resource used to represent cultivation energy.
-- Đan Dược (đan dược): consumable items that may accelerate progression.
-- Optional later resources: sect contribution, merit, spirit stones, technique fragments.
+Keep MVP economy small. Exact rates, costs, and gift mappings require Product Owner approval.
 
-The MVP should start with as few resources as possible to avoid unnecessary complexity.
-
-### 4.2 Realm ladder
-The following is an initial genre-inspired proposal, not a final canon:
+### 5.2 Realm ladder
+Initial genre-inspired proposal, not final canon:
 1. Luyện Khí
 2. Trúc Cơ
 3. Kim Đan
@@ -46,86 +50,80 @@ The following is an initial genre-inspired proposal, not a final canon:
 6. Luyện Hư
 7. Hợp Thể
 8. Đại Thừa
-9. Độ Kiếp
+9. Độ Kiếp (confirm whether realm or breakthrough event)
 10. Chân Tiên
 
-Each realm may contain stages such as Sơ kỳ, Trung kỳ, Hậu kỳ, and Đại viên mãn. Confirm exact realm taxonomy and whether Độ Kiếp is a realm or a breakthrough event before implementation.
+Potential sub-stages: Sơ kỳ, Trung kỳ, Hậu kỳ, Đại viên mãn.
 
-## 5. Progression inputs
-
-### 5.1 Watch time
-- Accumulate progress only during an eligible LIVE presence/session.
+## 6. Interaction inputs
+### 6.1 Watch time
+- Award progress only during eligible LIVE presence/session.
 - Define heartbeat, reconnect grace period, maximum offline credit, and duplicate-session handling.
-- Do not award unlimited progress from a stale connection.
+- No unlimited progress from stale connections.
 
-### 5.2 Likes
-- Likes may contribute spiritual energy.
-- Use per-user and global rate limits, batching, and diminishing returns to prevent spam or event floods.
-- Avoid assuming every raw like event can be processed individually at scale.
+### 6.2 Likes
+- May add linh khí.
+- Use per-user and global rate limits, batching, and diminishing returns.
+- Do not assume every raw like can be processed individually.
 
-### 5.3 Gifts and pills
-- Gifts may map to named in-game pills or effects.
-- The mapping must be configurable and reviewed against TikTok policies and supported integration terms.
-- Provide clear feedback without making paid gifts mandatory for progression.
-- No real-money gambling, randomized paid rewards, or misleading reward promises.
+### 6.3 Gifts
+- May map to named đan dược or visual effects, subject to TikTok policies and supported event access.
+- Gifts must not be mandatory for meaningful free progression.
+- No paid randomized rewards or misleading reward promises.
 
-## 6. Breakthrough and tribulation
-Suggested sequence:
-1. Eligibility notification.
-2. Character moves to a designated stage/arena.
-3. Ambient lighting and spiritual energy build.
+## 7. Breakthrough and tribulation
+Suggested spectacle sequence:
+1. Eligibility announcement.
+2. Character moves or is highlighted in a dedicated ritual area.
+3. Ambient light and spiritual energy build.
 4. Breakthrough animation and outcome.
-5. Realm, outfit, aura, and profile update.
-6. Broadcast announcement and ranking refresh.
+5. Realm, costume, aura, and profile update.
+6. LIVE announcement and ranking refresh.
 
-Failure rules, retry cost, cooldown, and whether tribulation is deterministic or skill-based remain open decisions. Do not implement punitive loss before approval.
+Failure penalties, retry costs, cooldowns, and skill challenges remain undecided. Do not implement punitive loss before approval.
 
-## 7. Character visual progression
-Visual progression should be modular:
-- Base body/rig.
-- Outfit set per realm tier.
-- Realm-specific aura and particles.
-- Optional weapon/accessory.
-- Nameplate and rank emblem.
-- Special breakthrough/tribulation VFX.
+## 8. Reusable character art system
+- Base chibi body and a small number of body/face variants.
+- Modular hair, headwear, robes, accessories, weapons, and realm badges.
+- Reusable animation states: idle, cultivate, celebrate, breakthrough, tribulation, receive gift.
+- Layered aura and VFX independent from costume.
+- Preserve character identity while upgrading appearance.
 
-The same character identity should remain recognizable as it advances. Art direction and asset ownership/licensing must be documented.
+## 9. Sect hierarchy
+- Tông chủ: central authority / host character.
+- Trưởng lão: senior figures flanking the Tông chủ.
+- Chấp sự: operational roles.
+- Đệ tử: viewer-controlled cultivators.
 
-## 8. Sect hierarchy
-Initial scene roles:
-- Tông chủ (Sect Master): central authority / host character.
-- Trưởng lão (Elders): senior figures flanking the Sect Master.
-- Chấp sự (Deacons/officials): operational roles.
-- Đệ tử (Disciples): viewer-controlled cultivators.
+Player-earned official sect positions are later scope, not required for MVP.
 
-Whether players can earn official sect positions is a later progression feature, not required for the first MVP.
+## 10. MVP production strategy
+- One hero background, one main hall composition.
+- A limited chibi roster with modular cosmetic variations.
+- A small set of reusable animation loops.
+- A compact VFX library reused with color/intensity variations.
+- Simulated LIVE events before real connector integration.
+- One local save database and operator panel.
+- No open world, complex combat, or large bespoke 3D pipeline in MVP.
 
-## 9. Social and competitive systems
-Potential later features:
-- Top cultivators by realm, total cultivation, or weekly contribution.
-- Sect contribution and disciple titles.
-- Scheduled tribulation events.
-- Multiple sects and sect-versus-sect events.
+## 11. Open design questions
+- Exact 2D/2.5D technique and engine.
+- Viewer leave/rejoin behavior and identity mapping.
+- Maximum visible characters and crowd layout.
+- Name moderation and ranking tie rules.
+- Realm duration and progression rates.
+- Watch-time versus likes versus gifts contribution.
+- Automatic versus player-triggered breakthrough.
+- Whether tribulation is spectacle-only or interactive.
+- Which asset sources are allowed under the zero-additional-spend rule.
 
-Do not build these before the single-sect MVP is stable.
-
-## 10. Open design questions
-- What happens when a viewer leaves and returns?
-- Can one account have multiple characters?
-- What is the maximum number of visible characters?
-- Are names filtered/moderated before display?
-- How are ties handled in rankings?
-- How long should each realm take for a free player?
-- What proportion of progression comes from watch time vs likes vs gifts?
-- Is breakthrough automatic or player-triggered?
-- Is tribulation a spectacle only or a gameplay challenge?
-
-## 11. MVP acceptance criteria
-- A viewer can be identified and represented as a character.
-- Eligible watch time updates progression correctly.
-- Likes are rate-limited and do not overload the event pipeline.
-- A character can reach a breakthrough threshold.
-- Breakthrough updates realm and visual tier consistently.
+## 12. MVP acceptance criteria
+- Viewer can be represented by a distinct chibi cultivator.
+- Eligible watch time updates progress correctly.
+- Likes are rate-limited and do not overload event processing.
+- Character can reach and display a breakthrough.
+- Breakthrough updates realm, costume, and VFX consistently.
 - Reconnects do not duplicate or erase progression.
 - Operator can pause event intake and recover from errors.
-- The vertical LIVE composition remains readable at the target player count.
+- Vertical LIVE composition remains attractive and readable at target player count.
+- MVP can be built and operated without additional paid services or assets.
