@@ -67,8 +67,8 @@ Mọi sự kiện quan trọng → Hệ thống Thông Báo (chữ + giọng đ�
 - Linh căn hiếm (Thiên / Dị Linh Căn) → thông báo toàn sơn môn + hiệu ứng đặc biệt.
 - Đọc tên: nhiều người đo liên tục thì gộp ("Chúc mừng 3 vị đạo hữu...") để không nghẽn âm thanh.
 
-**Cần PO xác nhận**
-- "1 lần mỗi phiên" nghĩa là **phiên sau đo lại** (linh căn đổi mỗi phiên) hay **giữ vĩnh viễn**? Tu Vi được lưu qua các phiên (theo GDD mục 4), còn linh căn thì chưa rõ.
+**PO đã quyết (D-009)**
+- Linh căn **đo lại mỗi phiên LIVE**. Tu Vi, cảnh giới, vật phẩm, chức vụ vẫn được lưu qua các phiên.
 
 ---
 
@@ -133,11 +133,10 @@ Tu Vi gốc/giây (đề xuất) = 1
 **Giới hạn bắt buộc (theo GDD 6.2)**
 - Tim: gộp theo lô, có trần mỗi người/phút (vd. tối đa 60 Hạ Phẩm Linh Thạch/phút) để không quá tải và không lấn át thời gian xem.
 
-**Rủi ro cần PO quyết (nói thẳng)**
-- Quà tặng → Tu Vi → Chiến Lực → thắng khiêu chiến → lấy chức vụ. Như vậy **người tặng nhiều quà sẽ mua được chức Tông chủ**. Điều này trái tinh thần GDD 6.3 ("quà không bắt buộc để tiến bộ") và dễ làm người chơi miễn phí bỏ đi. Phương án:
-  - A. Giới hạn phần Tu Vi từ quà được tính vào Chiến Lực (vd. tối đa 30%).
-  - B. Quà chỉ cho hiệu ứng/trang trí + đan dược tăng tốc có trần.
-  - C. Giữ nguyên, chấp nhận pay-to-win.
+**PO đã quyết (D-010): phương án C — quà tính vào Chiến Lực, không giới hạn**
+- Đã cân nhắc các phương án giới hạn 30% (A) và quà chỉ để trang trí (B); PO chọn C.
+- Rủi ro đã ghi nhận: người tặng nhiều quà có thể giành chức Tông chủ; người chơi miễn phí có thể nản. Cần theo dõi khi chạy thật.
+- GDD mục 6.3 ("quà không bắt buộc để tiến bộ") cần cập nhật cho khớp quyết định này.
 
 ---
 
@@ -183,8 +182,9 @@ Tu Vi gốc/giây (đề xuất) = 1
 
 - Nhiều người đột phá cùng lúc → xếp hàng hiệu ứng lớn, mỗi cái ~5–8 giây.
 
-**Cần PO xác nhận**
-- Đột phá có thể **thất bại** không? (GDD mục 7: chưa được làm hình phạt mất Tu Vi khi chưa duyệt.)
+**PO đã quyết (D-011)**
+- Đột phá **có thể thất bại nhưng không bị phạt**: không mất Tu Vi, chờ hồi rồi thử lại.
+- Đề xuất: tỉ lệ thành công cao ở cảnh giới thấp, giảm dần ở cảnh giới cao; hồi chiêu sau thất bại 60 giây; Đan dược đột phá (vd. Trúc Cơ Đan) tăng tỉ lệ. Con số chờ duyệt.
 
 ---
 
@@ -212,8 +212,11 @@ Tu Vi gốc/giây (đề xuất) = 1
 - Người giữ chức rời LIVE: giữ chức nhưng vẫn bị khiêu chiến được (đấu với "phân thân" theo chỉ số đã lưu).
 - Hồi chiêu: mỗi người khiêu chiến tối đa 1 lần / 5 phút; người giữ chức được miễn khiêu chiến 2 phút sau khi vừa thắng.
 
-**Mâu thuẫn với tài liệu hiện có (cần PO quyết)**
-- GDD mục 9 ghi "chức vụ người chơi giành được là phạm vi sau, **không thuộc MVP**". Luồng của PO đưa vào luồng chính → cần quyết: MVP có khiêu chiến hay để giai đoạn 2?
+**PO đã quyết (D-012)**
+- Khiêu chiến và giành chức vụ **nằm trong MVP**. GDD mục 9 cần cập nhật.
+- Phụ thuộc: cần đọc được bình luận lệnh (D-007); khi chưa có thì chạy bằng mô phỏng local.
+
+**Còn mở**
 - GDD mục 3 coi Tông chủ là **nhân vật chủ phòng** (host). Nếu người chơi lên được Tông chủ thì host đóng vai gì?
 
 ---
@@ -276,17 +279,20 @@ Chiến Lực = Tu Vi tích lũy × (1 + % Công Pháp) × (1 + % Vũ Khí) × (
 
 ---
 
-## 13. Danh sách câu hỏi PO cần quyết
+## 13. Quyết định và câu hỏi
 
-1. Linh căn đo lại **mỗi phiên** hay **giữ vĩnh viễn**?
-2. Người chơi có được đổi nhân vật không?
-3. Quà tặng ảnh hưởng Chiến Lực theo phương án A, B hay C (mục 6)?
-4. Linh thạch tự luyện hóa thành Tu Vi hay giữ làm tiền mua đan dược?
-5. Đột phá có thể thất bại không? Nếu có, hình phạt là gì?
-6. Khiêu chiến & chức vụ vào **MVP** hay **giai đoạn 2**?
-7. Host (Tông chủ NPC) đóng vai gì khi người chơi lên được Tông chủ?
-8. Khiêu chiến có dao động may rủi ±5% không?
-9. Duyệt các con số đề xuất (bảng linh căn, Tu Vi/giây, thang cảnh giới, tỉ lệ cơ duyên) hay chỉnh?
+**Đã quyết (25/11/2026, ghi trong DECISION_LOG)**
+- D-009: Linh căn đo lại mỗi phiên.
+- D-010: Quà tính vào Chiến Lực, không giới hạn.
+- D-011: Đột phá có thể thất bại, không phạt.
+- D-012: Khiêu chiến & chức vụ nằm trong MVP.
+
+**Còn mở**
+1. Người chơi có được đổi nhân vật không?
+2. Linh thạch tự luyện hóa thành Tu Vi hay giữ làm tiền mua đan dược?
+3. Host (Tông chủ NPC) đóng vai gì khi người chơi lên được Tông chủ?
+4. Khiêu chiến có dao động may rủi ±5% không?
+5. Duyệt các con số đề xuất (bảng linh căn, Tu Vi/giây, thang cảnh giới, tỉ lệ đột phá, tỉ lệ cơ duyên) hay chỉnh?
 
 ## 14. Phụ thuộc kỹ thuật
 
