@@ -47,6 +47,41 @@ Deliver:
 
 Constraints: do not lock the technical stack; do not finalize unapproved economy values or gift mappings; do not claim assets are integrated until implemented.
 
+## Kế hoạch v0.1 và giao việc (cập nhật 2026-11-25)
+
+Nguồn: `01_GAME_DESIGN/GAME_FLOW_v0.1.md`, D-009..D-018. Thời gian là ước tính.
+
+| Giai đoạn | Nội dung | Cổng qua |
+|---|---|---|
+| P0 – Chốt thiết kế (~1 tuần) | GDD v0.3, đặc tả tính năng mở rộng, lời thoại hệ thống, quy cách hình ảnh, duyệt số mô phỏng | PO duyệt |
+| P1 – PoC kỹ thuật (~1–2 tuần) | PoC 1–5 trong `08_TECHNICAL/TECHNICAL_ARCHITECTURE_PROPOSAL.md`, chốt D-005, D-007 | Bằng chứng chạy thử |
+| P2 – Vòng chơi cốt lõi, mô phỏng (~2–3 tuần) | Vào phòng → linh căn → tu luyện → cảnh giới → đột phá/Tâm Ma → thông báo | Chạy trơn, có test |
+| P3 – Phần còn lại MVP (~2 tuần) | Khiêu chiến, Trợ Chiến, chức vụ, cơ duyên, Thiên Bảng, Linh Khí Triều | Mô phỏng 200 người không lag |
+| P4 – LIVE thật (~1 tuần) | Nối TikTok + OBS, bảng điều khiển, LIVE thử riêng | 1 giờ không lỗi |
+| P5 – Giai đoạn 2 | Yêu Thú Công Sơn, Bí Cảnh, Sư Đồ, Điểm Danh Bế Quan, Tông Môn Đại Bỉ, nội dung cuối game | Sau MVP ổn định |
+
+### Claude
+| ID | Việc | Trạng thái |
+|---|---|---|
+| C-001 | Đề xuất kiến trúc kỹ thuật | Xong bản v0.1 → `08_TECHNICAL/TECHNICAL_ARCHITECTURE_PROPOSAL.md`, chờ PO |
+| C-002 | Mô phỏng kinh tế | Xong bản v0.1 → `09_SIMULATION/`, chờ PO |
+| C-003 | PoC 1–5 | Chờ duyệt C-001 |
+| C-004 | Lõi game + mô phỏng + SQLite (P2) | Chờ P1 |
+| C-005 | Màn hình Phaser, hiệu ứng, thông báo + TTS (P2–P3) | Chờ P1 + G-005 |
+| C-006 | Khiêu chiến, Trợ Chiến, chức vụ, cơ duyên, Thiên Bảng (P3) | Chờ P2 + G-003 |
+| C-007 | Nối TikTok thật, bảng điều khiển, kiểm thử vận hành (P4) | Chờ P3 + D-007 |
+
+### ChatGPT
+| ID | Việc | Đầu vào |
+|---|---|---|
+| G-002 | Cập nhật GDD lên v0.3 theo GAME_FLOW và D-009..D-018 | GAME_FLOW, DECISION_LOG |
+| G-003 | Đặc tả tính năng mở rộng (MVP + giai đoạn 2) | GAME_FLOW, SIM_REPORT |
+| G-004 | Bộ lời thoại thông báo hệ thống | GAME_FLOW mục 12 |
+| G-005 | Quy cách hình ảnh: bố cục 9:16, nhân vật module, 10 bộ trang phục, hiệu ứng, danh sách hình P0 | ART_DIRECTION_BRIEF, GAME_FLOW |
+| G-006 | Tạo bộ hình P0 đầu tiên (gói đang dùng, 0 đồng) | G-005 đã duyệt |
+
+Prompt giao việc cho ChatGPT: `00_PROJECT/CHATGPT_PROMPTS.md`.
+
 ## Handoff and release protocol
 Every task handoff includes task ID, owner, source versions/commit, deliverables and changed paths, assumptions, decisions needed, test/review evidence, risks, and next action.
 
