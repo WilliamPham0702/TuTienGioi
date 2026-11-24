@@ -89,7 +89,7 @@ Cần PO chạy `poc/measure/3_do_day_du.bat` (khoảng 2,5 giờ, tự động)
 
 ## 5. Bước tiếp theo
 
-1. PO tải gói đo (link trong PR), chạy theo `HUONG_DAN.md`, gửi lại file zip kết quả và 3 video.
+1. PO tải gói đo `TuTienGioi_PoC_C002.zip` (Claude gửi trong chat), chạy theo `HUONG_DAN.md`, gửi lại file zip kết quả và 3 video.
 2. Claude phân tích, cập nhật file này với số liệu PoC-2 và PoC-3 trên máy PO.
 3. ChatGPT và PO chấm PoC-1 theo `POC_PLAN.md` mục 4.
 4. Claude đề xuất engine cuối theo `POC_PLAN.md` mục 7; PO khóa D-005.
