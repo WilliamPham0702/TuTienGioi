@@ -16,6 +16,11 @@ Record only decisions explicitly approved by the Product Owner. Proposals must n
 | D-010 | Quà tặng và Chiến Lực | Tu Vi/vật phẩm có được từ quà tặng tính vào Chiến Lực khiêu chiến, không giới hạn. Rủi ro pay-to-win đã được nêu và PO chấp nhận. GDD mục 6.3 cần cập nhật. Bảng quy đổi quà vẫn chờ D-007 và chính sách TikTok. | Product Owner | 2026-11-25 |
 | D-011 | Đột phá | Đột phá có thể thất bại nhưng không bị phạt (không mất Tu Vi); chờ hồi rồi thử lại. Tỉ lệ cụ thể chờ duyệt. | Product Owner | 2026-11-25 |
 | D-012 | Khiêu chiến và chức vụ | Khiêu chiến người chơi và giành chức Trưởng Lão / Trưởng Phái / Tông Chủ nằm trong MVP (thay cho ghi chú "phạm vi sau" ở GDD mục 9). Phụ thuộc D-007 để đọc bình luận lệnh; có chế độ mô phỏng local. | Product Owner | 2026-11-25 |
+| D-013 | Nhân vật | Nhân vật chibi được phân ngẫu nhiên và cố định theo người chơi; không cho đổi nhân vật. | Product Owner | 2026-11-25 |
+| D-014 | Linh thạch | Linh thạch (từ tim, quà) tự động luyện hóa thành Tu Vi; không dùng làm tiền mua đan dược. | Product Owner | 2026-11-25 |
+| D-015 | Host và ghế Tông chủ | Khi người chơi giành ghế Tông chủ, nhân vật host trở thành Thái Thượng Tông Chủ, không thể bị khiêu chiến. | Product Owner | 2026-11-25 |
+| D-016 | Khiêu chiến | Chiến Lực mỗi bên được nhân ngẫu nhiên ±10% mỗi trận; bằng nhau thì bên bị khiêu chiến thắng. | Product Owner | 2026-11-25 |
+| D-017 | Con số kinh tế | Bảng linh căn, Tu Vi/giây, quy đổi linh thạch, thang cảnh giới, tỉ lệ cơ duyên trong GAME_FLOW_v0.1 được dùng tạm; chỉnh sau mô phỏng và cần PO duyệt lại trước khi khóa. | Product Owner | 2026-11-25 |
 
 ## Change-control rule
 Before changing an approved product decision, record the proposed change, rationale, impact, and obtain Product Owner approval.

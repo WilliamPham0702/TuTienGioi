@@ -2,7 +2,7 @@
 
 > Trạng thái: **bản nháp** tổng hợp từ mô tả mạch game của Product Owner (25/11/2026).
 > - Phần **"PO mô tả"** là ý của Product Owner, ghi lại đúng ý.
-> - Phần **"Đề xuất"** (con số, công thức, tỉ lệ) là giá trị khởi điểm để chạy mô phỏng, **chưa phải quyết định**. Cần PO duyệt và ghi vào `00_PROJECT/DECISION_LOG.md` trước khi khóa.
+> - Phần **"Đề xuất"** (con số, công thức, tỉ lệ) là giá trị **dùng tạm** để chạy mô phỏng (D-017), **chưa khóa**. Cần PO duyệt và ghi vào `00_PROJECT/DECISION_LOG.md` trước khi khóa.
 > - Tài liệu liên quan: `01_GAME_DESIGN/GDD_v0.1.md`, `00_PROJECT/DECISION_LOG.md`.
 
 ---
@@ -35,8 +35,8 @@ Mọi sự kiện quan trọng → Hệ thống Thông Báo (chữ + giọng đ�
 - Người chơi quay lại (cùng định danh hợp lệ): **giữ nhân vật cũ**, không random lại.
 - Hiệu ứng xuất hiện: nhân vật bước ra từ cổng sơn môn / mây, tên hiện trên đầu.
 
-**Cần PO xác nhận**
-- Người chơi có được tự đổi nhân vật không (vd. bằng lệnh bình luận)?
+**PO đã quyết (D-013)**
+- Người chơi **không được đổi nhân vật**; nhân vật cố định theo người chơi. Ngoại hình chỉ thay đổi qua trang phục/hào quang theo cảnh giới.
 
 ---
 
@@ -126,7 +126,8 @@ Tu Vi gốc/giây (đề xuất) = 1
 | Thượng Phẩm Linh Thạch | = 100 Trung Phẩm |
 | Cực Phẩm Linh Thạch | = 100 Thượng Phẩm |
 
-- Linh thạch tự động luyện hóa thành Tu Vi (hoặc giữ lại để "mua" đan dược — cần PO chọn).
+- **PO đã quyết (D-014):** linh thạch **tự động luyện hóa thành Tu Vi** ngay khi nhận, không giữ làm tiền.
+- Đan dược đến từ quà tặng và cơ duyên (không mua bằng linh thạch).
 - Đan dược: tăng Tu Vi tức thì hoặc tăng tốc tu luyện trong X phút (vd. Tụ Khí Đan +20% trong 5 phút).
 - Tặng hoa / quà TikTok → đan dược hoặc linh thạch theo bảng quy đổi riêng, **chờ D-007** (cách lấy sự kiện quà hợp lệ) và chính sách TikTok.
 
@@ -216,8 +217,8 @@ Tu Vi gốc/giây (đề xuất) = 1
 - Khiêu chiến và giành chức vụ **nằm trong MVP**. GDD mục 9 cần cập nhật.
 - Phụ thuộc: cần đọc được bình luận lệnh (D-007); khi chưa có thì chạy bằng mô phỏng local.
 
-**Còn mở**
-- GDD mục 3 coi Tông chủ là **nhân vật chủ phòng** (host). Nếu người chơi lên được Tông chủ thì host đóng vai gì?
+**PO đã quyết (D-015)**
+- Khi người chơi giành ghế Tông chủ, nhân vật host lên làm **Thái Thượng Tông Chủ**: ngồi vị trí cao hơn trên điện, không thể bị khiêu chiến. Người chơi giữ ghế Tông chủ cho đến khi bị đánh bại.
 
 ---
 
@@ -252,8 +253,12 @@ Tu Vi gốc/giây (đề xuất) = 1
 ```
 Chiến Lực = Tu Vi tích lũy × (1 + % Công Pháp) × (1 + % Vũ Khí) × (1 + % Pháp Bảo)
 ```
-- Chiến Lực cao hơn → thắng. Bằng nhau → người giữ chức/người bị khiêu chiến thắng.
-- Không có yếu tố may rủi (đúng ý PO). Nếu muốn kịch tính hơn, có thể thêm dao động ±5% — chờ PO chọn.
+- **PO đã quyết (D-016):** mỗi trận, Chiến Lực của từng bên nhân ngẫu nhiên trong khoảng **±10%**:
+```
+Chiến Lực trận = Chiến Lực × ngẫu nhiên(0,90 … 1,10)
+```
+- Chiến Lực trận cao hơn → thắng. Bằng nhau → người giữ chức/người bị khiêu chiến thắng.
+- Hệ quả: bên yếu hơn tới ~18% vẫn có cơ hội lật kèo; chênh lệch lớn hơn thì gần như chắc thua.
 - Trận đấu: hiệu ứng 2 nhân vật giao chiêu 5–8 giây, hiện thanh Chiến Lực hai bên, đọc to kết quả.
 
 ---
@@ -287,12 +292,14 @@ Chiến Lực = Tu Vi tích lũy × (1 + % Công Pháp) × (1 + % Vũ Khí) × (
 - D-011: Đột phá có thể thất bại, không phạt.
 - D-012: Khiêu chiến & chức vụ nằm trong MVP.
 
+- D-013: Không đổi nhân vật.
+- D-014: Linh thạch tự luyện hóa thành Tu Vi.
+- D-015: Host thành Thái Thượng Tông Chủ khi người chơi lên Tông chủ.
+- D-016: Khiêu chiến có dao động ngẫu nhiên ±10%.
+- D-017: Các con số đề xuất được dùng tạm; Claude chạy mô phỏng rồi đề xuất chỉnh, PO duyệt lại trước khi khóa.
+
 **Còn mở**
-1. Người chơi có được đổi nhân vật không?
-2. Linh thạch tự luyện hóa thành Tu Vi hay giữ làm tiền mua đan dược?
-3. Host (Tông chủ NPC) đóng vai gì khi người chơi lên được Tông chủ?
-4. Khiêu chiến có dao động may rủi ±5% không?
-5. Duyệt các con số đề xuất (bảng linh căn, Tu Vi/giây, thang cảnh giới, tỉ lệ đột phá, tỉ lệ cơ duyên) hay chỉnh?
+- Con số cuối cùng sau mô phỏng (D-017).
 
 ## 14. Phụ thuộc kỹ thuật
 
