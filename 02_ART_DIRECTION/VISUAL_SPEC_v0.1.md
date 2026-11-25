@@ -121,6 +121,28 @@ Các layer có anchor/pivot nhất quán để ghép rig. Không tạo 10 nhân 
 
 Quy tắc: tăng cấp độ tinh xảo theo từng Đại Cảnh nhưng không biến nhân vật thành khối sáng. Hào quang phải tách khỏi layer trang phục để có thể bật/tắt và tái sử dụng.
 
+### 6.1 Bảng màu trang phục tông môn chính đạo — PO đã xác nhận
+
+Bảng màu trang phục **đa sắc nhưng hài hòa, sáng nhưng sang trọng**. Không giới hạn tông môn vào xanh, ngọc và trắng. Các nhóm màu được khuyến khích:
+
+| Nhóm màu | Màu đề xuất | Cách sử dụng |
+|---|---|---|
+| Ngọc | Xanh ngọc, lục bảo, thanh ngọc | Áo chính, đai lưng, viền thêu |
+| Thiên thanh | Xanh da trời, lam nhạt, xanh khói | Lớp áo ngoài, dải lụa, pháp bào |
+| Thanh khiết | Trắng ngà, ivory, bạc sáng | Lớp áo trong, nhân vật khí chất thanh cao |
+| Hoa đào | Hồng phấn, hồng đào, san hô nhạt | Trang phục và phụ kiện tạo nét mềm mại |
+| Cát tường | Vàng nhạt, vàng mật ong, vàng kim | Viền thêu, huy hiệu, điểm nhấn quyền uy |
+| Ánh dương | Cam đào, cam nắng, màu mơ | Nhân vật nổi bật, áo choàng hoặc dải lụa |
+| Tiên mộng | Lavender, tử đinh hương, tím khói sáng | Nhân vật có cá tính riêng, pháp thuật |
+| Trung tính | Kem, be sáng, nâu gỗ nhạt | Đai, giày, phụ kiện để cân bằng |
+
+**Quy tắc phối màu**
+- Mỗi nhân vật ưu tiên 1 màu chủ đạo, 1 màu phụ và 1 màu nhấn; không dồn quá nhiều màu bão hòa vào một bộ.
+- Các nhân vật trong cùng tông môn có thể khác màu áo, nhưng thống nhất bằng huy hiệu, ngôn ngữ hoa văn, đường viền hoặc phụ kiện nhận diện.
+- Cấp bậc được phân biệt chủ yếu bằng silhouette, chất liệu, số lớp áo, độ tinh xảo và phụ kiện; không chỉ bằng màu.
+- Không dùng đen, đỏ máu hoặc màu u ám làm màu chủ đạo của tông môn chính đạo. Có thể dùng chúng cho Tâm Ma, phản diện, Thiên Kiếp hoặc cảnh tương phản.
+- Màu sắc không phải tín hiệu duy nhất để nhận diện chức vụ/cảnh giới; luôn kết hợp hình dạng huy hiệu và nhãn chữ.
+
 ## 7. Hệ màu Linh Căn
 
 | Linh Căn | Màu nhận diện đề xuất | Ngôn ngữ hiệu ứng |
