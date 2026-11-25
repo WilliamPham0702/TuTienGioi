@@ -160,7 +160,7 @@ export class Game {
     const d = Math.max(0, Math.floor(diamonds));
     if (d === 0) return;
     const c = this.state.pending;
-    if (c && at < c.endsAt) {
+    if (c && at < c.endsAt + this.cfg.assistGraceMs) {
       // Cửa sổ Trợ Chiến (D-018): quà cộng Chiến Lực ngay cho một phe.
       const own = p.id === c.challenger ? 'A' : p.id === c.defender ? 'B' : undefined;
       const fallback = this.cfg.assistDefaultSide === 'defender' ? 'B' : undefined;
@@ -213,7 +213,7 @@ export class Game {
       if (this.cfg.autoBreakthrough) this.tryBreakthrough(p, now);
     }
     s.lastTick = now;
-    if (s.pending && now >= s.pending.endsAt) this.resolveChallenge(now);
+    if (s.pending && now >= s.pending.endsAt + this.cfg.assistGraceMs) this.resolveChallenge(now);
     if (s.nextFortuneAt > 0 && now >= s.nextFortuneAt) {
       this.runFortune(now);
       s.nextFortuneAt = now + this.fortuneDelay();

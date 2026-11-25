@@ -71,7 +71,14 @@ Mức: **Chặn** = không làm đúng được nếu chưa giải quyết; **Ca
 - **Nhiều thông báo cùng lúc**: core giới hạn nhịp đọc 3,5 giây; khi quá tải sẽ bỏ thông báo thấp. Hàng chục người đột phá cùng lúc sẽ rất dài; GAME_FLOW §8 đã nói xếp hàng hiệu ứng ~5–8 giây — cần giới hạn trần ở lớp hiển thị.
 - **Kinh tế**: SIM_REPORT cảnh báo nhóm chi tiêu cao chạm Chân Tiên trong vài tháng; core có `Chân Tiên` là đích cuối, chưa có "sink".
 
-## 3. Cần PO / ChatGPT quyết
+## 2.5 PO đã trả lời (25/11/2026)
+
+- Quà của người xem chưa chọn phe: **không tính vào trận; quà thành Tu Vi của người tặng** (core đã đúng như vậy, `assistDefaultSide = 'none'`).
+- Quà đến trễ: **ân hạn 3 giây** sau khi hết 30 giây (đã làm: `assistGraceMs = 3000`, trận chốt ở giây 33; lệnh `!ung` vẫn chỉ nhận trong 30 giây).
+- 7 quy ước tạm ở mục 2.2: **dùng tạm như đề xuất**.
+- Đây là trả lời trong chat, chưa ghi vào `DECISION_LOG.md` (ChatGPT/PO ghi nếu muốn khóa).
+
+## 3. Cần PO / ChatGPT quyết (còn lại: câu 4)
 
 1. **Quà chưa chọn phe**: không tính vào trận (đang dùng) hay mặc định cho bên giữ chức?
 2. Mục 2.2, câu 1–4 (chọn ghế, nhường ghế, Thái Thượng sau khi mất ghế, Tu Vi dư khi đột phá).
@@ -82,6 +89,6 @@ Mức: **Chặn** = không làm đúng được nếu chưa giải quyết; **Ca
 
 - Task: C-003 · Owner: Claude → ChatGPT (xem 2.1–2.2) → PO (mục 3)
 - Thay đổi: `packages/core/**`, `08_TECHNICAL/CORE_AND_SPEC_REVIEW_v0.1.md`, `.gitignore`
-- Test: 31/31 đạt (vitest), tsc sạch — máy cloud, 2026-11-25
+- Test: 31/31 đạt (sau khi thêm ân hạn 3 giây) (vitest), tsc sạch — máy cloud, 2026-11-25
 - Giới hạn: số liệu kinh tế là tạm; chưa chạy trên PC của PO; chưa có kết nối TikTok
 - Không merge khi chưa được PO duyệt

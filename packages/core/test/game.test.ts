@@ -191,7 +191,7 @@ describe('khiêu chiến (D-012, D-015, D-016, D-018)', () => {
       a.realm = 2;
       a.tuViTotal = GAME_CONFIG.npcPower.truongLao + extra;
       expect(g.startChallenge('a', { role: 'truongLao' }, 0).ok).toBe(true);
-      g.tick(GAME_CONFIG.assistWindowMs);
+      g.tick(GAME_CONFIG.assistWindowMs + GAME_CONFIG.assistGraceMs);
       expect(g.results[0]!.winner).toBe(winner);
     }
   });
@@ -202,8 +202,8 @@ describe('khiêu chiến (D-012, D-015, D-016, D-018)', () => {
     g.state.players.b!.realm = 2;
     expect(g.startChallenge('a', { role: 'truongLao' }, 0).ok).toBe(true);
     expect(g.startChallenge('b', { role: 'truongLao' }, 1)).toEqual({ ok: false, reason: 'busy' });
-    g.tick(30_000);
-    expect(g.startChallenge('a', { role: 'truongLao' }, 31_000)).toEqual({ ok: false, reason: 'cooldown' });
+    g.tick(33_000);
+    expect(g.startChallenge('a', { role: 'truongLao' }, 34_000)).toEqual({ ok: false, reason: 'cooldown' });
     expect(g.startChallenge('a', { role: 'truongLao' }, 5 * 60_000 + 1).ok).toBe(true);
   });
 
@@ -251,16 +251,19 @@ describe('khiêu chiến (D-012, D-015, D-016, D-018)', () => {
     g.startChallenge('a', { role: 'truongLao' }, 0);
     g.handle(ev({ type: 'command', playerId: 'c', text: '!ung B', at: 1_000 }));
     g.handle(ev({ type: 'gift', playerId: 'c', diamonds: 10, at: 2_000 })); // +300 cho phe thủ
-    g.tick(30_000);
+    g.tick(33_000);
     expect(g.results[0]!.winner).toBe('defender');
   });
 
-  it('quà sau khi hết cửa sổ không còn cộng Chiến Lực trận', () => {
+  it('ân hạn 3 giây: quà đến trễ vẫn tính, sau ân hạn thì không', () => {
     const g = setup(fixed(0.5));
     g.state.players.a!.realm = 2;
     g.startChallenge('a', { role: 'truongLao' }, 0);
-    g.handle(ev({ type: 'gift', playerId: 'b', diamonds: 10, at: 30_000 }));
-    expect(g.state.pending!.assistB).toBe(0);
+    g.handle(ev({ type: 'command', playerId: 'b', text: '!ung B', at: 1_000 }));
+    g.handle(ev({ type: 'gift', playerId: 'b', diamonds: 1, at: 32_000 })); // trễ 2 giây: vẫn tính
+    expect(g.state.pending!.assistB).toBe(GAME_CONFIG.assistPowerPerDiamond);
+    g.handle(ev({ type: 'gift', playerId: 'b', diamonds: 10, at: 33_000 }));
+    expect(g.state.pending!.assistB).toBe(GAME_CONFIG.assistPowerPerDiamond); // không tăng thêm
   });
 
   it('thắng: nhậm ghế, được miễn khiêu chiến 2 phút; Tông Chủ → host thành Thái Thượng', () => {
@@ -270,7 +273,7 @@ describe('khiêu chiến (D-012, D-015, D-016, D-018)', () => {
     a.tuViTotal = 10_000_000;
     expect(g.state.hostSupreme).toBe(false);
     expect(g.startChallenge('a', { role: 'tongChu' }, 0).ok).toBe(true);
-    g.tick(30_000);
+    g.tick(33_000);
     const seat = g.state.seats.find((s) => s.role === 'tongChu')!;
     expect(seat.holder).toBe('a');
     expect(g.state.hostSupreme).toBe(true);
@@ -278,7 +281,7 @@ describe('khiêu chiến (D-012, D-015, D-016, D-018)', () => {
     const b = g.state.players.b!;
     b.realm = 4;
     expect(g.startChallenge('b', { role: 'tongChu' }, 60_000)).toEqual({ ok: false, reason: 'defender_immune' });
-    expect(g.startChallenge('b', { role: 'tongChu' }, 30_000 + 2 * 60_000 + 1).ok).toBe(true);
+    expect(g.startChallenge('b', { role: 'tongChu' }, 33_000 + 2 * 60_000 + 1).ok).toBe(true);
   });
 
   it('dao động ±10% nằm trong khoảng cho phép', () => {
@@ -292,7 +295,7 @@ describe('khiêu chiến (D-012, D-015, D-016, D-018)', () => {
       g.state.players.a!.tuViTotal = 1000;
       g.state.players.b!.tuViTotal = 1000;
       g.startChallenge('a', { playerId: 'b' }, 0);
-      g.tick(30_000);
+      g.tick(33_000);
       expect(g.results[0]!.challengerPower / 1000).toBeCloseTo(k, 3);
     }
   });

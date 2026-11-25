@@ -53,6 +53,8 @@ export const GAME_CONFIG = {
   seatCount: { truongLao: 4, truongPhai: 2, tongChu: 1 } as Record<SeatRole, number>,
   npcPower: { truongLao: 20_000, truongPhai: 150_000, tongChu: 800_000 } as Record<SeatRole, number>,
   assistWindowMs: 30_000,
+  /** Ân hạn nhận quà đến trễ (độ trễ mạng) sau khi hết cửa sổ Trợ Chiến. PO duyệt 3 giây (25/11/2026). */
+  assistGraceMs: 3_000,
   assistPowerPerDiamond: 30,
   /**
    * Quà của người xem CHƯA chọn phe: 'none' = không tính vào trận (FEATURE_SPEC §5, GDD v0.3 §9.3);
