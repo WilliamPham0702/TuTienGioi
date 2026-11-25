@@ -16,21 +16,21 @@
 ## 2. Khung và lưới 9:16
 
 **Canvas master:** 1080 × 1920 px, portrait 9:16.  
-**Safe margin:** 48 px trái/phải; 60 px trên/dưới.  
+**Safe area đề xuất:** lề trái 48 px; chừa khoảng 140 px bên phải và 280–320 px phía dưới cho lớp giao diện LIVE của nền tảng; phần trên chừa tối thiểu 100 px. Đây là vùng an toàn tạm thời, phải xác minh bằng video test trên điện thoại/tài khoản thực tế trước khi khóa. Không đặt tên, chỉ số hoặc nút thông tin cốt lõi trong vùng có thể bị UI TikTok che.  
 **Typography tối thiểu đề xuất:** 28–32 px cho thông tin chính; 22–24 px cho phụ đề; không dùng chữ nhỏ dưới 18 px ở overlay quan trọng.
 
 ### 2.1 Phân vùng dọc
 
 | Vùng | Khoảng Y đề xuất | Nội dung |
 |---|---:|---|
-| Header | 0–170 | Tên tông môn, tên LIVE/event, trạng thái kết nối nhỏ |
-| Tọa điện tối thượng | 170–520 | Thái Thượng Tông Chủ ở vị trí cao nhất; không gian kiến trúc và ánh sáng chính |
-| Khu ghế chấp chưởng | 520–790 | Tông Chủ, Trưởng Phái, Trưởng Lão; ghế trống có dấu hiệu NPC/đang tranh |
-| Khu nghi lễ | 790–1080 | Đá Đo Linh Căn hoặc sân khiêu chiến; hai trạng thái thay thế, không hiển thị đồng thời |
-| Khu đệ tử | 1080–1770 | Tối đa khoảng 60 nhân vật theo lớp sâu; nhân vật trọng tâm có tên/realm |
-| Footer | 1770–1920 | Thiên Bảng mini, hướng dẫn tương tác hoặc banner sự kiện; có thể luân phiên |
+| Header | 100–230 | Tên tông môn, tên LIVE/event; chỉ đặt thông tin ít quan trọng ở sát mép |
+| Tọa điện tối thượng | 230–520 | Thái Thượng Tông Chủ ở vị trí cao nhất; không gian kiến trúc và ánh sáng chính |
+| Khu ghế chấp chưởng | 520–760 | Tông Chủ, Trưởng Phái, Trưởng Lão; ghế trống có dấu hiệu NPC/đang tranh |
+| Khu nghi lễ | 760–1030 | Đá Đo Linh Căn hoặc sân khiêu chiến; hai trạng thái thay thế, không hiển thị đồng thời |
+| Khu đệ tử | 1030–1600 | Tối đa khoảng 60 nhân vật theo lớp sâu; nhân vật trọng tâm có tên/realm |
+| Safe area nền tảng | 1600–1920 và dải phải 940–1080 | Không đặt tên/điểm số cốt lõi; chỉ dùng nền/particle không quan trọng hoặc để trống |
 
-Đây là lưới định hướng, không phải tọa độ cố định của engine. Trong sự kiện lớn, khu nghi lễ có thể mở rộng và giảm mật độ đệ tử tạm thời.
+Đây là lưới định hướng, không phải tọa độ cố định của engine. Vùng safe area cần kiểm tra trên TikTok LIVE thực tế vì lớp chat, quà và nút điều hướng có thể thay đổi theo thiết bị. Trong sự kiện lớn, khu nghi lễ có thể mở rộng và giảm mật độ đệ tử tạm thời.
 
 ### 2.2 Quy tắc phân cấp
 
