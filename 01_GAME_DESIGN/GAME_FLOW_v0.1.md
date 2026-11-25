@@ -150,19 +150,19 @@ Tu Vi gốc/giây (đề xuất) = 1
 
 **Đề xuất**
 - Mỗi Đại Cảnh có 4 Tiểu Cảnh: Sơ Kỳ → Trung Kỳ → Hậu Kỳ → Đại Viên Mãn.
-- Thang Đại Cảnh theo GDD 5.2. Con số dưới đây chỉ để chạy mô phỏng, sẽ chỉnh sau khi đo thời gian xem thực tế.
+- Thang Đại Cảnh theo GDD 5.2. **PO duyệt 25/11/2026 (D-020): giảm 50% Tu Vi mỗi tiểu cảnh so với bản đầu.** Con số dưới đây chỉ để chạy mô phỏng, sẽ chỉnh sau khi đo thời gian xem thực tế.
 
 | # | Đại Cảnh | Tu Vi mỗi Tiểu Cảnh | Thời gian ước tính / tiểu cảnh (Tạp linh căn, chỉ xem) |
 |---|---|---|---|
-| 1 | Luyện Khí | 600 | 10 phút |
-| 2 | Trúc Cơ | 3.000 | 50 phút |
-| 3 | Kim Đan | 12.000 | 3,3 giờ |
-| 4 | Nguyên Anh | 40.000 | 11 giờ |
-| 5 | Hóa Thần | 120.000 | 33 giờ |
-| 6 | Luyện Hư | 300.000 | 83 giờ |
-| 7 | Hợp Thể | 700.000 | 194 giờ |
-| 8 | Đại Thừa | 1.500.000 | 417 giờ |
-| 9 | Độ Kiếp | 3.000.000 | 833 giờ |
+| 1 | Luyện Khí | 300 | 5 phút |
+| 2 | Trúc Cơ | 1.500 | 25 phút |
+| 3 | Kim Đan | 6.000 | 1,7 giờ |
+| 4 | Nguyên Anh | 20.000 | 5,6 giờ |
+| 5 | Hóa Thần | 60.000 | 17 giờ |
+| 6 | Luyện Hư | 150.000 | 42 giờ |
+| 7 | Hợp Thể | 350.000 | 97 giờ |
+| 8 | Đại Thừa | 750.000 | 208 giờ |
+| 9 | Độ Kiếp | 1.500.000 | 417 giờ |
 | 10 | Chân Tiên | Cảnh giới cuối | — |
 
 - Ý đồ: phiên đầu người mới lên được vài tiểu cảnh Luyện Khí (có cảm giác tiến bộ nhanh), cảnh giới cao cần nhiều phiên.
