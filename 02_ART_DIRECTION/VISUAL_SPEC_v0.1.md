@@ -15,6 +15,8 @@
 
 ## 2. Khung và lưới 9:16
 
+**Nguyên tắc bối cảnh:** chỉ một sân khấu ngoài trời trước đại điện tông môn. Ba lớp hình nền là ba lớp kỹ thuật của cùng một cảnh, không phải ba khu vực/bản đồ.
+
 **Canvas master:** 1080 × 1920 px, portrait 9:16.  
 **Safe area đề xuất:** lề trái 48 px; chừa khoảng 140 px bên phải và 280–320 px phía dưới cho lớp giao diện LIVE của nền tảng; phần trên chừa tối thiểu 100 px. Đây là vùng an toàn tạm thời, phải xác minh bằng video test trên điện thoại/tài khoản thực tế trước khi khóa. Không đặt tên, chỉ số hoặc nút thông tin cốt lõi trong vùng có thể bị UI TikTok che.  
 **Typography tối thiểu đề xuất:** 28–32 px cho thông tin chính; 22–24 px cho phụ đề; không dùng chữ nhỏ dưới 18 px ở overlay quan trọng.
@@ -51,17 +53,21 @@ Không dùng màu sắc làm tín hiệu duy nhất; mỗi chức vụ cần th�
 - Người chơi ngoài nhóm đang render vẫn phải tồn tại trong dữ liệu; có thể luân phiên vị trí hiển thị.
 - Nhân vật spotlight được phóng lớn trong một cửa sổ 3–6 giây, sau đó trả về vị trí.
 
-## 4. Các trạng thái sân khấu
+## 4. Một bối cảnh duy nhất — sân đại điện tông môn ngoài trời
 
-1. **Đại điện bình thường:** Tông Chủ/Thái Thượng, trưởng lão, đệ tử tu luyện; hiệu ứng nền nhẹ.
-2. **Đo Linh Căn:** Đá Đo Linh Căn ở giữa; một người đứng trước đá; màu đá và vòng phù văn phản hồi kết quả.
-3. **Đột phá:** nhân vật chuyển ra khu nghi lễ; ánh sáng hội tụ; hiệu ứng lớn được xếp hàng.
-4. **Thiên Kiếp:** mây đen phía trên sân, tia sét đánh vào pháp trận; rung màn hình rất nhẹ, không gây chớp nháy dày.
-5. **Khiêu chiến/Trợ Chiến:** sân giữa mở thành võ đài; hai nhân vật đối diện; thanh Chiến Lực và đồng hồ 30 giây ở vùng UI riêng.
-6. **Linh Khí Triều:** ánh sáng lan qua các hàng đệ tử; banner và timer xuất hiện ở header/footer.
-7. **Cơ duyên:** thẻ hệ thống nổi lên gần nhân vật nhận thưởng, không che các ghế chính.
+**Game chỉ có một cảnh nền duy nhất:** quảng trường/sân đá ngoài trời phía trước đại điện chính của tông môn, đúng bối cảnh key art đã được PO chọn. Đây là sân khấu cố định của TikTok LIVE; không thiết kế bản đồ phụ, cảnh trong nhà, khu vực khám phá hoặc màn chuyển cảnh sang địa điểm khác.
 
-Chỉ có một hiệu ứng toàn màn hình ưu tiên cao tại một thời điểm. Sự kiện nhỏ chạy dưới dạng icon/particle ngắn.
+Bố cục nền gồm bầu trời và núi tiên ở xa, đại điện cùng đài cao/ngai Tông chủ ở trung cảnh, sân đá rộng và quảng trường ở tiền cảnh. Trên sân có khoảng trống để bố trí tối đa khoảng 60 nhân vật theo hàng, đồng thời dành vùng nghi lễ trung tâm cho các sự kiện.
+
+Các hoạt động dưới đây **không phải bối cảnh riêng**; chúng chỉ là trạng thái gameplay, đạo cụ, overlay hoặc VFX xuất hiện trên cùng một sân khấu:
+1. **Trạng thái thường:** Tông Chủ/Thái Thượng, trưởng lão và đệ tử ở vị trí thường trực; hiệu ứng nền nhẹ.
+2. **Đo Linh Căn:** đạo cụ Đá Đo Linh Căn và phù văn được bật tại vùng nghi lễ giữa sân.
+3. **Đột phá:** nhân vật được spotlight ngay tại sân; ánh sáng và phù văn hội tụ quanh nhân vật.
+4. **Thiên Kiếp:** mây/sét/VFX xuất hiện phía trên cùng bối cảnh; không thay nền sang bản đồ khác.
+5. **Khiêu chiến/Trợ Chiến:** hai nhân vật được đưa vào vùng nghi lễ trung tâm; vòng đấu/hiệu ứng chiến đấu là overlay trên mặt sân hiện tại, không tạo arena scene riêng.
+6. **Linh Khí Triều/Cơ duyên:** sóng sáng, particle, banner và thẻ thông báo chạy trên sân khấu hiện tại.
+
+Chỉ có một hiệu ứng toàn màn hình ưu tiên cao tại một thời điểm. Sự kiện nhỏ chạy dưới dạng icon/particle ngắn. Có thể thay đổi ánh sáng, thời tiết và VFX theo sự kiện, nhưng camera và địa điểm vẫn giữ nguyên.
 
 ## 5.0 Mẫu tạo hình nhân vật chuẩn — PO chỉ định
 
@@ -198,11 +204,11 @@ Hiệu ứng hỗ trợ:
 
 | Asset ID | Tên file đề xuất | Kích thước/định dạng | Ghi chú |
 |---|---|---|---|
-| BG-01 | `bg_hall_back.png` | 1080×1920 PNG | Núi/mây/sky layer |
-| BG-02 | `bg_hall_mid.png` | 1080×1920 PNG | Kiến trúc đại điện, cột, đèn |
-| BG-03 | `bg_hall_front.png` | 1080×1920 PNG | Bậc thềm, sân, lan can/foreground |
-| BG-04 | `bg_ritual_stone.png` | 1024×1024 PNG transparent | Đá Đo Linh Căn và phù văn |
-| BG-05 | `bg_challenge_arena.png` | 1080×900 PNG transparent hoặc layer | Sàn võ đài thay thế khu nghi lễ |
+| BG-01 | `bg_sect_plaza_back.png` | 1080×1920 PNG | Lớp A: bầu trời, mây và núi xa |
+| BG-02 | `bg_sect_plaza_mid.png` | 1080×1920 PNG transparent | Lớp B: đại điện ngoài trời, đài cao, ngai và ghế hai bên |
+| BG-03 | `bg_sect_plaza_front.png` | 1080×1920 PNG transparent | Lớp C: sân/quảng trường đá, vòng nghi lễ và lan can tiền cảnh |
+| PR-01 | `prop_spirit_measure_stone.png` | 1024×1024 PNG transparent | Đạo cụ Đá Đo Linh Căn đặt trên sân khấu duy nhất |
+| FX-07 | `fx_challenge_circle.png` | 1024×1024 PNG transparent | Vòng đấu/ấn ký khiêu chiến phủ trên mặt sân; không phải nền võ đài riêng |
 | CH-01 | `chibi_base_body.png` | 1024×1024 transparent | Base rig, neutral pose |
 | CH-02 | `chibi_face_variants.png` | 1024×1024 transparent hoặc atlas | Bộ mặt/biểu cảm |
 | CH-03 | `chibi_hair_set.png` | 2048×2048 transparent atlas | Tóc trước/sau tách layer |
@@ -241,6 +247,6 @@ Các kích thước trên là kích thước master đề xuất; có thể xu�
 - [ ] Nhân vật giữ nhận diện qua 10 bộ trang phục.
 - [ ] Bảy bậc Linh Căn phân biệt được bằng màu và biểu tượng.
 - [ ] Bốn tầng VFX có độ dài/độ mạnh phù hợp và không che mặt.
-- [ ] Có trạng thái đại điện, đo Linh Căn, đột phá, Thiên Kiếp, khiêu chiến, Linh Khí Triều.
+- [ ] Chỉ có một bối cảnh ngoài trời trước đại điện tông môn; đo Linh Căn, đột phá, Thiên Kiếp, khiêu chiến và Linh Khí Triều đều diễn ra trên cùng sân khấu bằng đạo cụ/overlay/VFX.
 - [ ] Tất cả asset có nguồn/license rõ ràng và không phát sinh chi phí.
 - [ ] Bộ P0 có thể tích hợp thành cảnh chạy thử trước khi mở rộng asset.
