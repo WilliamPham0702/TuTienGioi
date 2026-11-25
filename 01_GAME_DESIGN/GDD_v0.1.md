@@ -67,9 +67,10 @@ Potential sub-stages: Sơ kỳ, Trung kỳ, Hậu kỳ, Đại viên mãn.
 - Do not assume every raw like can be processed individually.
 
 ### 6.3 Gifts
-- May map to named đan dược or visual effects, subject to TikTok policies and supported event access.
-- Gifts must not be mandatory for meaningful free progression.
-- No paid randomized rewards or misleading reward promises.
+- Gifts are the primary revenue driver (D-018). Gifts map to Tu Vi, đan dược, Chiến Lực and visible status effects, subject to TikTok policies and supported event access (D-007).
+- Gift contribution to Chiến Lực is uncapped (D-010).
+- Every gift reward must be fixed and known in advance. No paid randomized rewards (spin, mystery box, lucky draw) and no misleading reward promises.
+- Free viewers (watch time, likes) remain necessary for collective events and audience size, even though gifting players progress faster.
 
 ## 7. Breakthrough and tribulation
 Suggested spectacle sequence:
