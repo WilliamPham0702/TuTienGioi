@@ -1,0 +1,101 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8">
+<title>Tu Tiên Giới — operator</title>
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<style>
+  :root { --bg: #f6f4ee; --card: #fff; --text: #1f1d1a; --muted: #6b665c; --ok: #1f8a5b; --bad: #c0392b; --line: #ddd6c6; --btn: #2f4858; }
+  @media (prefers-color-scheme: dark) { :root { --bg: #15171c; --card: #1e2129; --text: #ece8df; --muted: #a29d92; --line: #343846; --btn: #4d7c99; } }
+  body { margin: 0; background: var(--bg); color: var(--text); font: 16px/1.5 "Segoe UI", Arial, sans-serif; }
+  main { max-width: 720px; margin: 0 auto; padding: 16px; }
+  h1 { font-size: 22px; margin: 8px 0 16px; }
+  section { background: var(--card); border: 1px solid var(--line); border-radius: 12px; padding: 14px 16px; margin-bottom: 14px; }
+  h2 { font-size: 17px; margin: 0 0 10px; }
+  .st { display: grid; grid-template-columns: 160px 1fr; gap: 4px 12px; }
+  .st span:nth-child(odd) { color: var(--muted); }
+  .ok { color: var(--ok); font-weight: 700; } .bad { color: var(--bad); font-weight: 700; }
+  button { background: var(--btn); color: #fff; border: 0; border-radius: 8px; padding: 10px 14px; font-size: 15px; margin: 4px 6px 4px 0; cursor: pointer; }
+  input { padding: 8px 10px; font-size: 15px; border: 1px solid var(--line); border-radius: 8px; background: var(--bg); color: var(--text); width: 140px; }
+  .note { color: var(--muted); font-size: 14px; }
+</style>
+</head>
+<body>
+<main>
+  <h1>Bảng điều khiển operator</h1>
+  <section>
+    <h2>Trạng thái</h2>
+    <div class="st">
+      <span>Kết nối lõi game</span><span id="ws" class="bad">chưa</span>
+      <span>Nguồn sự kiện</span><span id="src">-</span>
+      <span>Kết nối nguồn</span><span id="conn">-</span>
+      <span>Sự kiện đã nhận</span><span id="n">0</span>
+      <span>Sự kiện bỏ qua</span><span id="skip">0</span>
+      <span>Sự kiện gần nhất</span><span id="lastEv">-</span>
+      <span>Thông báo bị bỏ</span><span id="drop">0</span>
+      <span>Game</span><span id="game">-</span>
+    </div>
+  </section>
+  <section>
+    <h2>Điều khiển</h2>
+    <button id="pause">Tạm dừng game</button>
+    <button id="resume">Tiếp tục</button>
+    <p class="note">Tạm dừng đóng băng Tu Vi theo thời gian, đồng hồ trận và cơ duyên. Quà vẫn được ghi nhận.</p>
+  </section>
+  <section>
+    <h2>Thử không cần LIVE</h2>
+    <p class="note">Tạo người xem giả để xem màn hình phản ứng. Người giả có tiền tố "test:" và không lẫn với người thật.</p>
+    <input id="who" value="Khách 1" aria-label="Tên người xem giả">
+    <button data-f="join">Vào phòng</button>
+    <button data-f="like">Thả 50 tim</button>
+    <button data-f="gift">Tặng 10 kim cương</button>
+    <button data-f="bigGift">Tặng 500 kim cương</button>
+    <button data-f="ungA">!ung A</button>
+    <button data-f="ungB">!ung B</button>
+    <button data-f="kc">!khieuchien truong lao</button>
+  </section>
+</main>
+<script>
+(() => {
+  const $ = (s) => document.querySelector(s);
+  let ws;
+  const send = (m) => ws && ws.readyState === 1 && ws.send(JSON.stringify(m));
+  $('#pause').onclick = () => send({ type: 'pause' });
+  $('#resume').onclick = () => send({ type: 'resume' });
+  const id = () => $('#who').value.trim() || 'Khách';
+  const F = {
+    join: () => ({ type: 'join', playerId: id(), name: id() }),
+    like: () => ({ type: 'like', playerId: id(), count: 50 }),
+    gift: () => ({ type: 'gift', playerId: id(), diamonds: 10 }),
+    bigGift: () => ({ type: 'gift', playerId: id(), diamonds: 500 }),
+    ungA: () => ({ type: 'command', playerId: id(), text: '!ung A' }),
+    ungB: () => ({ type: 'command', playerId: id(), text: '!ung B' }),
+    kc: () => ({ type: 'command', playerId: id(), text: '!khieuchien truong lao' }),
+  };
+  document.querySelectorAll('[data-f]').forEach((b) => (b.onclick = () => send({ type: 'fake', event: F[b.dataset.f]() })));
+
+  function connect() {
+    ws = new WebSocket(`ws://${location.host}/ws?role=operator`);
+    ws.onopen = () => { $('#ws').textContent = 'đã kết nối'; $('#ws').className = 'ok'; };
+    ws.onclose = () => { $('#ws').textContent = 'mất kết nối, đang nối lại'; $('#ws').className = 'bad'; setTimeout(connect, 2000); };
+    ws.onmessage = (ev) => {
+      const m = JSON.parse(ev.data);
+      if (m.type === 'status') {
+        const s = m.status;
+        $('#src').textContent = s.source;
+        $('#conn').textContent = s.detail || (s.connected ? 'đã kết nối' : 'chưa');
+        $('#conn').className = s.connected ? 'ok' : 'bad';
+        $('#n').textContent = s.eventsIn;
+        $('#skip').textContent = s.skipped;
+        $('#lastEv').textContent = s.lastEventAt ? new Date(s.lastEventAt).toLocaleTimeString('vi-VN') : '-';
+        $('#drop').textContent = m.dropped;
+        $('#game').textContent = m.paused ? 'ĐANG TẠM DỪNG' : 'đang chạy';
+        $('#game').className = m.paused ? 'bad' : 'ok';
+      }
+    };
+  }
+  connect();
+})();
+</script>
+</body>
+</html>
