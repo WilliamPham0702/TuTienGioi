@@ -63,6 +63,19 @@ Không dùng màu sắc làm tín hiệu duy nhất; mỗi chức vụ cần th�
 
 Chỉ có một hiệu ứng toàn màn hình ưu tiên cao tại một thời điểm. Sự kiện nhỏ chạy dưới dạng icon/particle ngắn.
 
+## 5.0 Mẫu tạo hình nhân vật chuẩn — PO chỉ định
+
+**Tham chiếu bắt buộc:** nhóm **5 nhân vật đầu tiên** đã được ChatGPT thiết kế và PO lựa chọn trong phiên làm concept. Đây là chuẩn tạo hình cho **toàn bộ nhân vật trong game**.
+
+- Mọi nhân vật mới phải bám sát ngôn ngữ tạo hình, chất lượng hoàn thiện, tỷ lệ chibi, gương mặt, đường nét, chất liệu trang phục và cảm giác thẩm mỹ của đúng nhóm 5 nhân vật đầu tiên.
+- **Không dùng nhóm 5 nhân vật xuất hiện sau làm tham chiếu.** PO đã phản hồi rõ nhóm sau không đẹp và không phải phong cách mong muốn; loại nhóm này khỏi chuẩn art direction.
+- Không tự ý thay bằng một biến thể chibi khác, phong cách đơn giản hơn, trẻ con hơn, hoặc tạo hình đại trà chỉ vì dễ sản xuất.
+- Được phép thay đổi giới tính, gương mặt, kiểu tóc, màu sắc, trang phục, phụ kiện, vũ khí, cấp bậc và khí chất để tạo đa dạng nhân vật; nhưng chất lượng và ngôn ngữ tạo hình phải nhất quán với mẫu 5 nhân vật đầu tiên.
+- Bảng màu trang phục đa sắc, sáng và hài hòa như mục 6.1; không ép toàn bộ nhân vật mặc cùng một tông.
+- Trước khi sản xuất hàng loạt, concept mới phải được đặt cạnh nhóm 5 nhân vật chuẩn để PO đối chiếu. Nếu nhìn vào thấy khác phong cách hoặc kém chất lượng rõ rệt thì không đạt.
+
+Lưu ý: các concept được tạo bằng AI hiện tại chỉ là hình tham chiếu định hướng; chưa mặc nhiên là sprite, rig hoặc asset production-ready.
+
 ## 5. Nhân vật chibi module
 
 ### 5.1 Tỷ lệ và silhouette
