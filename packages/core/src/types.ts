@@ -28,6 +28,13 @@ export interface Player {
   weaponPct: number;
   treasurePct: number;
 
+  /** Tính theo phiên LIVE, reset khi bắt đầu phiên mới (Thiên Bảng). */
+  sessionBeQuanSec: number;
+  sessionGiftDiamonds: number;
+  /** Trạng thái Tâm Ma sau đột phá thất bại; null = không có. */
+  xinMa: { until: number; hearts: number } | null;
+  badges: string[];
+
   // Trạng thái tạm
   boostPct: number;
   boostUntil: number;
@@ -65,6 +72,7 @@ export type GameEvent =
   | { id: string; type: 'leave'; playerId: string; at: number }
   | { id: string; type: 'like'; playerId: string; count: number; at: number }
   | { id: string; type: 'gift'; playerId: string; diamonds: number; side?: 'A' | 'B'; at: number }
+  | { id: string; type: 'communityLike'; count: number; at: number }
   | { id: string; type: 'command'; playerId: string; text: string; at: number };
 
 export interface GameState {
@@ -72,6 +80,10 @@ export interface GameState {
   seats: Seat[];
   /** Host trở thành Thái Thượng Tông Chủ khi người chơi giành ghế Tông Chủ (D-015). */
   hostSupreme: boolean;
+  /** Linh Khí Triều. */
+  tide: { progress: number; until: number; cooldownUntil: number; activations: number };
+  /** Operator tạm dừng: dừng mọi cơ chế theo thời gian. */
+  paused: boolean;
   pending: PendingChallenge | null;
   lastTick: number;
   nextFortuneAt: number;

@@ -82,6 +82,21 @@ export const GAME_CONFIG = {
     trucCoDan: { name: 'Trúc Cơ Đan', breakBonus: 0.2 },
   },
 
+  // Linh Khí Triều (FEATURE_SPEC §1) — mọi con số là ĐỀ XUẤT
+  tide: { threshold: 2000, durationMs: 180_000, multiplier: 2, cooldownMs: 600_000, maxPerSession: 6 },
+
+  // Tâm Ma / Trợ Đạo (FEATURE_SPEC §3): tim của người khác rút ngắn thời gian chờ, KHÔNG tăng xác suất
+  xinMa: { windowMs: 120_000, heartsNeeded: 300, excludeSelf: true },
+
+  // Danh Hiệu theo cột mốc (FEATURE_SPEC §4)
+  badges: [
+    { id: 'tanTu', label: 'Tân Tú' },
+    { id: 'nhapDao', label: 'Nhập Đạo' },
+    { id: 'kimDan', label: 'Kim Đan Chân Nhân' },
+    { id: 'doKiep', label: 'Người Độ Kiếp' },
+  ],
+  maxBadgesShown: 2,
+
   // Thông báo
   announceMinGapMs: 3_500,
   announceMaxQueue: 12,

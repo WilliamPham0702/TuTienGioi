@@ -48,7 +48,7 @@ export class Game {
     const seats: Seat[] = [];
     for (const role of Object.keys(cfg.seatCount) as SeatRole[])
       for (let i = 0; i < cfg.seatCount[role]; i++) seats.push({ role, holder: null });
-    return { players: {}, seats, hostSupreme: false, pending: null, lastTick: 0, nextFortuneAt: 0, seenEventIds: [] };
+    return { players: {}, seats, hostSupreme: false, tide: { progress: 0, until: 0, cooldownUntil: 0, activations: 0 }, paused: false, pending: null, lastTick: 0, nextFortuneAt: 0, seenEventIds: [] };
   }
 
   // ---------- Phiên ----------
@@ -60,7 +60,12 @@ export class Game {
       p.present = false;
       p.boostPct = 0;
       p.boostUntil = 0;
+      p.sessionBeQuanSec = 0;
+      p.sessionGiftDiamonds = 0;
+      p.xinMa = null;
     }
+    this.state.tide = { progress: 0, until: 0, cooldownUntil: 0, activations: 0 };
+    this.state.paused = false;
     this.state.pending = null;
     this.state.lastTick = now;
     this.state.nextFortuneAt = now + this.fortuneDelay();
@@ -75,6 +80,7 @@ export class Game {
     if (this.state.seenEventIds.length > SEEN_CAP) this.state.seenEventIds.splice(0, 500);
 
     if (e.type === 'join') return this.onJoin(e.playerId, e.name, e.at), true;
+    if (e.type === 'communityLike') return this.addHearts(Math.max(0, Math.floor(e.count)), e.at, null), true;
     const p = this.state.players[e.playerId];
     if (!p) return false;
     switch (e.type) {
@@ -120,6 +126,10 @@ export class Game {
         gongfaPct: 0,
         weaponPct: 0,
         treasurePct: 0,
+        sessionBeQuanSec: 0,
+        sessionGiftDiamonds: 0,
+        xinMa: null,
+        badges: [],
         boostPct: 0,
         boostUntil: 0,
         breakBonus: 0,
@@ -131,6 +141,7 @@ export class Game {
       };
       this.state.players[id] = p;
     }
+    this.award(p, 'tanTu', at);
     p.name = name; // tên hiển thị đổi được; ngoại hình thì không (D-013)
     p.present = true;
     p.lastSeen = at;
@@ -153,12 +164,48 @@ export class Game {
     const room = Math.max(0, this.cfg.likeCapPerMinute - p.likeWindowCount);
     const stones = Math.min(Math.max(0, Math.floor(count)) * this.cfg.likeToLowStone, room);
     p.likeWindowCount += stones;
-    if (stones > 0) this.addTuVi(p, stones * this.cfg.tuViPerLowStone, at, false);
+    if (stones > 0) {
+      this.addTuVi(p, stones * this.cfg.tuViPerLowStone, at, false);
+      this.addHearts(stones, at, p.id);
+    }
+  }
+
+  /** Tim hợp lệ đã ghi nhận → thanh Linh Khí Triều và thanh Trợ Đạo của người đang Tâm Ma. `from` = null khi nguồn chỉ có tổng tim. */
+  private addHearts(n: number, at: number, from: string | null): void {
+    if (n <= 0) return;
+    const t = this.state.tide;
+    const c = this.cfg.tide;
+    if (at >= t.until && at >= t.cooldownUntil && t.activations < c.maxPerSession) {
+      t.progress += n;
+      if (t.progress >= c.threshold) {
+        t.progress = 0;
+        t.activations++;
+        t.until = at + c.durationMs;
+        t.cooldownUntil = t.until + c.cooldownMs;
+        this.say('high', 'tide', `LINH KHÍ TRIỀU! Tu Vi nhân ${c.multiplier} trong ${c.durationMs / 60_000} phút!`, true, at);
+      }
+    }
+    // Trợ Đạo: tim của người khác vào thanh của người Tâm Ma lâu nhất còn hiệu lực
+    let target: Player | undefined;
+    for (const q of Object.values(this.state.players)) {
+      if (!q.xinMa || at >= q.xinMa.until) continue;
+      if (this.cfg.xinMa.excludeSelf && q.id === from) continue;
+      if (!target || q.xinMa.until < target.xinMa!.until) target = q;
+    }
+    if (target) {
+      target.xinMa!.hearts += n;
+      if (target.xinMa!.hearts >= this.cfg.xinMa.heartsNeeded) {
+        target.xinMa = null;
+        target.breakCooldownUntil = at; // chỉ rút ngắn thời gian chờ, không tăng tỉ lệ
+        this.say('medium', 'trodao', `${target.name} được trợ đạo — có thể thử đột phá lại ngay!`, true, at);
+      }
+    }
   }
 
   private onGift(p: Player, diamonds: number, side: 'A' | 'B' | undefined, at: number): void {
     const d = Math.max(0, Math.floor(diamonds));
     if (d === 0) return;
+    p.sessionGiftDiamonds += d;
     const c = this.state.pending;
     if (c && at < c.endsAt + this.cfg.assistGraceMs) {
       // Cửa sổ Trợ Chiến (D-018): quà cộng Chiến Lực ngay cho một phe.
@@ -198,6 +245,14 @@ export class Game {
   /** Gọi đều đặn (vd. mỗi giây). Cộng Tu Vi theo thời gian hiện diện hợp lệ, thử đột phá, chạy cơ duyên, chốt khiêu chiến. */
   tick(now: number): void {
     const s = this.state;
+    if (s.paused) {
+      // Operator tạm dừng: đóng băng thời gian của trận và cơ duyên
+      const dt = Math.max(0, now - s.lastTick);
+      if (s.pending) s.pending.endsAt += dt;
+      if (s.nextFortuneAt > 0) s.nextFortuneAt += dt;
+      s.lastTick = now;
+      return;
+    }
     const start = Math.max(s.lastTick, now - this.cfg.maxTickGapMs);
     for (const p of Object.values(s.players)) {
       if (!p.present || p.root === null) continue;
@@ -206,10 +261,12 @@ export class Game {
       const sec = Math.max(0, end - start) / 1000;
       if (sec > 0) {
         const mult = this.cfg.roots.find((r) => r.id === p.root)!.mult;
-        const boost = p.boostUntil > start ? 1 + p.boostPct : 1;
+        const boost = (p.boostUntil > start ? 1 + p.boostPct : 1) * (s.tide.until > start ? this.cfg.tide.multiplier : 1);
+        p.sessionBeQuanSec += sec;
         this.addTuVi(p, sec * this.cfg.baseTuViPerSec * mult * boost, now, false);
       }
       if (now - p.lastSeen > this.cfg.presenceTimeoutMs) p.present = false;
+      if (p.xinMa && now >= p.xinMa.until) p.xinMa = null;
       if (this.cfg.autoBreakthrough) this.tryBreakthrough(p, now);
     }
     s.lastTick = now;
@@ -265,6 +322,10 @@ export class Game {
       p.realm++;
       p.minor = 0;
       p.progress = 0;
+      p.xinMa = null;
+      if (p.realm >= 1) this.award(p, 'nhapDao', now);
+      if (p.realm >= 2) this.award(p, 'kimDan', now);
+      if (p.realm >= 8) this.award(p, 'doKiep', now);
       const to = this.cfg.realms[p.realm]!.name;
       const big = p.realm >= 3;
       this.say(big ? 'high' : 'medium', 'breakthrough', `${p.name} đột phá từ ${from} lên ${to}!`, true, now);
@@ -272,6 +333,7 @@ export class Game {
       return 'success';
     }
     p.breakCooldownUntil = now + this.cfg.breakCooldownMs;
+    p.xinMa = { until: now + this.cfg.xinMa.windowMs, hearts: 0 };
     this.say('low', 'breakfail', `${p.name} đột phá thất bại, tu vi không tổn hao. Chờ hồi rồi thử lại.`, false, now);
     return 'fail';
   }
@@ -412,6 +474,41 @@ export class Game {
     }
     const pr: Priority = reward.kind === 'weapon' || reward.kind === 'treasure' ? 'high' : 'medium';
     this.say(pr, 'fortune', `Chúc mừng ký chủ ${p.name} nhận được ${what}!`, true, now);
+  }
+
+  // ---------- Thiên Bảng, danh hiệu, điều khiển ----------
+
+  /** Thiên Bảng (FEATURE_SPEC §2). Bế Quan và Cúng Phụng tính theo phiên; Tu Vi và Chiến Lực giữ theo hồ sơ.
+   *  Đồng hạng: người có mã định danh nhỏ hơn đứng trước (quy tắc TẠM, cần PO duyệt). */
+  leaderboard(tab: 'tuVi' | 'chienLuc' | 'beQuan' | 'cungPhung', n = 5): { id: string; name: string; value: number }[] {
+    const val = (p: Player) =>
+      tab === 'tuVi' ? p.tuViTotal : tab === 'chienLuc' ? this.combatPower(p) : tab === 'beQuan' ? p.sessionBeQuanSec : p.sessionGiftDiamonds;
+    return Object.values(this.state.players)
+      .map((p) => ({ id: p.id, name: p.name, value: val(p) }))
+      .filter((r) => r.value > 0)
+      .sort((a, b) => b.value - a.value || (a.id < b.id ? -1 : 1))
+      .slice(0, n);
+  }
+
+  private award(p: Player, id: string, at: number): void {
+    if (p.badges.includes(id)) return;
+    p.badges.push(id);
+    const b = this.cfg.badges.find((x) => x.id === id);
+    if (b && id !== 'tanTu') this.say('low', 'badge', `${p.name} nhận danh hiệu ${b.label}`, false, at);
+  }
+
+  /** Hiển thị cạnh tên: chức vụ riêng, tối đa 2 danh hiệu gần nhất (FEATURE_SPEC §4). */
+  displayTitles(p: Player): { seat: string | null; badges: string[] } {
+    const seat = this.state.seats.find((s) => s.holder === p.id);
+    const labels = p.badges.map((id) => this.cfg.badges.find((b) => b.id === id)?.label).filter((x): x is string => !!x);
+    return { seat: seat ? ROLE_NAMES[seat.role] : null, badges: labels.slice(-this.cfg.maxBadgesShown) };
+  }
+
+  pause(): void {
+    this.state.paused = true;
+  }
+  resume(): void {
+    this.state.paused = false;
   }
 
   // ---------- Khác ----------

@@ -42,6 +42,8 @@ export class Store {
       players,
       seats: JSON.parse(m.get('seats')!),
       hostSupreme: m.get('hostSupreme') === '1',
+      tide: JSON.parse(m.get('tide')!),
+      paused: m.get('paused') === '1',
       pending: JSON.parse(m.get('pending')!),
       lastTick: Number(m.get('lastTick')),
       nextFortuneAt: Number(m.get('nextFortuneAt')),
@@ -64,6 +66,8 @@ export class Store {
       for (const [id, json] of pending) up.run(id, json);
       setMeta.run('seats', JSON.stringify(state.seats));
       setMeta.run('hostSupreme', state.hostSupreme ? '1' : '0');
+      setMeta.run('tide', JSON.stringify(state.tide));
+      setMeta.run('paused', state.paused ? '1' : '0');
       setMeta.run('pending', JSON.stringify(state.pending));
       setMeta.run('lastTick', String(state.lastTick));
       setMeta.run('nextFortuneAt', String(state.nextFortuneAt));

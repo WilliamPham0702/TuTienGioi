@@ -3,7 +3,7 @@ import { Announcer, GAME_CONFIG, Game, seededRng, type GameEvent, type Rng } fro
 
 const fixed = (v: number): Rng => ({ next: () => v });
 let n = 0;
-const ev = <T extends Omit<GameEvent, 'id'>>(e: T): GameEvent => ({ ...e, id: `e${++n}` }) as GameEvent;
+const ev = <T extends Omit<GameEvent, 'id'>>(e: T): GameEvent => ({ ...e, id: `e${++n}` }) as unknown as GameEvent;
 const join = (g: Game, id: string, at = 0, name = id) => g.handle(ev({ type: 'join', playerId: id, name, at }));
 
 describe('linh căn (D-009)', () => {
