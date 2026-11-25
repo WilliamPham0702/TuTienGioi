@@ -1,0 +1,10 @@
+{
+  "name": "@tutiengioi/tiktok-probe",
+  "private": true,
+  "version": "0.1.0",
+  "type": "module",
+  "description": "PoC-3 TikTok: chỉ-đọc, không đăng nhập. Tách riêng khỏi core vì thư viện connector là bản không chính thức (giấy phép 'modified AGPL', cần PO xem).",
+  "dependencies": {
+    "tiktok-live-connector": "2.4.4"
+  }
+}
