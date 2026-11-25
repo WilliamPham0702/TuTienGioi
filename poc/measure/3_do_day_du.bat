@@ -1,6 +1,6 @@
 @echo off
-rem C-002 PoC - do day du: 3 cau hinh x 40/60/80 nhan vat (3 phut/lan) + bao dot pha + 3 video 60 giay. Khoang 45 phut.
+rem C-002 PoC - bai do nhanh: Phaser (Web), 80 nhan vat, 3 phut. Khoang 4 phut ke ca khoi dong.
 cd /d "%~dp0"
 echo Dang do. Khong dung may trong luc do. Cam sac neu la laptop.
-node run.mjs --minutes 3 --all
+node run.mjs --config A --n 80 --minutes 3
 pause
