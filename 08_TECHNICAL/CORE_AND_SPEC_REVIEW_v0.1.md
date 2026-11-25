@@ -24,7 +24,7 @@ Lõi luật thuần TypeScript, chạy được với Local Simulation, độc l
 | Hàng đợi thông báo: ưu tiên, 1 câu đọc/3,5 giây, quá tải bỏ mục thấp, không bỏ mục cao | GAME_FLOW §12 | Có |
 | Chống xử lý trùng theo ID sự kiện; snapshot/khôi phục | Brief §4.5 | Có |
 
-**Bằng chứng:** `cd packages/core && npm install && npm test` → **31/31 đạt**; `npm run typecheck` sạch (chạy trên máy cloud, 2026-11-25). Đây là test đơn vị trên logic; chưa đo hiệu năng, chưa nối SQLite, chưa nối TikTok.
+**Bằng chứng:** `cd packages/core && npm install && npm test` → **31/31 đạt (lượt 1)**; `npm run typecheck` sạch (chạy trên máy cloud, 2026-11-25). Đây là test đơn vị trên logic; chưa đo hiệu năng, chưa nối SQLite, chưa nối TikTok.
 
 **Bổ sung (lượt 2, cùng ngày): lưu SQLite, khôi phục, nguồn mô phỏng**
 
@@ -36,9 +36,13 @@ Lõi luật thuần TypeScript, chạy được với Local Simulation, độc l
 | Đợt dồn dập mô phỏng 500 sự kiện/giây × 60 giây (30.300 sự kiện) | Xử lý xong, không lỗi, không mất quà; ~0,2 giây trên máy cloud (chưa đo trên PC của PO, và chưa tính hiển thị) |
 | Sao lưu nóng ra file khác | Mở được, giống bản gốc |
 
-Tổng: **57/57 test đạt**, `tsc` sạch. Lưu ý: `node:sqlite` của Node 22 còn ở trạng thái thử nghiệm (có cảnh báo khi chạy); PoC-3 trước đó cũng dùng nó. Nếu cài trên máy PO gặp vấn đề thì đổi sang `better-sqlite3` (cùng giao diện `Store`).
+**Bổ sung (lượt 3): Linh Khí Triều, Tâm Ma, Thiên Bảng, Danh Hiệu, tạm dừng của operator** — đã có trong lõi, có test (11 test mới). Linh Khí Triều: ngưỡng tim cộng đồng → nhân đôi tốc độ tu luyện có thời hạn, có hồi và trần số lần/phiên. Tâm Ma: đột phá hỏng → cả phòng thả tim để "trợ đạo" (chỉ rút ngắn hồi, không phạt). Thiên Bảng 4 tab (Tu Vi, Chiến Lực, Bế Quan, Cúng Phụng theo phiên; hòa → id nhỏ hơn, tạm). Danh Hiệu: 4 loại tối thiểu, hiển thị tối đa 2. Operator tạm dừng/tiếp tục: đóng băng thời gian. Chưa có danh sách Đạo Hiệu (cần ChatGPT soạn nội dung).
 
-**Chưa làm (thuộc MVP theo GDD v0.3):** Linh Khí Triều, Tâm Ma, Thiên Bảng (4 tab, Cúng Phụng theo phiên), Đạo Hiệu/Danh Hiệu, kiểm duyệt tên, TTS, operator/audit log, cầu nối WebSocket tới màn hình.
+Tổng: **68/68 test đạt**, `tsc` sạch. Lưu ý: `node:sqlite` của Node 22 còn ở trạng thái thử nghiệm (có cảnh báo khi chạy); PoC-3 trước đó cũng dùng nó. Nếu cài trên máy PO gặp vấn đề thì đổi sang `better-sqlite3` (cùng giao diện `Store`).
+
+**Chưa làm (thuộc MVP theo GDD v0.3):** nội dung Đạo Hiệu, kiểm duyệt tên, TTS, audit log của operator, cầu nối WebSocket tới màn hình, bảng điều khiển operator.
+
+**PoC-3 TikTok (lượt 3):** đã có công cụ thăm dò chỉ-đọc `packages/tiktok-probe` (xem README trong đó). Mới kiểm thử ngoại tuyến bằng dữ liệu giả (5/5 test); **CHƯA từng chạy với TikTok thật** — T1–T8 vẫn là giả thuyết cho đến khi PO chạy và gửi `report.txt`.
 
 ## 2. Rà soát: mâu thuẫn và rủi ro kỹ thuật trong đặc tả
 
@@ -95,12 +99,12 @@ Mức: **Chặn** = không làm đúng được nếu chưa giải quyết; **Ca
 1. **Quà chưa chọn phe**: không tính vào trận (đang dùng) hay mặc định cho bên giữ chức?
 2. Mục 2.2, câu 1–4 (chọn ghế, nhường ghế, Thái Thượng sau khi mất ghế, Tu Vi dư khi đột phá).
 3. Có cho **thời gian ân hạn** nhận quà trễ sau khi hết 30 giây không?
-4. Ưu tiên bước tiếp theo: (a) lưu SQLite + khôi phục + adapter mô phỏng; (b) Linh Khí Triều, Tâm Ma, Thiên Bảng; (c) PoC-3 TikTok để trả lời T1–T3 (cần PO duyệt, xem `TECHNICAL_ARCHITECTURE_PROPOSAL.md` mục 5–6).
+4. (ĐÃ TRẢ LỜI: "Làm hết" → a, b đã xong; c đã có công cụ, chờ PO chạy.) Ưu tiên bước tiếp theo: (a) lưu SQLite + khôi phục + adapter mô phỏng; (b) Linh Khí Triều, Tâm Ma, Thiên Bảng; (c) PoC-3 TikTok để trả lời T1–T3 (cần PO duyệt, xem `TECHNICAL_ARCHITECTURE_PROPOSAL.md` mục 5–6).
 
 ## 4. Handoff
 
 - Task: C-003 · Owner: Claude → ChatGPT (xem 2.1–2.2) → PO (mục 3)
-- Thay đổi: `packages/core/**`, `08_TECHNICAL/CORE_AND_SPEC_REVIEW_v0.1.md`, `.gitignore`
-- Test: 57/57 đạt (vitest), tsc sạch — máy cloud, 2026-11-25
+- Thay đổi: `packages/core/**`, `packages/tiktok-probe/**`, `08_TECHNICAL/CORE_AND_SPEC_REVIEW_v0.1.md`, `.gitignore`
+- Test: core 68/68 (vitest), tsc sạch; tiktok-probe 5/5 (node --test, dữ liệu giả) — máy cloud, 2026-11-25
 - Giới hạn: số liệu kinh tế là tạm; chưa chạy trên PC của PO; chưa có kết nối TikTok
 - Không merge khi chưa được PO duyệt

@@ -8,7 +8,8 @@ Lõi luật game (TypeScript thuần, không I/O). Không phụ thuộc engine h
 - `Store` (SQLite, `node:sqlite`, cần Node ≥ 22.5; Node 22 in cảnh báo "experimental"): commit một giao dịch, chỉ ghi người chơi thay đổi, sao lưu nóng `backup()`.
 - `scenario()`/`burst()` = nguồn sự kiện MÔ PHỎNG; `run()` chạy nguồn qua `Game`, tick + commit định kỳ.
 - Khôi phục sau tắt đột ngột cho kết quả y hệt chưa từng tắt (test 20 điểm tắt khác nhau).
-- Chưa có: Linh Khí Triều, Tâm Ma, Thiên Bảng, Đạo Hiệu, kiểm duyệt tên, TTS.
+- Có: Linh Khí Triều, Tâm Ma, Thiên Bảng (4 tab), Danh Hiệu tối thiểu, operator tạm dừng/tiếp tục. 68 test.
+- Chưa có: nội dung Đạo Hiệu, kiểm duyệt tên, TTS, audit log operator.
 
 ```
 cd packages/core && npm install && npm test && npm run typecheck
