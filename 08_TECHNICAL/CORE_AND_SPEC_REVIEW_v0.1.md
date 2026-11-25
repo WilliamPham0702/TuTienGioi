@@ -99,7 +99,7 @@ Mức: **Chặn** = không làm đúng được nếu chưa giải quyết; **Ca
 1. **Quà chưa chọn phe**: không tính vào trận (đang dùng) hay mặc định cho bên giữ chức?
 2. Mục 2.2, câu 1–4 (chọn ghế, nhường ghế, Thái Thượng sau khi mất ghế, Tu Vi dư khi đột phá).
 3. Có cho **thời gian ân hạn** nhận quà trễ sau khi hết 30 giây không?
-4. (ĐÃ TRẢ LỜI: "Làm hết" → a, b đã xong; c đã có công cụ, chờ PO chạy.) Ưu tiên bước tiếp theo: (a) lưu SQLite + khôi phục + adapter mô phỏng; (b) Linh Khí Triều, Tâm Ma, Thiên Bảng; (c) PoC-3 TikTok để trả lời T1–T3 (cần PO duyệt, xem `TECHNICAL_ARCHITECTURE_PROPOSAL.md` mục 5–6).
+4. (ĐÃ TRẢ LỜI: "Làm hết" → a, b đã xong; c đã có công cụ, chờ PO chạy.) Ưu tiên bước tiếp theo: (a) lưu SQLite + khôi phục + adapter mô phỏng; (b) Linh Khí Triều, Tâm Ma, Thiên Bảng; (c) PoC-3 TikTok để trả lời T1–T3 (cần PO duyệt, xem `TECHNICAL_ARCHITECTURE_LIVE_ADDENDUM.md` mục 3–4).
 
 ## 4. Handoff
 
