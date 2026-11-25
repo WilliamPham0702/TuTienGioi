@@ -32,14 +32,28 @@ Các màu dưới đây là nhóm gợi ý, không phải mã màu khóa cứng:
 - Tông môn chính đạo không dùng đen, đỏ máu hoặc màu u ám làm bảng màu chủ đạo. Có thể dùng chúng cho Tâm Ma, phản diện, Thiên Kiếp hoặc cảnh tương phản.
 - Màu không phải tín hiệu duy nhất cho chức vụ/cảnh giới; kết hợp silhouette, huy hiệu, hoa văn và phụ kiện.
 
-## 3. Bộ concept cần duyệt
+## 3. Một bối cảnh duy nhất — quảng trường ngoài trời trước đại điện
 
-### A. Đại điện tông môn — key environment
-- Đại điện và sân rộng, kiến trúc tiên gia phương Đông, mái cong, bậc đá lớn, lan can, đèn lồng và hoa.
-- Xa cảnh có núi tiên, mây tầng, thác hoặc cầu mây; gần cảnh có sân nghi lễ và lối vào rộng.
-- Ánh sáng ban ngày/hoàng hôn dịu, có điểm sáng thần thánh nhưng không cháy trắng.
-- Tách tối thiểu ba lớp: hậu cảnh núi trời; trung cảnh kiến trúc; tiền cảnh sân/bậc thềm.
-- Bố cục trung tâm đủ thoáng để đặt nghi lễ, nhân vật spotlight và hiệu ứng.
+Game chỉ sử dụng **một cảnh nền duy nhất**: quảng trường/sân đá ngoài trời trước đại điện chính của tông môn. Đây là sân khấu cố định xuyên suốt phiên TikTok LIVE. Không tạo cảnh đại điện trong nhà, bản đồ phụ, khu vực khám phá, màn chơi riêng hoặc nền võ đài thay thế.
+
+Bố cục dọc 9:16, nhìn chính diện hơi từ trên cao, cân đối và có chiều sâu:
+- **15% trên cùng:** bầu trời, mây sáng và núi tiên xa; ánh sáng ban ngày ấm.
+- **15%–30%:** đại điện chính trên đài cao, ngai Tông chủ ở giữa, bảng hiệu trống không chữ và cầu thang rộng.
+- **30%–40%:** sân/hiên cao với các ghế phụ hai bên dành cho trưởng lão; để trống khi chưa có nhân vật.
+- **40%–55%:** vòng nghi lễ tròn khắc trên đá ở chính giữa, dùng làm điểm đặt đạo cụ hoặc hiệu ứng khi có sự kiện.
+- **55%–85%:** quảng trường đá rộng, có phối cảnh và đủ không gian cho khoảng 60 nhân vật nhỏ đứng theo hàng.
+- **15% dưới cùng:** nền đá và lan can thấp, ít chi tiết vì có thể bị lớp chat LIVE che.
+
+Ánh sáng ban ngày ấm, bảng màu ngọc, xanh trời, trắng ngà và điểm vàng nhạt. Kiến trúc tiên gia phương Đông, mái cong, bậc đá lớn, lan can, đèn lồng và hoa. Không có nhân vật, chữ, logo, HUD hoặc nút giao diện trong bản nền.
+
+### 3.1 Tách lớp kỹ thuật của cùng một cảnh
+- **Layer A — hậu cảnh:** chỉ bầu trời, mây và núi xa, phủ toàn canvas.
+- **Layer B — trung cảnh:** đại điện, đài cao, ngai, cầu thang và ghế phụ; nền trong suốt.
+- **Layer C — tiền cảnh:** sân/quảng trường đá, vòng nghi lễ và lan can; nền trong suốt.
+
+Ba layer phải cùng kích thước, cùng tọa độ và khớp tuyệt đối khi ghép lại. Đây là cách tạo parallax/chiều sâu cho **một cảnh duy nhất**, không phải ba background độc lập.
+
+Đá Đo Linh Căn, vòng khiêu chiến và các dấu ấn nghi lễ là đạo cụ/overlay riêng có thể bật tắt trên mặt sân; không tạo background mới cho từng hoạt động.
 
 ### B. Dàn nhân vật đại diện — character lineup
 Tạo một nhóm nhỏ để kiểm tra độ đa dạng và tính thống nhất:
@@ -68,7 +82,7 @@ Nhân vật cần có mặt và biểu cảm dễ đọc ở kích thước nh�
 
 ## 5. Phạm vi review và điều kiện nghiệm thu
 
-**Bộ review nhỏ chỉ gồm:** 1 cảnh đại điện, 1 lineup 5 nhân vật, 1 sheet thử màu trang phục, 1 sheet hiệu ứng tu luyện. Chưa sản xuất 10 bộ trang phục hoàn chỉnh hoặc toàn bộ asset P0.
+**Bộ review nhỏ chỉ gồm:** (1) một cảnh quảng trường ngoài trời trước đại điện, có bản ghép hoàn chỉnh và bản tách 3 layer; (2) một lineup 5 nhân vật; (3) một sheet thử màu trang phục; (4) một sheet hiệu ứng tu luyện. Chưa sản xuất 10 bộ trang phục hoàn chỉnh hoặc toàn bộ asset P0.
 
 PO đánh giá theo 5 tiêu chí:
 - Đúng chất tiên hiệp và tông môn chính đạo.
@@ -86,3 +100,8 @@ Chỉ sau khi PO duyệt bộ review mới mở rộng thành asset P0.
 - Chỉ sử dụng công cụ đã có trong gói hiện tại hoặc công cụ mã nguồn mở phù hợp.
 - Ghi lại nguồn và điều khoản sử dụng của mọi tài nguyên bên ngoài trước khi đưa vào game.
 - Không tạo bộ asset lớn trước khi concept review được duyệt.
+
+
+## 7. Nguyên tắc gameplay trên sân khấu
+
+Đo Linh Căn, tu luyện, đột phá, Thiên Kiếp, khiêu chiến, Trợ Chiến, Linh Khí Triều và Cơ duyên đều diễn ra trên cùng một sân khấu ngoài trời. Chỉ thay đổi vị trí nhân vật, đạo cụ, ánh sáng, thời tiết, overlay và VFX. Không chuyển cảnh hoặc tải một bản đồ khác. Mục tiêu là giữ sân khấu liên tục, dễ theo dõi và có sức hút trong livestream.
