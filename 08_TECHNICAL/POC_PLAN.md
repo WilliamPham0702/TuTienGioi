@@ -4,7 +4,7 @@
 |---|---|
 | Task | C-002 — PoC so sánh Phaser 4 và Godot 4; runtime/hiệu năng; game core và dữ liệu |
 | Người thực hiện | Claude (kỹ thuật). PO chạy bài đo hiệu năng trên PC. ChatGPT phản biện hình ảnh. |
-| Căn cứ | Quyết định PO ngày 24/11/2026 (DECISION_LOG D-005, D-007, D-009); `TECHNICAL_ARCHITECTURE_PROPOSAL.md` |
+| Căn cứ | Quyết định PO ngày 24/11/2026 (DECISION_LOG D-005, D-007, D-019); `TECHNICAL_ARCHITECTURE_PROPOSAL.md` |
 | Trạng thái | **Kế hoạch — chưa có kết quả.** Mọi số liệu sẽ được ghi ở `08_TECHNICAL/POC_RESULTS.md` kèm log và ảnh chụp. |
 
 ---
@@ -18,7 +18,7 @@ PoC trả lời 4 câu hỏi. Câu trả lời phải dựa trên **số liệu 
 3. Game core có xử lý đúng **500–1.000 người chơi mô phỏng**, không cộng trùng, chặn được spam và khôi phục được sau crash không? (PoC-3)
 4. Kết luận: **khóa Phaser 4 hay chuyển sang Godot 4?** (mục 7)
 
-## 2. Ràng buộc (từ D-009)
+## 2. Ràng buộc (từ D-019)
 
 - **0 VNĐ.** Chỉ dùng công cụ, thư viện và asset miễn phí theo giấy phép. Không đăng ký dịch vụ.
 - **Không kết nối TikTok thật.** Không dùng connector không chính thức. Không yêu cầu hay lưu mật khẩu, cookie, session token.

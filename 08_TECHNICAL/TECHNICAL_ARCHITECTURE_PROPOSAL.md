@@ -24,7 +24,7 @@
   - **PoC-3** Game core và dữ liệu, mô phỏng 500–1.000 người chơi.
 - Bài đo kết nối TikTok thật (trước đây là PoC-1) được đổi tên thành **PoC-LIVE** và **hoãn**: không dùng connector không chính thức trên tài khoản thật khi chưa được PO cho phép.
 - **Tài liệu PoC chính thức:** `08_TECHNICAL/POC_PLAN.md`. Khi mục 8 dưới đây khác `POC_PLAN.md`, **`POC_PLAN.md` được ưu tiên**.
-- **Lưu ý mã quyết định:** các mã D-008b, D-009…D-016 ở mục 13 là **mã đề xuất trong báo cáo này**, không phải mã trong `DECISION_LOG.md`. Trong DECISION_LOG, **D-009 = cho phép PoC C-002**.
+- **Lưu ý mã quyết định:** các mã D-008b, D-009…D-016 ở mục 13 là **mã đề xuất trong báo cáo này**, không phải mã trong `DECISION_LOG.md`. Trong DECISION_LOG, **D-019 = cho phép PoC C-002** (đánh số lại từ D-009 khi gộp với GAME_FLOW, nơi D-009…D-018 là quyết định mạch game).
 - **D-016 (một phần):** PO xác nhận tài khoản đã phát LIVE được trên điện thoại (ảnh chụp ngày 24/11/2026). **Quyền phát từ PC (LIVE Studio/stream key) vẫn chưa xác minh.** PoC không cần phát LIVE nên không bị chặn bởi điểm này.
 
 ## 0. Kết luận một trang (bản đầu, trước quyết định C-002)
