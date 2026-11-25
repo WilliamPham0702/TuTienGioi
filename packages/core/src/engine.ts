@@ -1,5 +1,6 @@
 import { Announcer, type Announcement, type Priority } from './announce.ts';
 import { GAME_CONFIG, type GameConfig, type SeatRole } from './config.ts';
+import { NameFilter } from './moderation.ts';
 import { weightedPick, type Rng } from './rng.ts';
 import type { GameEvent, GameState, PendingChallenge, Player, Seat } from './types.ts';
 
@@ -39,6 +40,8 @@ export class Game {
     private rng: Rng,
     private cfg: GameConfig = GAME_CONFIG,
     state?: GameState,
+    /** Bộ lọc tên (GDD mục 11). Mặc định bật với danh sách chặn bản đầu. */
+    readonly nameFilter: NameFilter = new NameFilter(),
   ) {
     this.announcer = new Announcer(cfg.announceMinGapMs, cfg.announceMaxQueue);
     this.state = state ?? Game.emptyState(cfg);
@@ -142,7 +145,9 @@ export class Game {
       this.state.players[id] = p;
     }
     this.award(p, 'tanTu', at);
-    p.name = name; // tên hiển thị đổi được; ngoại hình thì không (D-013)
+    // tên hiển thị đổi được; ngoại hình thì không (D-013). Tên luôn qua bộ lọc trước khi hiện/đọc.
+    p.rawName = name;
+    p.name = this.nameFilter.display(p.id, name, p.nameHidden, p.nameApproved);
     p.present = true;
     p.lastSeen = at;
     if (p.root === null) this.measureRoot(p, at);
@@ -507,6 +512,39 @@ export class Game {
   pause(): void {
     this.state.paused = true;
   }
+
+  // ---------- Kiểm duyệt tên (người vận hành) ----------
+
+  /** Ẩn / bỏ ẩn tên một người chơi. Trả false nếu không có người chơi này. */
+  setNameHidden(playerId: string, hidden: boolean): boolean {
+    const p = this.state.players[playerId];
+    if (!p) return false;
+    p.nameHidden = hidden;
+    this.refreshName(p);
+    return true;
+  }
+
+  /** Duyệt tên bị bộ lọc bắt nhầm (approved = true) hoặc hủy duyệt. */
+  setNameApproved(playerId: string, approved: boolean): boolean {
+    const p = this.state.players[playerId];
+    if (!p) return false;
+    p.nameApproved = approved;
+    this.refreshName(p);
+    return true;
+  }
+
+  /** Áp lại bộ lọc cho mọi người chơi (sau khi thêm/bớt từ chặn). Trả số tên bị đổi. */
+  refreshNames(): number {
+    let changed = 0;
+    for (const p of Object.values(this.state.players)) if (this.refreshName(p)) changed++;
+    return changed;
+  }
+
+  private refreshName(p: Player): boolean {
+    const before = p.name;
+    p.name = this.nameFilter.display(p.id, p.rawName ?? p.name, p.nameHidden, p.nameApproved);
+    return p.name !== before;
+  }
   resume(): void {
     this.state.paused = false;
   }
@@ -522,7 +560,7 @@ export class Game {
     return JSON.stringify(this.state);
   }
 
-  static restore(json: string, rng: Rng, cfg: GameConfig = GAME_CONFIG): Game {
-    return new Game(rng, cfg, JSON.parse(json) as GameState);
+  static restore(json: string, rng: Rng, cfg: GameConfig = GAME_CONFIG, nameFilter?: NameFilter): Game {
+    return new Game(rng, cfg, JSON.parse(json) as GameState, nameFilter);
   }
 }

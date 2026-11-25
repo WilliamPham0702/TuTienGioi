@@ -1,1 +1,4 @@
 node_modules/
+
+# bản chạy thử bảng điều khiển
+packages/core/demo-audit.db*
