@@ -9,7 +9,14 @@ export interface Appearance {
 
 export interface Player {
   id: string;
+  /** Tên đã qua kiểm duyệt — dùng để hiển thị và đọc to. */
   name: string;
+  /** Tên gốc từ nguồn sự kiện (chỉ người vận hành xem). Bản lưu cũ có thể chưa có. */
+  rawName?: string;
+  /** Người vận hành ẩn tên bằng tay. */
+  nameHidden?: boolean;
+  /** Người vận hành duyệt tên (bộ lọc bắt nhầm). */
+  nameApproved?: boolean;
   /** Cố định theo người chơi, không đổi (D-013). */
   appearance: Appearance;
   /** Đo lại mỗi phiên (D-009). null = chưa đo trong phiên này. */

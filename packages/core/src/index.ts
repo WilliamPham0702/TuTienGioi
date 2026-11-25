@@ -6,3 +6,8 @@ export * from './engine.ts';
 export * from './store.ts';
 export * from './sim.ts';
 export * from './runner.ts';
+export * from './moderation.ts';
+export * from './audit.ts';
+export * from './operator.ts';
+export * from './tuning.ts';
+export * from './dashboard.ts';
