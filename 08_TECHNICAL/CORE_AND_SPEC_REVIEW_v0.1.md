@@ -26,7 +26,19 @@ Lõi luật thuần TypeScript, chạy được với Local Simulation, độc l
 
 **Bằng chứng:** `cd packages/core && npm install && npm test` → **31/31 đạt**; `npm run typecheck` sạch (chạy trên máy cloud, 2026-11-25). Đây là test đơn vị trên logic; chưa đo hiệu năng, chưa nối SQLite, chưa nối TikTok.
 
-**Chưa làm (thuộc MVP theo GDD v0.3):** Linh Khí Triều, Tâm Ma, Thiên Bảng (4 tab, Cúng Phụng theo phiên), Đạo Hiệu/Danh Hiệu, kiểm duyệt tên, TTS, lưu SQLite, operator/audit log.
+**Bổ sung (lượt 2, cùng ngày): lưu SQLite, khôi phục, nguồn mô phỏng**
+
+| Hạng mục | Kết quả (test, máy cloud) |
+|---|---|
+| Lưu SQLite WAL, 1 giao dịch/lần commit, chỉ ghi người chơi thay đổi | Có test |
+| Tắt đột ngột ở 20 điểm khác nhau → mở lại, chạy tiếp → trạng thái **giống hệt** chạy liền một mạch | 20/20 đạt (đối chiếu từng byte JSON) |
+| Nguồn gửi lại 300 sự kiện cuối sau khi nối lại | Bị bỏ qua, không cộng trùng |
+| Đợt dồn dập mô phỏng 500 sự kiện/giây × 60 giây (30.300 sự kiện) | Xử lý xong, không lỗi, không mất quà; ~0,2 giây trên máy cloud (chưa đo trên PC của PO, và chưa tính hiển thị) |
+| Sao lưu nóng ra file khác | Mở được, giống bản gốc |
+
+Tổng: **40/40 test đạt**, `tsc` sạch. Lưu ý: `node:sqlite` của Node 22 còn ở trạng thái thử nghiệm (có cảnh báo khi chạy); PoC-3 trước đó cũng dùng nó. Nếu cài trên máy PO gặp vấn đề thì đổi sang `better-sqlite3` (cùng giao diện `Store`).
+
+**Chưa làm (thuộc MVP theo GDD v0.3):** Linh Khí Triều, Tâm Ma, Thiên Bảng (4 tab, Cúng Phụng theo phiên), Đạo Hiệu/Danh Hiệu, kiểm duyệt tên, TTS, operator/audit log, cầu nối WebSocket tới màn hình.
 
 ## 2. Rà soát: mâu thuẫn và rủi ro kỹ thuật trong đặc tả
 
@@ -89,6 +101,6 @@ Mức: **Chặn** = không làm đúng được nếu chưa giải quyết; **Ca
 
 - Task: C-003 · Owner: Claude → ChatGPT (xem 2.1–2.2) → PO (mục 3)
 - Thay đổi: `packages/core/**`, `08_TECHNICAL/CORE_AND_SPEC_REVIEW_v0.1.md`, `.gitignore`
-- Test: 31/31 đạt (sau khi thêm ân hạn 3 giây) (vitest), tsc sạch — máy cloud, 2026-11-25
+- Test: 40/40 đạt (vitest), tsc sạch — máy cloud, 2026-11-25
 - Giới hạn: số liệu kinh tế là tạm; chưa chạy trên PC của PO; chưa có kết nối TikTok
 - Không merge khi chưa được PO duyệt

@@ -3,10 +3,20 @@ export interface Rng {
   next(): number;
 }
 
+/** Bộ sinh số lưu được trạng thái, để khôi phục sau khi tắt đột ngột mà kết quả vẫn y hệt. */
+export interface PersistableRng extends Rng {
+  getState(): number;
+  setState(n: number): void;
+}
+
 /** Bộ sinh số có seed (mulberry32): cùng seed → cùng kết quả, để test và mô phỏng lặp lại được. */
-export function seededRng(seed: number): Rng {
+export function seededRng(seed: number): PersistableRng {
   let a = seed >>> 0;
   return {
+    getState: () => a,
+    setState: (n: number) => {
+      a = n >>> 0;
+    },
     next() {
       a = (a + 0x6d2b79f5) >>> 0;
       let t = a;
