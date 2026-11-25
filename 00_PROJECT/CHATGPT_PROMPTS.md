@@ -36,7 +36,7 @@ Mỗi sự kiện 3–5 biến thể. Đánh dấu câu nào đọc to, câu nà
 
 ## G-005 — Quy cách hình ảnh
 ```
-Nhiệm vụ G-005 cho TuTienGioi (đọc 02_ART_DIRECTION/ART_DIRECTION_BRIEF_v0.1.md, GDD, GAME_FLOW_v0.1.md, 08_TECHNICAL/TECHNICAL_ARCHITECTURE_PROPOSAL.md mục 6).
+Nhiệm vụ G-005 cho TuTienGioi (đọc 02_ART_DIRECTION/ART_DIRECTION_BRIEF_v0.1.md, GDD, GAME_FLOW_v0.1.md, 08_TECHNICAL/TECHNICAL_ARCHITECTURE_LIVE_ADDENDUM.md mục 6).
 Phong cách đã duyệt: chibi tiên hiệp 2D/2.5D, khung dọc 1080×1920, hiển thị rõ tối đa ~60 nhân vật.
 Cần: (1) bố cục màn hình 9:16: đại điện, ghế Thái Thượng Tông Chủ / Tông Chủ / Trưởng Phái / Trưởng Lão, Đá Đo Linh Căn, khu khiêu chiến + thanh Trợ Chiến, khung thông báo/chat tự vẽ (dòng đỏ), Thiên Bảng; (2) nhân vật chibi module tách lớp (thân, mặt, tóc, áo, phụ kiện, vũ khí); (3) 10 bộ trang phục + màu hào quang theo cảnh giới; (4) hiệu ứng 4 tầng (tiểu cảnh, đại cảnh, Thiên Kiếp, Thiên Phạt) + 7 màu linh căn + Tâm Ma + Trợ Chiến; (5) danh sách hình P0 tối thiểu, ghi kích thước px, định dạng PNG trong suốt / spritesheet, tên file.
 Ràng buộc: chữ đọc được trên màn hình điện thoại; chỉ dùng hình tự tạo hoặc giấy phép miễn phí dùng thương mại; không dùng nhân vật có bản quyền.

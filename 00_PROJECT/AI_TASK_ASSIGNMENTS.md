@@ -54,7 +54,7 @@ Nguồn: `01_GAME_DESIGN/GAME_FLOW_v0.1.md`, D-009..D-018. Thời gian là ướ
 | Giai đoạn | Nội dung | Cổng qua |
 |---|---|---|
 | P0 – Chốt thiết kế (~1 tuần) | GDD v0.3, đặc tả tính năng mở rộng, lời thoại hệ thống, quy cách hình ảnh, duyệt số mô phỏng | PO duyệt |
-| P1 – PoC kỹ thuật (~1–2 tuần) | PoC 1–5 trong `08_TECHNICAL/TECHNICAL_ARCHITECTURE_PROPOSAL.md`, chốt D-005, D-007 | Bằng chứng chạy thử |
+| P1 – PoC kỹ thuật (~1–2 tuần) | PoC trong `08_TECHNICAL/POC_PLAN.md` và `08_TECHNICAL/TECHNICAL_ARCHITECTURE_LIVE_ADDENDUM.md`, chốt D-005, D-007 | Bằng chứng chạy thử |
 | P2 – Vòng chơi cốt lõi, mô phỏng (~2–3 tuần) | Vào phòng → linh căn → tu luyện → cảnh giới → đột phá/Tâm Ma → thông báo | Chạy trơn, có test |
 | P3 – Phần còn lại MVP (~2 tuần) | Khiêu chiến, Trợ Chiến, chức vụ, cơ duyên, Thiên Bảng, Linh Khí Triều | Mô phỏng 200 người không lag |
 | P4 – LIVE thật (~1 tuần) | Nối TikTok + OBS, bảng điều khiển, LIVE thử riêng | 1 giờ không lỗi |
@@ -63,7 +63,7 @@ Nguồn: `01_GAME_DESIGN/GAME_FLOW_v0.1.md`, D-009..D-018. Thời gian là ướ
 ### Claude
 | ID | Việc | Trạng thái |
 |---|---|---|
-| C-001 | Đề xuất kiến trúc kỹ thuật | Xong bản v0.1 → `08_TECHNICAL/TECHNICAL_ARCHITECTURE_PROPOSAL.md`, chờ PO |
+| C-001 | Đề xuất kiến trúc kỹ thuật | Xong → `08_TECHNICAL/TECHNICAL_ARCHITECTURE_PROPOSAL.md` (PR #2, đã merge) + phụ lục `TECHNICAL_ARCHITECTURE_LIVE_ADDENDUM.md` |
 | C-002 | Mô phỏng kinh tế | Xong bản v0.1 → `09_SIMULATION/`, chờ PO |
 | C-003 | PoC 1–5 | Chờ duyệt C-001 |
 | C-004 | Lõi game + mô phỏng + SQLite (P2) | Chờ P1 |
