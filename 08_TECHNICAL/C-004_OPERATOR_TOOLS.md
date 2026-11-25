@@ -18,7 +18,7 @@ Tên người xem đi qua bộ lọc **trước khi** hiện lên màn hình hay
 - Bí danh **cố định theo người chơi**: cùng người thì luôn cùng số, nên vẫn nhận ra nhau trên Thiên Bảng.
 - Tên gốc vẫn được lưu (`rawName`) để người vận hành xem trên bảng điều khiển; khán giả không thấy.
 - Chống bắt nhầm: từ ngắn chỉ chặn khi đứng riêng ("Long" không bị chặn vì "lon"). Từ trùng chữ khi bỏ dấu ("Lớn"/"lồn", "Các"/"cặc") chỉ chặn khi viết không dấu hoặc đúng dạng tục.
-- Đã thử: 23 tên xấu, 5 tên quảng cáo bị chặn; 20 tên thật (Long, Lớn, Chợ Lớn, Đi chợ Tết, Dư Thanh, Cù Lao, Các Bạn...) không bị bắt nhầm.
+- Đã thử: 21 tên xấu, 5 tên quảng cáo bị chặn; 20 tên thật (Long, Lớn, Chợ Lớn, Đi chợ Tết, Dư Thanh, Cù Lao, Các Bạn...) không bị bắt nhầm.
 - Danh sách từ chặn là **bản đầu**. Người vận hành thêm/bớt lúc đang LIVE; tên của người đang xem được áp lại ngay.
 - Bắt nhầm thì người vận hành bấm **Duyệt tên**; muốn ẩn một tên lọt lưới thì bấm **Ẩn tên**.
 - Giới hạn: không bộ lọc nào bắt được hết. Tên kiểu chơi chữ, ẩn ý vẫn có thể lọt, nên cần người trông LIVE.
