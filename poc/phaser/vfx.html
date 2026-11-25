@@ -1,0 +1,20 @@
+<!doctype html>
+<html lang="vi">
+<head>
+<meta charset="utf-8" />
+<meta name="viewport" content="width=device-width, initial-scale=1" />
+<title>TuTienGioi — VFX lab</title>
+<style>
+  @font-face { font-family: 'NotoSansVI'; src: url('./assets/fonts/NotoSans-Bold-VI.ttf') format('truetype'); font-weight: 700; }
+  html, body { margin: 0; padding: 0; background: #000; overflow: hidden; font-family: sans-serif; }
+  #game { width: 100vw; height: 100vh; }
+  #ui { position: fixed; left: 0; right: 0; bottom: 0; display: none; flex-wrap: wrap; gap: 6px; padding: 8px; background: #000a; justify-content: center; }
+  #ui button { font: 600 14px sans-serif; padding: 8px 10px; border-radius: 8px; border: 1px solid #8ab; background: #13203a; color: #fff; }
+</style>
+</head>
+<body>
+<div id="game"></div>
+<div id="ui"></div>
+<script type="module" src="./src/vfx-lab.ts"></script>
+</body>
+</html>
