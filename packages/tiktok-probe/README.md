@@ -22,7 +22,7 @@ Không có khóa vẫn thử được nhưng có thể bị giới hạn. Nếu 
 
 ## Cảnh báo — PO cần đọc
 - Đây **không phải API chính thức** của TikTok; thư viện `tiktok-live-connector` là kỹ thuật đảo ngược, có thể ngừng hoạt động bất cứ lúc nào.
-- Giấy phép thư viện là **AGPL (xem trường license trong package của thư viện)**. Chưa xác minh được tác động nếu dùng cho sản phẩm thương mại/đóng — cần PO cân nhắc trước khi đưa vào game chính.
+- Giấy phép thư viện là **AGPL-3.0-only**. Chưa xác minh được tác động nếu dùng cho sản phẩm thương mại/đóng — cần PO cân nhắc trước khi đưa vào game chính.
 - **Điều khoản TikTok và chính sách kiếm tiền LIVE chưa được xác minh.** PO cần tự đọc trong ứng dụng trước khi triển khai thật.
 - Công cụ này chưa từng được chạy với TikTok thật; kết quả đầu tiên có thể lộ lỗi trong chính công cụ.
 
