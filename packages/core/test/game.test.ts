@@ -96,6 +96,8 @@ describe('tu luyện theo thời gian', () => {
 
 describe('thả tim và quà', () => {
   it('like hợp lệ: +5 Tu Vi gốc × Linh Căn, giữ trần 60/phút', () => {
+    expect(GAME_CONFIG.tuViPerLike).toBe(5);
+    expect(GAME_CONFIG.likeCapPerMinute).toBe(60);
     const g = new Game(seededRng(1));
     join(g, 'a', 0);
     g.state.players.a!.root = 'song'; // ×2
