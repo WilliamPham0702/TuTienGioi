@@ -27,12 +27,13 @@ def _fingerprint(task: dict[str, Any]) -> str:
 
 def _safe_relative_path(value: Any) -> bool:
     """Reject absolute, traversing, Windows-style, and empty repository paths."""
-    if not isinstance(value, str) or not value.strip() or "\\" in value:
+    if not isinstance(value, str) or not value.strip() or value.startswith("/") or "\\" in value:
         return False
-    path = PurePosixPath(value)
-    if path.is_absolute() or any(part in {"", ".", ".."} for part in path.parts):
+    normalized = value.rstrip("/")
+    parts = normalized.split("/")
+    if not normalized or any(part in {"", ".", ".."} for part in parts):
         return False
-    if path.parts and ":" in path.parts[0]:
+    if ":" in parts[0]:
         return False
     return True
 
