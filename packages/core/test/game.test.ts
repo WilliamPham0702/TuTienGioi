@@ -7,7 +7,16 @@ const ev = <T extends Omit<GameEvent, 'id'>>(e: T): GameEvent => ({ ...e, id: `e
 const join = (g: Game, id: string, at = 0, name = id) => g.handle(ev({ type: 'join', playerId: id, name, at }));
 
 describe('linh căn (D-009)', () => {
-  it('bảng tỉ lệ cộng đúng 100%', () => {
+  it('bảng Linh Căn đúng checkpoint, tổng trọng số 100%', () => {
+    expect(GAME_CONFIG.roots.map(({ id, mult, chance }) => [id, mult, chance])).toEqual([
+      ['tap', 1, 0.35],
+      ['song', 2, 0.25],
+      ['tam', 3, 0.18],
+      ['thien', 4, 0.12],
+      ['di', 5, 0.06],
+      ['tien', 6, 0.03],
+      ['thanhthe', 10, 0.01],
+    ]);
     const sum = GAME_CONFIG.roots.reduce((s, r) => s + r.chance, 0);
     expect(sum).toBeCloseTo(1, 10);
   });
@@ -47,14 +56,14 @@ describe('linh căn (D-009)', () => {
 });
 
 describe('tu luyện theo thời gian', () => {
-  it('Tạp linh căn 10 phút = 600 Tu Vi; Nhất phẩm = 1200', () => {
+  it('Tạp ×1 trong 10 phút = 600 Tu Vi; Song ×2 = 1200', () => {
     const g = new Game(seededRng(1));
     g.startSession(0);
     g.state.nextFortuneAt = 0; // tắt cơ duyên để đo riêng Tu Vi theo thời gian
     join(g, 'a');
     join(g, 'b');
     g.state.players.a!.root = 'tap';
-    g.state.players.b!.root = 'nhatpham';
+    g.state.players.b!.root = 'song';
     for (let t = 1; t <= 600; t++) {
       g.handle(ev({ type: 'heartbeat', playerId: 'a', at: t * 1000 }));
       g.handle(ev({ type: 'heartbeat', playerId: 'b', at: t * 1000 }));
@@ -86,7 +95,7 @@ describe('tu luyện theo thời gian', () => {
 });
 
 describe('thả tim và quà', () => {
-  it('tim: 1 tim = 1 Hạ Phẩm = 10 Tu Vi, trần 60/phút (D-014)', () => {
+  it('like hợp lệ: +5 Tu Vi gốc × Linh Căn, giữ trần 60/phút', () => {
     const g = new Game(seededRng(1));
     join(g, 'a', 0);
     g.handle(ev({ type: 'like', playerId: 'a', count: 1000, at: 1000 }));
@@ -94,7 +103,7 @@ describe('thả tim và quà', () => {
     g.handle(ev({ type: 'like', playerId: 'a', count: 10, at: 30_000 }));
     expect(g.state.players.a!.tuViTotal).toBe(600); // cùng phút: đã chạm trần
     g.handle(ev({ type: 'like', playerId: 'a', count: 10, at: 61_001 }));
-    expect(g.state.players.a!.tuViTotal).toBe(700);
+    expect(g.state.players.a!.tuViTotal).toBe(700); // 10 likes × 5 × 2 = 100 Tu Vi
   });
 
   it('quà cộng Tu Vi theo bảng cố định, không trần (D-010)', () => {
