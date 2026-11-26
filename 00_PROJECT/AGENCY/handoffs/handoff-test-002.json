@@ -1,0 +1,10 @@
+{
+  "task_id": "HANDOFF-TEST-002",
+  "from_ai": "synthetic-agent-a",
+  "to_ai": "synthetic-agent-b",
+  "asset_id": "asset-test-001-v1",
+  "artifact_path": "00_PROJECT/AGENCY/tests/fixtures/asset-test-001.txt",
+  "sha256": "1fd7c5d72cd058b52d0d830d2dd56bfeb2acc0fe6980567b2b2b0b229311e543",
+  "next_action": "Read the exact artifact from GitHub and publish a downstream result referencing this asset ID and checksum.",
+  "status": "SYNTHETIC_HANDOFF_EXAMPLE"
+}

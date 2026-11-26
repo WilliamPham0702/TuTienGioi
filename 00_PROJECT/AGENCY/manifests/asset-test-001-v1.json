@@ -1,0 +1,23 @@
+{
+  "asset_id": "asset-test-001-v1",
+  "task_id": "HANDOFF-TEST-001",
+  "producer": {
+    "ai": "synthetic-agent-a",
+    "mode": "repository-handoff-test"
+  },
+  "created_at_utc": "2026-11-26T00:00:00Z",
+  "artifact": {
+    "path": "00_PROJECT/AGENCY/tests/fixtures/asset-test-001.txt",
+    "filename": "asset-test-001.txt",
+    "mime_type": "text/plain",
+    "size_bytes": 84,
+    "sha256": "1fd7c5d72cd058b52d0d830d2dd56bfeb2acc0fe6980567b2b2b0b229311e543"
+  },
+  "validation": {
+    "status": "SYNTHETIC_FIXTURE",
+    "evidence": "Validated by scripts/agency/validate_handoffs.py"
+  },
+  "downstream_tasks": [
+    "HANDOFF-TEST-002"
+  ]
+}
