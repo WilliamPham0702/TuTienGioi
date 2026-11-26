@@ -22,10 +22,17 @@ jobs:
         with:
           python-version: '3.x'
       - name: Validate receipt
+        env:
+          RECEIPT_PATH: ${{ inputs.receipt_path }}
+          CURRENT_STATUS: ${{ inputs.current_status }}
         shell: bash
         run: |
           set -euo pipefail
-          python scripts/agency/receipt_protocol.py "${{ inputs.receipt_path }}" ${{ inputs.current_status && format('--current-status {0}', inputs.current_status) || '' }
+          if [[ -n "$CURRENT_STATUS" ]]; then
+            python scripts/agency/receipt_protocol.py "$RECEIPT_PATH" --current-status "$CURRENT_STATUS"
+          else
+            python scripts/agency/receipt_protocol.py "$RECEIPT_PATH"
+          fi
   disabled:
     if: vars.AGENCY_CI_ENABLED != 'true'
     runs-on: ubuntu-latest
