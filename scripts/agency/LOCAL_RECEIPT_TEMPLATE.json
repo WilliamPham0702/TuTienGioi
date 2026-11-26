@@ -1,0 +1,8 @@
+{
+  "issue_number": 123,
+  "worker_id": "copilot",
+  "status": "REVIEW",
+  "summary": "Short result summary",
+  "deliverables": ["branch or PR URL"],
+  "test_summary": "Tests and results"
+}
