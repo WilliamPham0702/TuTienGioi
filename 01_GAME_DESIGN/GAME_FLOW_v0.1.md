@@ -1,5 +1,7 @@
 # Game Flow — TuTienGioi v0.1
 
+> **Trạng thái (2026-11-27): LỊCH SỬ / ĐÃ THAY THẾ MỘT PHẦN.** Tài liệu này giữ để truy vết. Thẩm quyền hiện tại là `01_GAME_DESIGN/GDD_MASTER.md` và `01_GAME_DESIGN/GAME_FLOW_MASTER.md`, bám checkpoint `00_PROJECT/TUTIENGIOI_GDD_CHECKPOINT_2026-11-26.md`. Xung đột được ghi trong `00_PROJECT/GDD_CONFLICT_REPORT.md`. Không dùng các số liệu, thất bại đột phá, Tâm Ma, trang bị hay pháp bảo trong tài liệu này làm quyết định.
+
 > Trạng thái: **bản nháp** tổng hợp từ mô tả mạch game của Product Owner (25/11/2026).
 > - Phần **"PO mô tả"** là ý của Product Owner, ghi lại đúng ý.
 > - Phần **"Đề xuất"** (con số, công thức, tỉ lệ) là giá trị **dùng tạm** để chạy mô phỏng (D-017), **chưa khóa**. Cần PO duyệt và ghi vào `00_PROJECT/DECISION_LOG.md` trước khi khóa.

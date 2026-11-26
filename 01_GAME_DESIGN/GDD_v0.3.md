@@ -1,5 +1,7 @@
 # Game Design Document — TuTienGioi v0.3
 
+> **Trạng thái (2026-11-27): LỊCH SỬ / ĐÃ THAY THẾ MỘT PHẦN.** Tài liệu này giữ để truy vết. Thẩm quyền hiện tại là `01_GAME_DESIGN/GDD_MASTER.md` và `01_GAME_DESIGN/GAME_FLOW_MASTER.md`, bám checkpoint `00_PROJECT/TUTIENGIOI_GDD_CHECKPOINT_2026-11-26.md`. Xung đột được ghi trong `00_PROJECT/GDD_CONFLICT_REPORT.md`. Không dùng các số liệu, thất bại đột phá, Tâm Ma, trang bị hay pháp bảo trong tài liệu này làm quyết định.
+
 > Trạng thái: **bản đặc tả sản phẩm cập nhật theo GAME_FLOW_v0.1 và D-009..D-018**. Các thông số kinh tế chưa được PO khóa vẫn mang nhãn **ĐỀ XUẤT / DÙNG TẠM**. Đây là tài liệu thiết kế, không phải xác nhận tính khả thi của kết nối TikTok.
 
 ## 1. Tóm tắt sản phẩm

@@ -30,3 +30,37 @@ Before changing an approved product decision, record the proposed change, ration
 
 ## Clarification
 D-006 is the approved art direction. 2D/2.5D is the preferred starting hypothesis, not a locked engine or implementation decision. Technical stack and LIVE integration remain open.
+
+> Ghi chú 2026-11-27 (GDD sync, Issue #40): đoạn trên là bản gốc, giữ nguyên lịch sử. Theo D-005 (đã khóa 2026-11-25), stack kỹ thuật **đã được khóa**; chỉ tích hợp LIVE (D-007) còn mở. Xem `00_PROJECT/GDD_CONFLICT_REPORT.md`, mục C-43.
+
+## Checkpoint decisions (2026-11-26) — bổ sung ngày 2026-11-27
+
+Các quyết định dưới đây nằm trong `00_PROJECT/TUTIENGIOI_GDD_CHECKPOINT_2026-11-26.md` (được PO xác nhận trong snapshot 2026-11-26) nhưng trước đó chưa có dòng riêng trong bảng trên. Chỉ bổ sung để đối chiếu, không thay đổi nội dung checkpoint.
+
+| ID | Topic | Decision / status | Owner | Date |
+|---|---|---|---|---|
+| D-021 | Dân số và BOT offline | Giữ tối thiểu 50 nhân vật (người chơi thật + BOT sở hữu), không trần, không xóa để ép 50. Người chơi offline chuyển sang BOT và giữ nguyên tiến trình; quay lại thì trả quyền điều khiển. BOT lấp chỗ chỉ spawn khi thiếu. Chi tiết: `GDD_DECISION_OFFLINE_BOT_POPULATION.md`, `SYSTEM_SPEC/SS-01`. | Product Owner | 2026-11-26 |
+| D-022 | Linh Căn và tu luyện | 7 bậc Linh Căn với trọng số 35/25/18/12/6/3/1% và hệ số ×1/×2/×3/×4/×5/×6/×10. Tu Vi gốc 1/giây khi LIVE × hệ số. Tim/like hợp lệ 5 × hệ số. Chi tiết: `SYSTEM_SPEC/SS-02`. | Product Owner | 2026-11-26 |
+| D-023 | Đột phá, cảnh giới và đan dược | Đột phá tự động, có thể nhiều lần liên tiếp, không thất bại, không mất Tu Vi. Ngưỡng Tu Vi tích lũy: 1.200 / 6.000 / 24.000 / 72.000 / 180.000 / 420.000 / 900.000 / 1.800.000 / 3.600.000 / 7.200.000 (kết thúc bằng Tiên Cảnh). Đan dược cộng Tu Vi cố định, tự nhận, không giới hạn, không cooldown. Thay thế D-011 và D-020. | Product Owner | 2026-11-26 |
+| D-024 | Boss | L1–L7 với trọng số 40/25/15/10/6/3/1%. Một Boss tại một thời điểm. L4–L7 despawn sau 5 phút. Thưởng Tu Vi = tỉ lệ sát thương × hệ số Linh Căn × 10.000 × cấp Boss. Số vật phẩm rơi và trọng số phẩm chất theo checkpoint. Chi tiết: `SYSTEM_SPEC/SS-03`. | Product Owner | 2026-11-26 |
+| D-025 | Top 10 hàng giờ | Xếp hạng theo cảnh giới rồi Tu Vi tích lũy; chỉ người đang LIVE khi chốt. Chia 25/18/14/11/9/7/6/4/3/3%. Quỹ 20% vật phẩm Boss rơi thật, 80% thưởng Boss thông thường. Phần dư chia cho hạng đủ điều kiện, không nợ, không chuyển sang chu kỳ sau. Chi tiết: `SYSTEM_SPEC/SS-04`. | Product Owner | 2026-11-26 |
+| D-026 | Quà và kho chung | Người gửi không LIVE → kho chung, không tự tạo nhân vật. Kho chung chia đều cho người online; phần dư ngẫu nhiên. Quà cho người có nhân vật thì nâng cấp nhân vật. Quà đặc biệt có thể kích hoạt sự kiện thế giới. Bảng quy đổi quà chưa có. Chi tiết: `SYSTEM_SPEC/SS-05`. | Product Owner | 2026-11-26 |
+| D-027 | Sự kiện thế giới và camera | Sự kiện ngẫu nhiên và do người chơi kích hoạt; mọi người đủ điều kiện có thể tham gia; sự kiện không xung đột có thể chạy song song. Camera ưu tiên: Boss đang đánh > Độ Kiếp > Tiên Cảnh > Đột phá > Nhận vật phẩm > Sự kiện nhỏ; không ngắt focus; FIFO trong cùng ưu tiên; không bỏ sự kiện; thời lượng 3/5/8/12/15 giây và Boss theo trận. Chi tiết: `SYSTEM_SPEC/SS-06`, `SS-07`. | Product Owner | 2026-11-26 |
+| D-028 | Vật phẩm, linh thạch và giao dịch | Không trang bị, không pháp bảo. Túi không giới hạn, tự phân loại. Boss item vào túi tự động. Linh thạch hỗ trợ kinh tế, giao dịch, tính năng và nâng cấp; không tự động luyện thành Tu Vi (thay phần tự luyện hóa của D-014). Giao dịch người chơi được bật trong ranh giới chống gian lận; được chuyển linh thạch. Chi tiết: `SYSTEM_SPEC/SS-09`, `SS-10`. | Product Owner | 2026-11-26 |
+| D-029 | LIVE interactions và reconnect | Like/comment có hệ thống quy đổi riêng, có chống spam và chống farm. Reconnect lưu trạng thái ngay và khôi phục đúng. Tiếng Việt mặc định; kiểm duyệt nội dung; đa ngôn ngữ có thể thêm sau. Tường thuật AI bám sự kiện thật. Chi tiết: `SYSTEM_SPEC/SS-14`, `SS-15`, `SS-17`. | Product Owner | 2026-11-26 |
+| D-030 | Đội AI | Đội AI gồm ChatGPT và Claude. Copilot không thuộc workflow dự án. Các tài liệu workflow cũ vẫn nhắc Copilot, xử lý ở OPEN-36. | Product Owner | 2026-11-26 |
+
+## Status update — 2026-11-27 (GDD sync)
+
+Các dòng gốc ở bảng trên **không bị sửa**. Bảng dưới ghi trạng thái mới theo checkpoint 2026-11-26, theo quy tắc: mâu thuẫn được ghi rõ, áp checkpoint mới nhất, không sửa âm thầm.
+
+| ID gốc | Trạng thái | Thay thế bởi | Ghi chú |
+|---|---|---|---|
+| D-011 (đột phá có thể thất bại) | SUPERSEDED | D-023 | Checkpoint: đột phá tự động, không thất bại. Tâm Ma (liên quan) cũng SUPERSEDED. |
+| D-014 (linh thạch tự luyện thành Tu Vi) | SUPERSEDED (phần tự luyện hóa) | D-028 | Phần "không dùng linh thạch mua đan dược" **không bị checkpoint thay thế**, vẫn giữ trong SS-09 mục 4.3, chờ PO xác nhận (OPEN-17). |
+| D-017 (con số kinh tế dùng tạm) | SUPERSEDED (phần số liệu linh căn, thang cảnh giới, tu vi/giây) | D-022, D-023 | Các số khác (quy đổi linh thạch, tỉ lệ cơ duyên) vẫn TUNABLE. |
+| D-020 (giảm 50% Tu Vi mỗi tiểu cảnh) | SUPERSEDED | D-023 | Ngưỡng mới là Tu Vi tích lũy theo checkpoint. Tiểu cảnh chưa có quy định (OPEN-02). |
+| D-009, D-010, D-012, D-013, D-015, D-016, D-018 | Còn hiệu lực | — | Checkpoint không mâu thuẫn. D-016 có OPEN-14 về cách làm tròn khi hòa. |
+| D-003 | Còn hiệu lực | — | "Likes contribute spiritual energy" nay là Tu Vi trực tiếp (D-022). |
+
+Mục OPEN liên quan đến các quyết định trên: xem `01_GAME_DESIGN/GDD_MASTER.md`, Phụ lục A.
