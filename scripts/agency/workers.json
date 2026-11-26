@@ -1,0 +1,32 @@
+{
+  "schema_version": 1,
+  "workers": [
+    {
+      "id": "copilot",
+      "display_name": "GitHub Copilot",
+      "enabled": false,
+      "native_trigger": "github_copilot_coding_agent",
+      "capabilities": ["code", "tests", "github", "python", "javascript"],
+      "free_only": true,
+      "notes": "Enable only after confirming account access and free quota. Discovery does not start a session."
+    },
+    {
+      "id": "claude",
+      "display_name": "Claude",
+      "enabled": false,
+      "native_trigger": "manual_or_native_app",
+      "capabilities": ["architecture", "design", "review", "code", "documentation"],
+      "free_only": true,
+      "notes": "No external session trigger is wired in this repository."
+    },
+    {
+      "id": "deepseek",
+      "display_name": "DeepSeek",
+      "enabled": false,
+      "native_trigger": "manual_or_native_app",
+      "capabilities": ["architecture", "code", "review", "documentation"],
+      "free_only": true,
+      "notes": "No external session trigger is wired in this repository."
+    }
+  ]
+}
