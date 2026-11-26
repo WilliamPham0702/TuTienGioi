@@ -150,6 +150,90 @@ class OfflineOrchestratorTests(unittest.TestCase):
         self.assertEqual(self.executor.invocations, 0)
         self.assertEqual(self.executor.external_calls, 0)
 
+    def test_executor_cannot_escape_scope_with_parent_segments(self):
+        for changed_path in (
+            "scripts/agency/../../README.md",
+            "scripts/agency/../secrets.txt",
+            "/scripts/agency/example.py",
+            "scripts\\agency\\example.py",
+            "scripts/agency/./example.py",
+        ):
+            with self.subTest(changed_path=changed_path):
+                self.flow = OfflineOrchestrator(FakeExecutor({
+                    "changed_paths": [changed_path],
+                    "test_summary": "Fake tests passed",
+                }))
+                self.flow.submit(task())
+                self.flow.claim("TASK-001")
+                record = self.flow.execute("TASK-001")
+                self.assertEqual(record["status"], "BLOCKED")
+                self.assertEqual(record["blocker"], "SCOPE_VIOLATION")
+
+    def test_task_scope_rejects_windows_and_dot_paths(self):
+        for unsafe in ("scripts\\agency", "./scripts/agency", "C:/repo"):
+            with self.subTest(scope=unsafe):
+                with self.assertRaisesRegex(ValueError, "safe relative"):
+                    validate_task(task(scope=[unsafe]))
+
+    def test_malformed_executor_paths_fail_closed(self):
+        for changed_paths in ("scripts/agency/file.py", None, [None]):
+            with self.subTest(changed_paths=changed_paths):
+                self.flow = OfflineOrchestrator(FakeExecutor({
+                    "changed_paths": changed_paths,
+                    "test_summary": "Fake tests passed",
+                }))
+                self.flow.submit(task())
+                self.flow.claim("TASK-001")
+                self.assertEqual(self.flow.execute("TASK-001")["blocker"], "SCOPE_VIOLATION")
+
+    def test_executor_exception_blocks_task(self):
+        class BrokenExecutor:
+            invocations = 0
+            external_calls = 0
+            def execute(self, _task):
+                self.invocations += 1
+                raise RuntimeError("simulated failure")
+
+        self.flow = OfflineOrchestrator(BrokenExecutor())
+        self.flow.submit(task())
+        self.flow.claim("TASK-001")
+        record = self.flow.execute("TASK-001")
+        self.assertEqual(record["status"], "BLOCKED")
+        self.assertEqual(record["blocker"], "EXECUTOR_ERROR")
+        self.assertFalse(record["external_ai_invoked"])
+
+    def test_cancellation_wins_over_late_executor_result(self):
+        started = threading.Event()
+        release = threading.Event()
+
+        class SlowExecutor:
+            invocations = 0
+            external_calls = 0
+            def execute(self, _task):
+                self.invocations += 1
+                started.set()
+                release.wait(timeout=5)
+                return {
+                    "changed_paths": ["scripts/agency/example.py"],
+                    "test_summary": "Late fake result",
+                }
+
+        executor = SlowExecutor()
+        self.flow = OfflineOrchestrator(executor)
+        self.flow.submit(task())
+        self.flow.claim("TASK-001")
+        outcomes = []
+        worker = threading.Thread(target=lambda: outcomes.append(self.flow.execute("TASK-001")))
+        worker.start()
+        self.assertTrue(started.wait(timeout=2))
+        cancelled = self.flow.cancel("TASK-001")
+        release.set()
+        worker.join(timeout=2)
+        self.assertFalse(worker.is_alive())
+        self.assertEqual(cancelled["status"], "CANCELLED")
+        self.assertEqual(outcomes[0]["status"], "CANCELLED")
+        self.assertEqual(self.flow.snapshot("TASK-001")["status"], "CANCELLED")
+
 
 if __name__ == "__main__":
     unittest.main()
