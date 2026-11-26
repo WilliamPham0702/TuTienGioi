@@ -381,6 +381,8 @@ Bản chi tiết từng dòng mâu thuẫn nằm trong `00_PROJECT/GDD_CONFLICT_
 | OPEN-41 | Thời điểm Boss đầu tiên khi phiên bắt đầu và khoảng nghỉ giữa các Boss | Chưa có; đề xuất 2 phút sau khi phiên bắt đầu hoặc sau khi Boss trước kết thúc | SS-03, SS-06 |
 | OPEN-42 | NPC giữ chức trống có được khiêu chiến và trợ chiến không | Có khiêu chiến được; không có trợ chiến | SS-11 mục 5 |
 | OPEN-43 | README.md ghi "game plan đã archive" nhưng Issue #40 yêu cầu không đổi trạng thái game thành ARCHIVED | Giữ nguyên trạng thái, chỉ thêm đường dẫn đến GDD master; PO quyết cách ghi trạng thái | Mục 0 (conflict C-27) |
+| OPEN-44 | Hạ tầng nhiều máy chủ, đám mây, sao lưu tự động lên bên thứ ba | Để sau quyết định hạ tầng; MVP chạy cục bộ | SS-18 mục 6 |
+| OPEN-45 | Xuất dữ liệu người chơi theo yêu cầu quyền riêng tư | Cần PO và quy định áp dụng trước khi làm | SS-18 mục 6 |
 
 ## Phụ lục B. Tham chiếu
 
