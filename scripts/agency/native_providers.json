@@ -1,0 +1,25 @@
+{
+  "schema_version": 1,
+  "execution_mode": "LOCAL_CLI_OPT_IN",
+  "providers": {
+    "claude": {
+      "enabled": false,
+      "free_only": true,
+      "free_quota_confirmed": false,
+      "adapter": "fixed-claude-cli-plan"
+    },
+    "gemini": {
+      "enabled": false,
+      "free_only": true,
+      "free_quota_confirmed": false,
+      "adapter": "fixed-gemini-cli-plan"
+    },
+    "copilot": {
+      "enabled": false,
+      "free_only": true,
+      "free_quota_confirmed": false,
+      "adapter": "fixed-copilot-cli-prompt"
+    }
+  },
+  "note": "All providers are disabled until an operator verifies free-tier eligibility and enables a provider locally. No credentials or secrets are stored here."
+}

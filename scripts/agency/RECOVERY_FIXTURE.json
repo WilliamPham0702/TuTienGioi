@@ -1,0 +1,20 @@
+{
+  "schema_version": 1,
+  "queue": {
+    "tasks": [
+      {
+        "task_id": "RECOVERY-DEMO-001",
+        "status": "IN_PROGRESS",
+        "priority": "P1",
+        "claimed_by": "claude",
+        "claim_time": "2026-11-26T10:00:00Z",
+        "last_heartbeat_at": "2026-11-26T10:10:00Z",
+        "lease_expires_at": "2026-11-26T10:30:00Z",
+        "attempts": 0,
+        "max_attempts": 3,
+        "required_capabilities": ["code", "review"]
+      }
+    ]
+  },
+  "note": "Synthetic fixture only; it does not represent a real worker session."
+}
