@@ -1,3 +1,6 @@
+import sys
+from pathlib import Path
+sys.path.insert(0, str(Path(__file__).resolve().parent))
 import unittest
 from datetime import datetime, timezone
 from execution_loop import run_loop
