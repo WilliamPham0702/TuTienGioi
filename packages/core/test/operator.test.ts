@@ -291,7 +291,7 @@ describe('Chỉnh tỉ lệ (GM)', () => {
 
   it('tỉ lệ linh căn phải cộng đủ 100%', () => {
     expect(validateTuning(GAME_CONFIG, { rootChances: { tap: 0.5 } })[0]).toMatch(/100%/);
-    const ok = applyTuning(GAME_CONFIG, { rootChances: { tap: 0.3, tu: 0.35 } });
+    const ok = applyTuning(GAME_CONFIG, { rootChances: { tap: 0.3, song: 0.3 } });
     expect(ok.ok).toBe(true);
   });
 
