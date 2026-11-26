@@ -1,0 +1,45 @@
+name: AI Agency Integration Tests
+
+on:
+  pull_request:
+    branches: [main]
+    paths:
+      - "scripts/agency/**"
+      - ".github/workflows/agency-integration-tests.yml"
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+concurrency:
+  group: agency-integration-${{ github.ref }}
+  cancel-in-progress: true
+
+jobs:
+  python-tests:
+    runs-on: ubuntu-latest
+    timeout-minutes: 10
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v4
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.x"
+      - name: Compile Agency modules
+        run: python -m compileall -q scripts/agency
+      - name: Run complete Agency unit and integration suite
+        run: python -m unittest discover -s scripts/agency -p "test_*.py" -v
+      - name: Assert real AI workers and providers remain disabled
+        run: |
+          python - <<'PY'
+          import json
+          from pathlib import Path
+
+          workers = json.loads(Path("scripts/agency/workers.json").read_text())
+          providers = json.loads(Path("scripts/agency/native_providers.json").read_text())
+          assert all(item.get("enabled") is False for item in workers["workers"]), "A worker is enabled by default"
+          assert all(item.get("enabled") is False for item in providers["providers"].values()), "A provider is enabled by default"
+          assert all(item.get("free_quota_confirmed") is False for item in providers["providers"].values()), "Free quota was pre-confirmed"
+          print("Safety defaults verified: all workers/providers disabled; no free quota pre-confirmed.")
+          PY

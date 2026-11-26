@@ -26,7 +26,7 @@ class RecoveryEngineTests(unittest.TestCase):
         result = recover({"tasks": [task()]}, WORKERS, now=NOW)
         decision = result["decisions"][0]
         updated = result["queue"]["tasks"][0]
-        self.assertEqual(decision["decision"], "RETRY_SCHEDULED")
+        self.assertEqual(decision["event"], "RETRY_SCHEDULED")
         self.assertEqual(decision["suggested_worker_id"], "beta")
         self.assertEqual(updated["status"], "WAITING_FOR_AGENT")
         self.assertEqual(updated["attempts"], 1)
@@ -35,7 +35,7 @@ class RecoveryEngineTests(unittest.TestCase):
     def test_retry_limit_blocks_task(self):
         result = recover({"tasks": [task(attempts=3, max_attempts=4)]}, WORKERS, now=NOW)
         self.assertEqual(result["queue"]["tasks"][0]["status"], "BLOCKED")
-        self.assertEqual(result["decisions"][0]["decision"], "BLOCKED")
+        self.assertEqual(result["decisions"][0]["event"], "BLOCKED")
 
     def test_heartbeat_timeout_detects_stalled_worker(self):
         value = task(lease_expires_at="2026-11-26T13:00:00+00:00",
@@ -46,9 +46,12 @@ class RecoveryEngineTests(unittest.TestCase):
     def test_same_claim_is_idempotent(self):
         first = recover({"tasks": [task()]}, WORKERS, now=NOW)
         second = recover(first["queue"], WORKERS, first["history"], now=NOW)
-        self.assertEqual(second["decisions"][0]["decision"], "ALREADY_RECOVERED")
+        # First pass transitions the task out of an active state and appends one audit event.
+        # A second pass must not emit another decision, increment attempts, or duplicate history.
+        self.assertEqual(second["decisions"], [])
         self.assertEqual(len(second["history"]), 1)
         self.assertEqual(second["queue"]["tasks"][0]["attempts"], 1)
+        self.assertEqual(second["queue"]["tasks"][0]["status"], "WAITING_FOR_AGENT")
 
     def test_no_alternate_worker_is_reported_as_none(self):
         workers = {"workers": [WORKERS["workers"][0]]}
