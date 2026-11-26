@@ -17,7 +17,7 @@ class LoopTests(unittest.TestCase):
         self.assertFalse(r["ai_invoked"]); self.assertFalse(r["dispatch_enabled"])
         self.assertEqual(r["claim_packets"][0]["state"],"CLAIMED_PACKET_READY")
     def test_dependency_unblocks_after_valid_done_receipt(self):
-        q={"tasks":[{"task_id":"A","status":"IN_PROGRESS"},{"task_id":"B","status":"OPEN","priority":"P1","required_capabilities":["art"],"depends_on":["A"]}]}
+        q={"tasks":[{"task_id":"A","status":"REVIEW"},{"task_id":"B","status":"OPEN","priority":"P1","required_capabilities":["art"],"depends_on":["A"]}]}
         workers={"workers":[{"id":"w2","enabled":True,"capabilities":["art"]}]}
         receipt={"task_id":"A","agent_id":"w1","mode":"manual","branch":"work","status":"DONE","updated_at_utc":"2026-01-01T00:00:00Z","deliverables":["x"],"test_summary":"not run"}
         r=run_loop(q,workers,[receipt],now=self.now)
