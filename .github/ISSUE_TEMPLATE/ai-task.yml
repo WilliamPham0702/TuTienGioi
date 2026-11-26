@@ -1,0 +1,64 @@
+name: AI Agency Task
+description: Create a scoped task for the shared AI team
+title: "[AI-TASK] "
+labels: ["ai-task"]
+body:
+  - type: input
+    id: task_id
+    attributes:
+      label: Task ID
+      placeholder: G-004
+    validations:
+      required: true
+  - type: dropdown
+    id: assigned_ai
+    attributes:
+      label: Assigned AI
+      options:
+        - ChatGPT
+        - GitHub Copilot
+        - Claude
+        - Unassigned — coordinator to route
+    validations:
+      required: true
+  - type: input
+    id: mode
+    attributes:
+      label: Exact mode
+      placeholder: Copilot Agent / Claude Code / ChatGPT Thinking
+    validations:
+      required: true
+  - type: input
+    id: status
+    attributes:
+      label: Status
+      value: OPEN
+    validations:
+      required: true
+  - type: textarea
+    id: scope
+    attributes:
+      label: Scope
+      description: Repository, branch/base commit, allowed files/modules, exclusions, dependencies.
+    validations:
+      required: true
+  - type: textarea
+    id: acceptance
+    attributes:
+      label: Acceptance criteria
+    validations:
+      required: true
+  - type: textarea
+    id: tests
+    attributes:
+      label: Tests and evidence
+      description: Commands, expected results, and evidence to attach. Write NOT RUN if unavailable.
+    validations:
+      required: true
+  - type: textarea
+    id: deliverables
+    attributes:
+      label: Deliverables
+      description: Expected artifact paths and downstream handoff target.
+    validations:
+      required: true
