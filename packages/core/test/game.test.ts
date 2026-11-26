@@ -98,6 +98,7 @@ describe('thả tim và quà', () => {
   it('like hợp lệ: +5 Tu Vi gốc × Linh Căn, giữ trần 60/phút', () => {
     const g = new Game(seededRng(1));
     join(g, 'a', 0);
+    g.state.players.a!.root = 'song'; // ×2
     g.handle(ev({ type: 'like', playerId: 'a', count: 1000, at: 1000 }));
     expect(g.state.players.a!.tuViTotal).toBe(600);
     g.handle(ev({ type: 'like', playerId: 'a', count: 10, at: 30_000 }));
