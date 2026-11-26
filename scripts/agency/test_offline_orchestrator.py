@@ -64,7 +64,7 @@ class OfflineOrchestratorTests(unittest.TestCase):
         with self.assertRaisesRegex(ValueError, "different content"):
             self.flow.submit(task(acceptance_criteria=["Changed"]))
 
-    def test_only_one_concurrent_claim_succeeds(self):
+    def test_concurrent_duplicate_claims_share_one_lease(self):
         self.flow.submit(task())
         barrier = threading.Barrier(3)
         outcomes = []
