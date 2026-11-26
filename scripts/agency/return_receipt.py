@@ -1,4 +1,4 @@
-#!/usr/bin/env/env python3
+#!/usr/bin/env python3
 """Validate a local AI receipt and publish it to a GitHub issue using gh CLI."""
 import argparse,json,subprocess
 from pathlib import Path
