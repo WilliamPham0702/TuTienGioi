@@ -38,7 +38,7 @@ PoC trả lời 4 câu hỏi. Câu trả lời phải dựa trên **số liệu 
 
 **Lưu ý:** đây là asset **mức placeholder có chủ đích**, đủ để so sánh **khả năng engine** (lớp, pivot, tween, blend, particle, filter), **không** đại diện chất lượng art cuối. Không dùng ảnh hay asset nào từ Internet trong PoC, nên không có rủi ro giấy phép bên thứ ba.
 
-Công cụ (miễn phí): Node.js LTS, Phaser 4 (MIT), Vite (MIT), Godot 4.5 (MIT) kèm export templates chính thức, OBS Studio (GPL), Chrome/Edge sẵn có. Các file giấy phép được liệt kê trong `poc/assets/LICENSES.md` và `poc/THIRD_PARTY.md`.
+Công cụ (miễn phí): Node.js LTS, Phaser 4.2.1 (MIT), Vite (MIT), Godot 4.7.2 (MIT, bản ổn định mới nhất lúc làm PoC) kèm export templates chính thức, OBS Studio (GPL), Chrome/Edge sẵn có. Các file giấy phép được liệt kê trong `poc/assets/LICENSES.md` và `poc/THIRD_PARTY.md`.
 
 ## 4. PoC-1 — Hình ảnh và animation (Phaser 4 và Godot 4)
 
@@ -81,7 +81,7 @@ Công cụ (miễn phí): Node.js LTS, Phaser 4 (MIT), Vite (MIT), Godot 4.5 (MI
 
 | Chỉ số | Công cụ (miễn phí, có sẵn) |
 |---|---|
-| FPS, frame time p50/p95/p99, số khung > 50 ms (giật) | Logger trong game ghi frame time từng khung, gửi về script đo local hoặc ghi file. Script tự tính phân vị |
+| FPS, frame time p50/p95/p99, số khung > 50 ms (giật) | Logger trong game ghi **khoảng thời gian thật giữa hai khung hình** (`performance.now()` / `Time.get_ticks_usec()`), không dùng `delta` của engine vì `delta` bị làm mượt. Gửi về bộ đo local; bộ đo tự tính phân vị |
 | Khung OBS bị rớt do render/encode | Cửa sổ **Stats** của OBS: chụp màn hình đầu và cuối mỗi lần chạy |
 | CPU %, RAM theo tiến trình (OBS, trình duyệt/Godot, Node) | `typeperf` của Windows, chạy tự động bằng file `.bat`, ghi CSV mỗi 1 giây |
 | Cấu hình máy | `dxdiag /t` và `systeminfo` ghi ra file text |
@@ -91,7 +91,7 @@ Công cụ (miễn phí): Node.js LTS, Phaser 4 (MIT), Vite (MIT), Godot 4.5 (MI
 
 | Chỉ số | Ngưỡng |
 |---|---|
-| FPS trung bình | ≥ 30 |
+| FPS trung bình | ≥ 29,5 (OBS Browser Source khóa ở 30 fps, nên trung bình đo được luôn xấp xỉ 30) |
 | Frame time p95 | ≤ 40 ms |
 | Khung > 50 ms | ≤ 0,5% tổng số khung |
 | Khung OBS bị rớt (render + encode) | < 1% |
@@ -101,11 +101,15 @@ Công cụ (miễn phí): Node.js LTS, Phaser 4 (MIT), Vite (MIT), Godot 4.5 (MI
 
 ### 5.4 Gói đo cho PO
 
-Claude chuẩn bị thư mục `poc/measure/` gồm:
-- `1_setup.bat`: kiểm tra và hướng dẫn cài Node.js LTS, OBS (đều miễn phí). Không cài gì khác.
-- `2_run.bat`: chọn cấu hình và số nhân vật, tự bật game và bộ ghi CPU/RAM, đếm 10 phút, tự dừng.
-- `3_collect.bat`: gom log, CSV, file cấu hình máy vào một file `.zip` để PO gửi lại.
-- `HUONG_DAN.md`: từng bước kèm ảnh, gồm cả cách thêm Browser Source và Window Capture trong OBS.
+Claude chuẩn bị thư mục `poc/measure/` (bản đã làm):
+- `1_kiem_tra.bat`: kiểm tra Node.js và OBS; thiếu thì mở trang tải miễn phí. Không tự cài gì.
+- `2_thu_nhanh.bat`: chạy thử 1 phút.
+- `3_do_day_du.bat`: chạy toàn bộ ma trận đo **tự động**. Bộ đo điều khiển OBS qua WebSocket có sẵn trong OBS 28+ (tự tạo scene, tự đặt 1080×1920 @ 30 fps, tự chuyển nguồn, tự đọc OBS Stats, tự quay 3 video 60 giây).
+- `4_game_core.bat`: chạy PoC-3 trên máy PO.
+- `5_gom_ket_qua.bat`: gom kết quả thành một file `.zip` trên Desktop.
+- `HUONG_DAN.md`: hướng dẫn từng bước.
+
+CPU/RAM theo tiến trình được đo bằng PowerShell (`Get-Process`, `Win32_PerfFormattedData_PerfOS_Processor`). Cách này không phụ thuộc ngôn ngữ Windows, thay cho `typeperf` ghi trong bản kế hoạch đầu.
 
 PO chỉ cần làm theo hướng dẫn và gửi file `.zip`. Claude phân tích và ghi vào `POC_RESULTS.md`.
 

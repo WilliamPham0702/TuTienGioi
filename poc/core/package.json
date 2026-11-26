@@ -1,0 +1,14 @@
+{
+  "name": "tutiengioi-poc-core",
+  "private": true,
+  "version": "0.0.0",
+  "type": "module",
+  "description": "C-002 PoC-3: game core + local simulation + SQLite (throwaway PoC code, not product code). Requires Node.js >= 22.18 (runs .ts directly).",
+  "scripts": {
+    "test": "vitest run --reporter=verbose",
+    "scenarios": "node --no-warnings scripts/run-scenarios.ts"
+  },
+  "devDependencies": {
+    "vitest": "^3.2.0"
+  }
+}

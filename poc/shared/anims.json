@@ -1,0 +1,48 @@
+{
+  "_doc": "Shared animation definitions for both engines. 'wave' channels are procedural sine motions (amp in degrees for rot, unitless for scale, base units for y), phase in cycles. 'clips' are keyframed: key = [time_s, value]; values are interpolated with smoothstep. Layer names refer to rig.json; 'root' means the whole character.",
+  "waves": {
+    "idle": {
+      "period": 2.6,
+      "channels": [
+        {"layer": "body", "prop": "scaleY", "amp": 0.018, "phase": 0.0},
+        {"layer": "head", "prop": "rot", "amp": 2.2, "phase": 0.12},
+        {"layer": "face", "prop": "rot", "amp": 2.2, "phase": 0.12},
+        {"layer": "hair_front", "prop": "rot", "amp": 2.2, "phase": 0.12},
+        {"layer": "hat", "prop": "rot", "amp": 2.2, "phase": 0.12},
+        {"layer": "beard", "prop": "rot", "amp": 3.0, "phase": 0.2},
+        {"layer": "hair_back", "prop": "rot", "amp": 3.5, "phase": 0.3},
+        {"layer": "cape", "prop": "rot", "amp": 2.5, "phase": 0.35},
+        {"layer": "arm_l", "prop": "rot", "amp": 3.0, "phase": 0.25},
+        {"layer": "arm_r", "prop": "rot", "amp": -3.0, "phase": 0.25}
+      ]
+    },
+    "cultivate": {
+      "period": 3.2,
+      "channels": [
+        {"layer": "root", "prop": "y", "amp": 6.0, "phase": 0.0, "offset": -10.0},
+        {"layer": "body", "prop": "scaleY", "amp": 0.025, "phase": 0.0},
+        {"layer": "arm_l", "prop": "rot", "amp": 2.0, "phase": 0.2, "offset": -28.0},
+        {"layer": "arm_r", "prop": "rot", "amp": -2.0, "phase": 0.2, "offset": 28.0},
+        {"layer": "hair_back", "prop": "rot", "amp": 5.0, "phase": 0.3},
+        {"layer": "cape", "prop": "rot", "amp": 4.0, "phase": 0.35}
+      ]
+    }
+  },
+  "clips": {
+    "celebrate": {
+      "duration": 1.3,
+      "tracks": {
+        "arm_l": [[0, 0], [0.25, 125], [1.0, 125], [1.3, 0]],
+        "arm_r": [[0, 0], [0.25, -125], [1.0, -125], [1.3, 0]],
+        "root_y": [[0, 0], [0.3, -26], [0.6, 0], [0.8, -12], [1.0, 0]],
+        "head_rot": [[0, 0], [0.3, -6], [0.7, 6], [1.0, 0]]
+      }
+    },
+    "hop": {
+      "duration": 0.45,
+      "tracks": {
+        "root_y": [[0, 0], [0.2, -18], [0.45, 0]]
+      }
+    }
+  }
+}
