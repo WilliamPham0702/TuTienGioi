@@ -1,0 +1,24 @@
+{
+  "schema_version": 1,
+  "tasks": [
+    {
+      "task_id": "ROUTE-DEMO-CODE",
+      "status": "OPEN",
+      "task_type": "code",
+      "required_capabilities": ["tests"],
+      "preferred_capabilities": ["python"]
+    },
+    {
+      "task_id": "ROUTE-DEMO-DESIGN",
+      "status": "OPEN",
+      "task_type": "design",
+      "required_capabilities": ["review"]
+    },
+    {
+      "task_id": "ROUTE-DEMO-3D",
+      "status": "OPEN",
+      "required_capabilities": ["3d-modeling"]
+    }
+  ],
+  "note": "Synthetic routing fixture; does not assert live worker availability or AI invocation."
+}
