@@ -1,0 +1,92 @@
+name: AI task dispatch
+
+on:
+  push:
+    branches:
+      - feat/ai-agency-auto-dispatch-v1
+  issues:
+    types: [opened, edited, labeled, reopened]
+
+permissions:
+  issues: write
+  contents: read
+
+jobs:
+  workflow-smoke-test:
+    if: github.event_name == 'push'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Confirm workflow parsed and push trigger executed
+        shell: bash
+        run: |
+          set -euo pipefail
+          test -n "${GITHUB_WORKFLOW:-}"
+          test -n "${GITHUB_REPOSITORY:-}"
+          echo "Workflow syntax accepted by GitHub Actions; push smoke test passed."
+          echo "Issue dispatch integration remains pending until this workflow is on the default branch."
+
+  validate-and-notify:
+    if: github.event_name == 'issues' && contains(github.event.issue.labels.*.name, 'ai-task')
+    runs-on: ubuntu-latest
+    steps:
+      - name: Validate task packet
+        id: validate
+        env:
+          ISSUE_BODY: ${{ github.event.issue.body }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          missing=()
+          for heading in "Task ID" "Assigned AI" "Mode" "Status" "Scope" "Acceptance criteria" "Tests" "Deliverables"; do
+            if ! grep -qi "$heading" <<< "$ISSUE_BODY"; then
+              missing+=("$heading")
+            fi
+          done
+          if (("${#missing[@]}" > 0)); then
+            printf 'valid=false\n' >> "$GITHUB_OUTPUT"
+            printf 'missing=%s\n' "$(IFS=', '; echo "${missing[*]}")" >> "$GITHUB_OUTPUT"
+          else
+            printf 'valid=true\n' >> "$GITHUB_OUTPUT"
+            printf 'missing=none\n' >> "$GITHUB_OUTPUT"
+          fi
+
+      - name: Post dispatch notice
+        env:
+          GH_TOKEN: ${{ github.token }}
+          ISSUE_URL: ${{ github.event.issue.html_url }}
+          ISSUE_NUMBER: ${{ github.event.issue.number }}
+          VALID: ${{ steps.validate.outputs.valid }}
+          MISSING: ${{ steps.validate.outputs.missing }}
+          REPO: ${{ github.repository }}
+        shell: bash
+        run: |
+          set -euo pipefail
+          if [[ "$VALID" == "true" ]]; then
+            body=$(cat <<EOF
+          ## AI Agency dispatch notice
+
+          **Packet valid.**
+
+          This issue is in the AI task queue. The workflow has validated the required task fields and recorded the dispatch signal.
+
+          **Important:** this workflow does not wake or invoke a Claude/Copilot chat session. An executor must claim the task in an issue comment and publish work to the shared repository. If no native agent accepts it, the coordinator must set status to `WAITING_FOR_AGENT` and provide the Product Owner one manual activation step.
+
+          **Executor checklist**
+          1. Read this issue and all referenced upstream artifacts.
+          2. Comment with AI identity, exact mode, branch, and starting commit before editing.
+          3. Work only within the stated scope.
+          4. Commit deliverables and tests; post artifact paths and evidence.
+          5. Do not use paid services, secrets, or production resources.
+          EOF
+          )
+          else
+            body=$(cat <<EOF
+          ## AI Agency dispatch blocked — incomplete task packet
+
+          The task was **not dispatched** because required fields are missing: $MISSING
+
+          Update this issue with the required headings: Task ID, Assigned AI, Mode, Status, Scope, Acceptance criteria, Tests, Deliverables. The workflow will validate again when the issue is edited/reopened or the `ai-task` label is re-applied.
+          EOF
+          )
+          fi
+          gh issue comment "$ISSUE_NUMBER" --repo "$REPO" --body "$body"
