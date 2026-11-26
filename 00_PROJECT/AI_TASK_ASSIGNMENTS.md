@@ -1,15 +1,13 @@
 # AI Task Routing & Project Backlog — TuTienGioi
 
 ## Current operating rule
-This file no longer assigns permanent task ownership to a specific AI. Use `00_PROJECT/AI_ORCHESTRATION.md` for routing and `00_PROJECT/AI_TASK_TEMPLATE.md` for every assignment. ChatGPT is the preferred dispatcher, but any AI can coordinate or take over.
+This file no longer assigns permanent task ownership to a specific AI. Use `00_PROJECT/AI_ORCHESTRATION.md` for routing and `00_PROJECT/AI_TASK_TEMPLATE.md` for every assignment. ChatGPT is the preferred dispatcher. Only ChatGPT, Claude, and GitHub Copilot participate in this project.
 
 ## Free-first AI routing defaults
-- Copilot — Agent mode: scoped repository implementation, edits, tests.
-- DeepSeek — Reasoning/DeepThink: logic, algorithms, debugging, code analysis.
-- Gemini — Thinking/Research mode if available: research, independent review, QA, documentation.
-- ChatGPT — Thinking: task breakdown, specifications, integration and review; use agent/work mode only if actually available.
-- Claude — Code/Agent and deeper reasoning if available: difficult architecture, cross-module issues, complex debugging; reserve Pro quota.
-Mode labels vary by account UI. Assignment must include the exact available mode and fallback. Do not incur additional spend.
+- ChatGPT — Thinking: task breakdown, product specifications, orchestration, integration and final review.
+- Claude — Claude Code/Agent when available: technical architecture, difficult implementation, cross-module integration and complex debugging.
+- GitHub Copilot — Coding Agent/Agent mode: bounded repository implementation, edits, tests and focused review.
+Mode labels vary by account UI. Every task must specify the actual mode available and fallback. Do not incur additional spend.
 
 ## Task list (ownership is dynamically assigned per task)
 Task status labels: OPEN, CLAIMED, IN_PROGRESS, BLOCKED, REVIEW, DONE, CANCELLED. Check repository state and evidence before changing these statuses.
