@@ -4,22 +4,20 @@
 ChatGPT is the preferred dispatcher for the Product Owner, but no AI is the sole coordinator. Any AI that has repository access and reads this protocol can inspect the project, propose/claim tasks, execute a task within its scope, review work, and prepare a handoff. The GitHub repository is the shared source of truth; AI chat memory is not.
 
 ## AI roster and mode selection (free-first)
-Choose the exact mode available in the user's account UI. Mode names vary by product/version. Never claim a mode exists if it is unavailable.
+Only three AIs participate in this project. Do not assign tasks to or assume availability of any fourth AI.
 
-| AI | Preferred mode | Primary work | Use paid quota only when |
-|---|---|---|---|
-| ChatGPT | Thinking for planning/review; Agent/Work only if available and appropriate | Dispatch, decomposition, specs, integration/review, small scoped work | A difficult reasoning/review task cannot be handled with Free |
-| GitHub Copilot | Agent mode | Repository edits, coding, tests, focused implementation | Avoid paid features/usage beyond current entitlement |
-| DeepSeek | DeepThink/Reasoning for hard logic; ordinary chat for small tasks | Logic, debugging, coding assistance, alternative solutions | No paid API or subscription is required by project tasks |
-| Gemini | Thinking/Pro mode if available; otherwise standard mode | Research, independent review, QA, docs | Use free access first |
-| Claude | Claude Code/Agent mode for repo tasks; extended/deep reasoning when available | Architecture, difficult implementation, complex debugging | Reserve Pro quota for high-risk/high-complexity work |
+| AI | Preferred mode | Primary work |
+|---|---|---|
+| ChatGPT | Thinking for planning/review; Work/Agent only if available and appropriate | Product direction, GDD, task decomposition, orchestration, integration and final review |
+| Claude | Claude Code/Agent mode if available; otherwise Claude chat with repository access | Technical architecture, complex implementation, integration and difficult debugging |
+| GitHub Copilot | Coding Agent / Agent mode | Bounded repository implementation, tests, focused fixes and independent code review |
 
-Free-first rule: select the strongest free/available mode that can complete the task safely. Claude Pro is a specialist reserve, not the default executor. Do not purchase, subscribe, use paid API, or incur project charges.
+Free-first rule: use currently available access and modes. Do not purchase, subscribe, use paid APIs, or incur project charges without Product Owner approval.
 
 ## Dispatch requirements
 Every task assignment MUST explicitly state:
 1. Task ID and title.
-2. Assigned AI/account (ChatGPT, Claude, Copilot, DeepSeek, Gemini).
+2. Assigned AI/account (ChatGPT, Claude, GitHub Copilot).
 3. Exact mode to select in that product (and fallback mode if unavailable).
 4. Repository and branch; expected starting commit.
 5. Module/file scope (use module names only when grounded in current repository).
@@ -53,11 +51,10 @@ Every task assignment MUST explicitly state:
 ## Task routing quick guide
 | Task type | First choice | Mode | Reviewer |
 |---|---|---|---|
-| Small code change / UI implementation | Copilot | Agent | Gemini or ChatGPT review |
-| Game logic / algorithm / bug | DeepSeek | Reasoning/DeepThink | Copilot or Gemini review |
-| Research / technical comparison / policy check | Gemini | Thinking/Research mode | ChatGPT synthesis |
-| Product requirements / game design / UX / art direction | ChatGPT | Thinking | Gemini research; Claude feasibility only if needed |
-| Architecture / difficult cross-module issue | Claude (quota-reserved) | Agent/Code + deep reasoning available | Gemini independent review |
+| Small code change / UI implementation | GitHub Copilot | Coding Agent / Agent | Claude or ChatGPT review |
+| Tests, bounded bug reproduction and code review | GitHub Copilot | Coding Agent / Agent | Claude or ChatGPT review |
+| Product requirements / game design / UX / art direction | ChatGPT | Thinking | Claude feasibility review; Copilot consistency checks |
+| Architecture / difficult cross-module issue | Claude | Agent/Code + reasoning available | Copilot independent review; ChatGPT acceptance |
 | Integration / final acceptance checklist | ChatGPT | Thinking | Product Owner acceptance |
 
 Routing is a default, not a hard restriction. Dispatcher can select another AI when current availability, task context, skill, quota, or repository access makes it better. The assignment must explain the choice briefly.
