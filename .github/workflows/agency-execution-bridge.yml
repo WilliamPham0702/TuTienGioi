@@ -1,0 +1,46 @@
+name: AI Agency execution packet bridge
+on:
+  workflow_dispatch:
+    inputs:
+      issue_number:
+        description: GitHub issue number containing the AI task packet
+        required: true
+        type: string
+      worker_id:
+        description: Registered worker ID (must be enabled in workers.json)
+        required: true
+        type: string
+permissions:
+  contents: read
+  issues: read
+jobs:
+  prepare-packet:
+    if: vars.AGENCY_CI_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Fetch issue packet
+        env:
+          GH_TOKEN: ${{ github.token }}
+          REPO: ${{ github.repository }}
+          ISSUE_NUMBER: ${{ inputs.issue_number }}
+        run: gh issue view "$ISSUE_NUMBER" --repo "$REPO" --json number,title,body,url > issue.json
+      - name: Prepare execution packet
+        run: python scripts/agency/prepare_execution.py --issue-file issue.json --worker "${{ inputs.worker_id }}" --output execution-packet.json
+      - uses: actions/upload-artifact@v4
+        with:
+          name: ai-agency-execution-packet-${{ inputs.issue_number }}
+          path: execution-packet.json
+          if-no-files-found: error
+          retention-days: 7
+      - name: Report limitation
+        run: echo "Packet prepared only; no external AI session was invoked."
+  opt-in-notice:
+    if: vars.AGENCY_CI_ENABLED != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Disabled by default
+        run: echo "Execution bridge is opt-in. Set AGENCY_CI_ENABLED=true to enable manual runs."
