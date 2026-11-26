@@ -65,3 +65,7 @@ Not in MVP unless explicitly approved:
 
 ## 8. Definition of a successful MVP
 A real viewer can join a LIVE session, appear as a distinct chibi cultivator, accumulate eligible progress, trigger an allowed interaction, and visibly experience a breakthrough with an updated outfit/effect. The operator can control the session, and the game recovers from dropped connections without corrupting progression.
+
+
+## GDD hiện hành (2026-11-27)
+Xem [GDD_MASTER](01_GAME_DESIGN/GDD_MASTER.md) và [SYSTEM_SPEC](01_GAME_DESIGN/SYSTEM_SPEC/README.md). Trạng thái dự án không thay đổi.
