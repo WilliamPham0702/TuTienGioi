@@ -2,7 +2,7 @@ name: AI task dispatch
 
 on:
   issues:
-    types: [opened, labeled, reopened]
+    types: [opened, edited, labeled, reopened]
 
 permissions:
   issues: write
@@ -49,7 +49,7 @@ jobs:
             body=$(cat <<EOF
           ## AI Agency dispatch notice
 
-          <badge>Packet valid</badge>
+          **Packet valid.**
 
           This issue is in the AI task queue. The workflow has validated the required task fields and recorded the dispatch signal.
 
