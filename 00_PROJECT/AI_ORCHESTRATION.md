@@ -76,3 +76,12 @@ Any AI can take over by:
 
 ## Human approvals
 Product Owner approval is required for changes to approved product decisions, budget, paid services, account credentials, real TikTok integration, merge to main when required, and production deployment. AI dispatch and task claiming do not grant these approvals.
+
+
+## AI connection verification (shared GitHub reporting)
+- Run the standardized read-only connection check from `00_PROJECT/AI_CONNECTION_CHECK_PROMPT.md`.
+- Each AI must publish its own report to `00_PROJECT/AI_CONNECTION_REPORTS/<ai-slug>.md`; do not ask the Product Owner to relay results between chats.
+- Use one stable report per AI; update it on each check and include timestamp, selected platform mode, required-file read results, workflow understanding, repo/commit inspected, and access evidence.
+- When the Product Owner asks ChatGPT to check connections, ChatGPT must inspect the report directory/files directly on GitHub, compare report claims against accessible repository evidence, and return the status table. Missing report = NOT VERIFIED, not a request for the user to copy/paste results.
+- A report is self-reported. A status is CONNECTED only when required docs were read, workflow understood, and the report was successfully committed to this repository. Read access without successful report publication is PARTIAL.
+- Reports are connection evidence only; they do not grant task ownership or permission to modify project code.
