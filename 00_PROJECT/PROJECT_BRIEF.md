@@ -48,10 +48,12 @@ Not in MVP unless explicitly approved:
 - Unbounded gift-to-power conversion.
 - Full 3D character rigs or expansive 3D worlds before a 2D/2.5D prototype is evaluated.
 
-## 6. Roles and collaboration
-- Product Owner: WilliamPham0702 — final product decisions and acceptance.
-- ChatGPT: product/design support, visual direction, specifications, documentation, and review.
-- Claude: implementation and technical investigation, with code changes reviewed before release.
+## 6. AI collaboration and task routing
+- Product Owner: WilliamPham0702 — final authority on product decisions and acceptance.
+- ChatGPT is the preferred task dispatcher, but every AI may coordinate, split, claim, execute, review, or hand off tasks by following `00_PROJECT/AI_ORCHESTRATION.md`.
+- Use free-first routing. Each task must explicitly identify AI/account, exact mode to select, fallback mode, and why that AI/mode was selected. Claude Pro is quota-reserved for difficult architecture, cross-module work, and complex debugging.
+- Task state and decisions must be shared in GitHub, never depend on private chat history. One AI owns edits for a task/files at a time.
+- See `00_PROJECT/AI_ORCHESTRATION.md`, `00_PROJECT/AI_TASK_TEMPLATE.md`, and `00_PROJECT/AI_TASK_ASSIGNMENTS.md`.
 
 ## 7. Decisions still open
 - Exact 2D versus 2.5D implementation and rendering engine.
