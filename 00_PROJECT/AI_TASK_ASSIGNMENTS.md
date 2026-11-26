@@ -86,3 +86,22 @@ Prompt giao việc cho ChatGPT: `00_PROJECT/CHATGPT_PROMPTS.md`.
 Every task handoff includes task ID, owner, source versions/commit, deliverables and changed paths, assumptions, decisions needed, test/review evidence, risks, and next action.
 
 Claude submits technical proposals; ChatGPT reviews product implications; Product Owner approves. ChatGPT submits product/visual specifications; Claude reviews feasibility; Product Owner approves. Implementation starts only after these gates. Use feature branches and PRs. No merge, deployment, paid service, or external commitment without explicit approval. Never claim tests passed without recorded evidence.
+
+
+## AI shared orchestration (added 2026-11-26)
+
+ChatGPT is the preferred dispatcher for the Product Owner, but any AI may coordinate, claim, execute, review, and hand off tasks by following `00_PROJECT/AI_ORCHESTRATION.md`. GitHub is the source of truth; chat memory is not.
+
+### Free-first task routing
+- **Copilot — Agent Mode:** first choice for scoped repository edits and implementation tasks.
+- **DeepSeek — Reasoning/DeepThink:** first choice for game logic, algorithms, debugging and code assistance.
+- **Gemini — Thinking/Research mode (if available):** research, independent review, QA and documentation.
+- **ChatGPT — Thinking:** dispatch, task breakdown, requirements, integration and review; use any available agent/work mode only if appropriate and available.
+- **Claude — Code/Agent mode plus deep reasoning (if available):** reserve Pro quota for architecture, difficult cross-module work and complex debugging.
+Mode names depend on current UI and account entitlements. Every assignment must name the exact selectable mode and fallback. Prefer free access and never incur new project costs without PO approval.
+
+### Mandatory task assignment fields
+Every task must state: Task ID/title; AI/account; mode and fallback; why selected; repository; branch and starting commit; module/files in scope; dependencies; goal; acceptance criteria; out-of-scope; tests/evidence; deliverables; handoff and next owner. Use `00_PROJECT/AI_TASK_TEMPLATE.md`.
+
+### Shared task claiming and handoff
+Use GitHub Issues as the shared task board when available, otherwise `00_PROJECT/TASK_BOARD.md`. One AI owns edits per task/files at a time. Other AIs may review or research in parallel only when not editing overlapping scope. Before takeover, read shared project docs and verify code/branch/commit/test evidence. Task statuses: OPEN, CLAIMED, IN_PROGRESS, BLOCKED, REVIEW, DONE, CANCELLED. A task is DONE only with test/verification evidence. Any AI may take over; Product Owner retains approvals for scope, design, paid services, secrets, merge/release and production deployment.
