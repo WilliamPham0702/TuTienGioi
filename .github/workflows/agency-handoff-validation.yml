@@ -20,6 +20,8 @@ permissions:
 
 jobs:
   validate:
+    # Opt-in only: prevents unexpected Actions usage or charges.
+    if: vars.AGENCY_CI_ENABLED == 'true'
     runs-on: ubuntu-latest
     steps:
       - name: Checkout repository
