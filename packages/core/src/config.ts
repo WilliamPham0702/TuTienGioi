@@ -2,20 +2,20 @@
  * Toàn bộ con số game nằm ở đây, KHÔNG nằm trong luật.
  * Mọi giá trị là TẠM (D-017) — lấy từ GAME_FLOW_v0.1, chờ PO duyệt sau mô phỏng.
  */
-export type RootId = 'tap' | 'tu' | 'tam' | 'song' | 'nhatpham' | 'thien' | 'di';
+export type RootId = 'tap' | 'song' | 'tam' | 'thien' | 'di' | 'tien' | 'thanhthe';
 export type SeatRole = 'truongLao' | 'truongPhai' | 'tongChu';
 
 export const GAME_CONFIG = {
   provisional: true,
 
   roots: [
-    { id: 'tap', name: 'Tạp Linh Căn', mult: 1.0, chance: 0.4 },
-    { id: 'tu', name: 'Tứ Linh Căn', mult: 1.2, chance: 0.25 },
-    { id: 'tam', name: 'Tam Linh Căn', mult: 1.4, chance: 0.18 },
-    { id: 'song', name: 'Song Linh Căn', mult: 1.7, chance: 0.1 },
-    { id: 'nhatpham', name: 'Nhất Phẩm Linh Căn', mult: 2.0, chance: 0.05 },
-    { id: 'thien', name: 'Thiên Linh Căn', mult: 2.5, chance: 0.018 },
-    { id: 'di', name: 'Dị Linh Căn', mult: 3.0, chance: 0.002 },
+    { id: 'tap', name: 'Tạp Linh Căn', mult: 1, chance: 0.35 },
+    { id: 'song', name: 'Song Linh Căn', mult: 2, chance: 0.25 },
+    { id: 'tam', name: 'Tam Linh Căn', mult: 3, chance: 0.18 },
+    { id: 'thien', name: 'Thiên Linh Căn', mult: 4, chance: 0.12 },
+    { id: 'di', name: 'Dị Linh Căn', mult: 5, chance: 0.06 },
+    { id: 'tien', name: 'Tiên Linh Căn', mult: 6, chance: 0.03 },
+    { id: 'thanhthe', name: 'Thánh Thể', mult: 10, chance: 0.01 },
   ] as { id: RootId; name: string; mult: number; chance: number }[],
 
   baseTuViPerSec: 1,
@@ -40,9 +40,8 @@ export const GAME_CONFIG = {
   breakCooldownMs: 60_000,
   breakPillBonus: 0.2,
 
-  // Linh thạch (D-014: tự luyện hóa thành Tu Vi)
-  tuViPerLowStone: 10,
-  likeToLowStone: 1,
+  // Like hợp lệ cộng trực tiếp Tu Vi theo Linh Căn; giữ giới hạn chống spam hiện tại.
+  tuViPerLike: 5,
   likeCapPerMinute: 60,
 
   /** Quà → Tu Vi (D-010: tính vào Chiến Lực, không trần). Bảng cố định, công khai, không ngẫu nhiên (D-018). CHỜ D-007. */
