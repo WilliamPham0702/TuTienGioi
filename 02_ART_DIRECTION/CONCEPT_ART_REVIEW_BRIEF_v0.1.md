@@ -32,26 +32,40 @@ Các màu dưới đây là nhóm gợi ý, không phải mã màu khóa cứng:
 - Tông môn chính đạo không dùng đen, đỏ máu hoặc màu u ám làm bảng màu chủ đạo. Có thể dùng chúng cho Tâm Ma, phản diện, Thiên Kiếp hoặc cảnh tương phản.
 - Màu không phải tín hiệu duy nhất cho chức vụ/cảnh giới; kết hợp silhouette, huy hiệu, hoa văn và phụ kiện.
 
-## 3. Bộ concept cần duyệt
+## 3. Một bối cảnh duy nhất — quảng trường ngoài trời trước đại điện
 
-### A. Đại điện tông môn — key environment
-- Đại điện và sân rộng, kiến trúc tiên gia phương Đông, mái cong, bậc đá lớn, lan can, đèn lồng và hoa.
-- Xa cảnh có núi tiên, mây tầng, thác hoặc cầu mây; gần cảnh có sân nghi lễ và lối vào rộng.
-- Ánh sáng ban ngày/hoàng hôn dịu, có điểm sáng thần thánh nhưng không cháy trắng.
-- Tách tối thiểu ba lớp: hậu cảnh núi trời; trung cảnh kiến trúc; tiền cảnh sân/bậc thềm.
-- Bố cục trung tâm đủ thoáng để đặt nghi lễ, nhân vật spotlight và hiệu ứng.
+Game chỉ sử dụng **một cảnh nền duy nhất**: quảng trường/sân đá ngoài trời trước đại điện chính của tông môn. Đây là sân khấu cố định xuyên suốt phiên TikTok LIVE. Không tạo cảnh đại điện trong nhà, bản đồ phụ, khu vực khám phá, màn chơi riêng, nền võ đài thay thế hoặc chuyển cảnh sang địa điểm khác.
 
-### B. Dàn nhân vật đại diện — character lineup
-Tạo một nhóm nhỏ để kiểm tra độ đa dạng và tính thống nhất:
-1. Đệ tử mới nhập môn: trang phục đơn giản, màu xanh ngọc hoặc lam nhạt.
-2. Đệ tử có thiên phú: trang phục hồng đào hoặc vàng nhạt, phụ kiện riêng.
-3. Chấp sự: silhouette gọn gàng, đai/huy hiệu rõ, phối ivory + màu nhấn.
-4. Trưởng lão: nhiều lớp áo, tay áo và hoa văn tinh tế, có thể dùng lavender hoặc xanh ngọc đậm hơn.
-5. Tông chủ: dáng đứng quyền uy, pháp bào cao cấp, điểm nhấn vàng kim/cam nắng nhưng không quá phô trương.
+Bố cục dọc 9:16, nhìn chính diện hơi từ trên cao, cân đối và có chiều sâu:
+- **15% trên cùng:** bầu trời, mây sáng và núi tiên xa; ánh sáng ban ngày ấm.
+- **15%–30%:** đại điện chính trên đài cao, ngai Tông chủ ở giữa, bảng hiệu trống không chữ và cầu thang rộng.
+- **30%–40%:** sân/hiên cao với các ghế phụ hai bên dành cho trưởng lão; để trống khi chưa có nhân vật.
+- **40%–55%:** vòng nghi lễ tròn khắc trên đá ở chính giữa, dùng làm điểm đặt đạo cụ hoặc hiệu ứng khi có sự kiện.
+- **55%–85%:** quảng trường đá rộng, có phối cảnh và đủ không gian cho khoảng 60 nhân vật nhỏ đứng theo hàng.
+- **15% dưới cùng:** nền đá và lan can thấp, ít chi tiết vì có thể bị lớp chat LIVE che.
 
-Nhân vật cần có mặt và biểu cảm dễ đọc ở kích thước nhỏ; giữ được nhận diện khi đổi cảnh giới/trang phục.
+Ánh sáng ban ngày ấm, bảng màu ngọc, xanh trời, trắng ngà và điểm vàng nhạt. Kiến trúc tiên gia phương Đông, mái cong, bậc đá lớn, lan can, đèn lồng và hoa. Bản nền không có nhân vật, chữ, logo, HUD hoặc nút giao diện.
 
-### C. Hiệu ứng tu luyện — VFX language
+### 3.1 Tách lớp kỹ thuật của cùng một cảnh
+- **Layer A — hậu cảnh:** chỉ bầu trời, mây và núi xa, phủ toàn canvas.
+- **Layer B — trung cảnh:** đại điện, đài cao, ngai, cầu thang và ghế phụ; nền trong suốt.
+- **Layer C — tiền cảnh:** sân/quảng trường đá, vòng nghi lễ và lan can; nền trong suốt.
+
+Ba layer phải cùng kích thước, cùng tọa độ và khớp tuyệt đối khi ghép lại. Đây là cách tạo parallax/chiều sâu cho **một cảnh duy nhất**, không phải ba background độc lập.
+
+Đá Đo Linh Căn, vòng khiêu chiến và dấu ấn nghi lễ là đạo cụ/overlay riêng có thể bật tắt trên mặt sân; không tạo background mới cho từng hoạt động.
+
+### 3.2 Dàn nhân vật đại diện — character lineup
+Tạo nhóm 5 vai trò để kiểm tra độ đa dạng và tính thống nhất, nhưng **tất cả phải theo đúng phong cách của 5 nhân vật đầu tiên do PO chọn**:
+1. Đệ tử mới nhập môn.
+2. Đệ tử có thiên phú.
+3. Chấp sự.
+4. Trưởng lão.
+5. Tông chủ.
+
+Không dùng nhóm 5 nhân vật tạo ra ở lần sau đã bị PO loại làm tham chiếu. Nhân vật cần có mặt và biểu cảm dễ đọc ở kích thước nhỏ; giữ được nhận diện khi đổi cảnh giới/trang phục.
+
+### 3.3 Hiệu ứng tu luyện — VFX language
 - Tu luyện thường: linh khí mảnh, hạt sáng nhỏ, vòng khí chuyển động chậm.
 - Đột phá: phù văn mở rộng, cột sáng và lớp áo/hào quang đổi cấp.
 - Thiên Kiếp: mây tụ, sét có hướng, pháp trận bảo hộ; tránh flash trắng toàn màn hình.
@@ -68,7 +82,7 @@ Nhân vật cần có mặt và biểu cảm dễ đọc ở kích thước nh�
 
 ## 5. Phạm vi review và điều kiện nghiệm thu
 
-**Bộ review nhỏ chỉ gồm:** 1 cảnh đại điện, 1 lineup 5 nhân vật, 1 sheet thử màu trang phục, 1 sheet hiệu ứng tu luyện. Chưa sản xuất 10 bộ trang phục hoàn chỉnh hoặc toàn bộ asset P0.
+**Bộ review nhỏ chỉ gồm:** (1) một cảnh quảng trường ngoài trời trước đại điện, có bản ghép hoàn chỉnh và bản tách 3 layer; (2) một lineup 5 nhân vật; (3) một sheet thử màu trang phục; (4) một sheet hiệu ứng tu luyện. Chưa sản xuất 10 bộ trang phục hoàn chỉnh hoặc toàn bộ asset P0.
 
 PO đánh giá theo 5 tiêu chí:
 - Đúng chất tiên hiệp và tông môn chính đạo.
@@ -86,3 +100,23 @@ Chỉ sau khi PO duyệt bộ review mới mở rộng thành asset P0.
 - Chỉ sử dụng công cụ đã có trong gói hiện tại hoặc công cụ mã nguồn mở phù hợp.
 - Ghi lại nguồn và điều khoản sử dụng của mọi tài nguyên bên ngoài trước khi đưa vào game.
 - Không tạo bộ asset lớn trước khi concept review được duyệt.
+
+
+## 7. Quy trình concept theo prompt của PO (25/11/2026)
+
+### 7.1 Nhân vật đệ tử Luyện Khí — duyệt trước, tách lớp sau
+- Dùng đúng 5 hình nhân vật đầu tiên PO cung cấp làm tham chiếu bắt buộc: tỷ lệ đầu/thân khoảng 2.5–3 đầu, kiểu mặt, điểm sáng mắt, line art sạch, cel shading mềm và chất lượng trang phục tương đương.
+- Tạo trước **một nhân vật hoàn chỉnh**, toàn thân, góc 3/4 chính diện, tư thế trung tính, đứng thẳng, tay thả lỏng, nền trong suốt, không chữ và không bóng đổ mặt đất.
+- Nhân vật thử nghiệm: đệ tử ngoại môn Luyện Khí, đạo bào xanh ngọc nhạt + trắng ngà, đai vải, tóc buộc gọn, vẻ bình tĩnh quyết tâm, không vũ khí.
+- Chỉ sau khi PO duyệt hình hoàn chỉnh mới tạo parts sheet cho chính nhân vật đó. Tách 11 phần, nền trong suốt, có khoảng trống, không chồng lấp: (1) tóc sau; (2) đầu + mặt, không tóc trước, mắt mở; (3) tóc trước/mái; (4) thân áo, không tay; (5) tay trái + ống tay; (6) tay phải + ống tay; (7) vạt áo dưới; (8) chân trái + giày; (9) chân phải + giày; (10) đai lưng/dải thắt; (11) đầu cùng nhân vật với mắt nhắm để chớp mắt.
+- Các phần bị che trong tư thế lắp ráp phải được vẽ dư ở khớp để có thể xoay mà không hở. Giữ nguyên scale và màu so với hình đã duyệt. Nếu một sheet không đủ chỗ, chia thành hai sheet (phần 1–6 và 7–11).
+
+### 7.2 Nền quảng trường ngoài trời — một cảnh, ba lớp
+- Dùng 5 nhân vật đầu tiên chỉ làm tham chiếu phong cách, không đưa nhân vật vào ảnh nền.
+- Tạo một background dọc 9:16, chính diện hơi từ trên cao, đối xứng; theo đúng phân vùng ở mục 3.
+- Bản đầu tiên là **một hình nền hoàn chỉnh**, không chữ, không nhân vật, không UI.
+- Chỉ sau khi PO duyệt bản ghép mới tách lại đúng cùng cảnh thành 3 layer A/B/C. Các layer phải giữ nguyên kích thước và alignment. Nếu công cụ không tạo alpha trong suốt tốt, ưu tiên bản nền hoàn chỉnh chất lượng cao; khâu tách lớp có thể xử lý sau.
+- Không tạo thêm cảnh đêm/ngày, đại điện trong nhà hoặc bản đồ phụ trừ khi PO yêu cầu riêng.
+
+### 7.3 Điều kiện dừng
+Không tạo hàng loạt nhân vật, trang phục hoặc asset P0 trước khi PO duyệt trực tiếp nhân vật mẫu và cảnh nền. Không tự thay thế bộ 5 hình tham chiếu chuẩn bằng phong cách khác. Ngân sách bổ sung vẫn là 0 VND.
