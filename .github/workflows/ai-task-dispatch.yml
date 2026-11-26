@@ -69,7 +69,7 @@ jobs:
 
           This issue is in the AI task queue. The workflow has validated the required task fields and recorded the dispatch signal.
 
-          **Important:** this workflow does not wake or invoke a Claude/Copilot chat session. An executor must claim the task in an issue comment and publish work to the shared repository. If no native agent accepts it, the coordinator must set status to `WAITING_FOR_AGENT` and provide the Product Owner one manual activation step.
+          **Important:** this workflow does not wake or invoke a Claude/Copilot chat session. An executor must claim the task in an issue comment and publish work to the shared repository. If no native agent accepts it, the coordinator must set status to \`WAITING_FOR_AGENT\` and provide the Product Owner one manual activation step.
 
           **Executor checklist**
           1. Read this issue and all referenced upstream artifacts.
@@ -85,7 +85,7 @@ jobs:
 
           The task was **not dispatched** because required fields are missing: $MISSING
 
-          Update this issue with the required headings: Task ID, Assigned AI, Mode, Status, Scope, Acceptance criteria, Tests, Deliverables. The workflow will validate again when the issue is edited/reopened or the `ai-task` label is re-applied.
+          Update this issue with the required headings: Task ID, Assigned AI, Mode, Status, Scope, Acceptance criteria, Tests, Deliverables. The workflow will validate again when the issue is edited/reopened or the \`ai-task\` label is re-applied.
           EOF
           )
           fi
