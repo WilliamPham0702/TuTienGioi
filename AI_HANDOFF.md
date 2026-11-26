@@ -1,44 +1,29 @@
-# AI Handoff Protocol — TuTienGioi
+# AI Handoff & Shared Orchestration — TuTienGioi
 
-## Shared source of truth
-GitHub repository: https://github.com/WilliamPham0702/TuTienGioi
+## Authoritative workflow
+Current workflow is defined by `00_PROJECT/AI_ORCHESTRATION.md` and `00_PROJECT/AI_TASK_TEMPLATE.md`. These supersede any older fixed AI role assignment or manual prompt-copy workflow.
 
-Read these files before starting substantial work:
-1. `00_PROJECT/PROJECT_BRIEF.md`
-2. `00_PROJECT/DECISION_LOG.md`
-3. `01_GAME_DESIGN/GDD_v0.1.md`
-4. Relevant design/technical documents for the task.
+- Product Owner: WilliamPham0702; final approval for product scope, gameplay/design decisions, budget, account access, real TikTok connection, merge/release and deployment.
+- ChatGPT is the preferred dispatcher, but not an exclusive coordinator. Any AI may inspect project status, split/propose tasks, claim open tasks, execute within scope, review non-overlapping work, and hand off.
+- Prefer free modes/accounts. Claude Pro is reserved for high-complexity work. Each task must name AI, exact selectable mode, fallback, repository/branch/commit, scope, tests/evidence, and handoff.
+- Shared source of truth is GitHub files/issues/commits, not private AI chat memory.
 
-## Responsibility boundaries
-- Product Owner (WilliamPham0702): approves scope, priorities, product decisions, and acceptance.
-- ChatGPT: product design, visual direction, UX, specifications, documentation, and review.
-- Claude: technical architecture, implementation, tests, and engineering reports.
+## Read before work
+1. `00_PROJECT/AI_ORCHESTRATION.md`
+2. `00_PROJECT/AI_TASK_TEMPLATE.md`
+3. `00_PROJECT/PROJECT_BRIEF.md`
+4. `00_PROJECT/DECISION_LOG.md`
+5. `01_GAME_DESIGN/GDD_v0.1.md`
+6. Current task's related documents
+7. Current status/task board and latest handoff
 
-These are working responsibilities, not a claim that either AI has unrestricted access or can act autonomously across accounts.
+## Safety and verification
+- Never expose or commit secrets, tokens, credentials, cookies, or personal data.
+- Do not incur charges or use paid APIs/services/assets without PO approval.
+- Do not modify overlapping files with another AI's active task.
+- Use feature branches and PRs for implementation. No production deploy without explicit PO approval.
+- Verify actual repository state, branch, commit, diff, and tests; never claim tests pass without evidence.
+- Keep handoff updated at checkpoints. Treat older handoffs as historical; verify against code and latest project docs.
 
-## Required handoff format
-Every handoff must include:
-- Task ID and title.
-- Goal and user-visible outcome.
-- Source documents and exact version/commit.
-- Approved constraints and decisions.
-- Deliverables and changed file paths.
-- Test evidence (commands, results, environment).
-- Known limitations and unresolved questions.
-- Next owner and next action.
-
-## Engineering safety
-- Never commit secrets, API keys, access tokens, private credentials, or personal data.
-- Do not put TikTok credentials in frontend code or repository files.
-- Use environment variables or a secrets manager for runtime credentials.
-- Work on feature branches; do not push experimental work directly to `main`.
-- Open a pull request for review before merging.
-- Do not deploy to production without explicit Product Owner approval.
-- Treat TikTok integration libraries and unofficial event sources as unverified until their current terms, stability, and policy compliance are checked.
-- Include tests and evidence; do not claim tests passed unless they were actually run.
-
-## Current project status
-- Repository created and accessible to the connected GitHub integration.
-- Initial project brief, game design baseline, decision log, and handoff protocol added.
-- No engine, rendering stack, deployment target, or TikTok integration method has been selected.
-- No game code has been implemented yet.
+## Handoff fields
+Task ID/title; assigned AI and mode; goal; source docs and commit; approved constraints; files changed; test commands and actual results; limitations/blockers; next task/owner/action.
