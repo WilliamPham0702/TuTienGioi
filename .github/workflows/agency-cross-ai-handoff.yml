@@ -1,0 +1,48 @@
+name: AI Agency cross-agent handoff simulation
+on:
+  pull_request:
+    paths:
+      - "00_PROJECT/AGENCY/**"
+      - "scripts/agency/**"
+      - ".github/workflows/agency-cross-ai-handoff.yml"
+  push:
+    branches: [main]
+    paths:
+      - "00_PROJECT/AGENCY/**"
+      - "scripts/agency/**"
+      - ".github/workflows/agency-cross-ai-handoff.yml"
+permissions:
+  contents: read
+jobs:
+  receiver-simulation:
+    # Opt-in to avoid unplanned Actions usage.
+    if: vars.AGENCY_CI_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Checkout producer workspace
+        uses: actions/checkout@v4
+        with:
+          path: producer_workspace
+      - name: Checkout receiver workspace
+        uses: actions/checkout@v4
+        with:
+          path: receiver_workspace
+      - name: Set up Python
+        uses: actions/setup-python@v5
+        with:
+          python-version: "3.12"
+      - name: Run receiver unit tests in isolated workspace
+        working-directory: receiver_workspace
+        run: python -m unittest discover -s scripts/agency -p "test_receive_handoff.py" -v
+      - name: Receiver reads committed handoff in separate checkout
+        working-directory: receiver_workspace
+        run: |
+          python scripts/agency/receive_handoff.py \
+            --root . \
+            --handoff 00_PROJECT/AGENCY/handoffs/handoff-test-002.json \
+            --receiver-ai synthetic-agent-b \
+            --receipt-output 00_PROJECT/AGENCY/tests/receiver-simulation-receipt.json
+      - name: Confirm simulated receiver receipt
+        working-directory: receiver_workspace
+        run: |
+          python -c "import json; r=json.load(open('00_PROJECT/AGENCY/tests/receiver-simulation-receipt.json')); assert r['receipt_status']=='RECEIVED_AND_VERIFIED_SIMULATION'; print('Receiver simulation verified:', r['asset_id'], r['sha256'])"
