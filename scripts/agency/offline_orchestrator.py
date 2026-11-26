@@ -6,6 +6,7 @@ import copy
 import hashlib
 import json
 import threading
+from pathlib import PurePosixPath
 from typing import Any
 
 ALLOWED_AI = {"ChatGPT", "Claude"}
@@ -24,6 +25,27 @@ def _fingerprint(task: dict[str, Any]) -> str:
     return hashlib.sha256(encoded.encode("utf-8")).hexdigest()
 
 
+def _safe_relative_path(value: Any) -> bool:
+    """Reject absolute, traversing, Windows-style, and empty repository paths."""
+    if not isinstance(value, str) or not value.strip() or "\\" in value:
+        return False
+    path = PurePosixPath(value)
+    if path.is_absolute() or any(part in {"", ".", ".."} for part in path.parts):
+        return False
+    if path.parts and ":" in path.parts[0]:
+        return False
+    return True
+
+
+def _within_scope(path: str, roots: list[str]) -> bool:
+    normalized = PurePosixPath(path).as_posix()
+    for root in roots:
+        normalized_root = PurePosixPath(root).as_posix().rstrip("/")
+        if normalized == normalized_root or normalized.startswith(normalized_root + "/"):
+            return True
+    return False
+
+
 def validate_task(task: dict[str, Any]) -> None:
     if not isinstance(task, dict):
         raise ValueError("task must be an object")
@@ -33,9 +55,8 @@ def validate_task(task: dict[str, Any]) -> None:
         raise ValueError("missing required fields: " + ", ".join(missing))
     if task["assigned_ai"] not in ALLOWED_AI:
         raise ValueError("assigned_ai must be ChatGPT or Claude")
-    if not isinstance(task["scope"], list) or not all(
-        isinstance(path, str) and path.strip() and not path.startswith("/")
-        and ".." not in path.split("/") for path in task["scope"]
+    if not isinstance(task["scope"], list) or not task["scope"] or not all(
+        _safe_relative_path(path) for path in task["scope"]
     ):
         raise ValueError("scope must contain safe relative repository paths")
     for flag, message in FORBIDDEN_FLAGS.items():
@@ -114,20 +135,35 @@ class OfflineOrchestrator:
                 raise ValueError("task must be CLAIMED before execution")
             record["status"] = "IN_PROGRESS"
             task = copy.deepcopy(item["task"])
-        result = self.executor.execute(task)
-        changed = result.get("changed_paths", [])
-        allowed = task["scope"]
-        if not changed or any(not any(path == root or path.startswith(root.rstrip("/") + "/") for root in allowed) for path in changed):
+        try:
+            result = self.executor.execute(task)
+        except Exception:
             with self._lock:
-                record["status"] = "BLOCKED"
-                record["blocker"] = "SCOPE_VIOLATION"
+                if record["status"] == "IN_PROGRESS":
+                    record["status"] = "BLOCKED"
+                    record["blocker"] = "EXECUTOR_ERROR"
+                return copy.deepcopy(record)
+
+        changed = result.get("changed_paths") if isinstance(result, dict) else None
+        if not isinstance(changed, list) or not changed or not all(
+            _safe_relative_path(path) and _within_scope(path, task["scope"])
+            for path in changed
+        ):
+            with self._lock:
+                if record["status"] == "IN_PROGRESS":
+                    record["status"] = "BLOCKED"
+                    record["blocker"] = "SCOPE_VIOLATION"
                 return copy.deepcopy(record)
         if not result.get("test_summary"):
             with self._lock:
-                record["status"] = "BLOCKED"
-                record["blocker"] = "MISSING_TEST_EVIDENCE"
+                if record["status"] == "IN_PROGRESS":
+                    record["status"] = "BLOCKED"
+                    record["blocker"] = "MISSING_TEST_EVIDENCE"
                 return copy.deepcopy(record)
         with self._lock:
+            # Cancellation wins over a late executor result.
+            if record["status"] != "IN_PROGRESS":
+                return copy.deepcopy(record)
             record["changed_paths"] = list(changed)
             record["test_summary"] = str(result["test_summary"])
             record["status"] = "REVIEW"
