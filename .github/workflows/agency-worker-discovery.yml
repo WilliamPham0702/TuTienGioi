@@ -1,0 +1,32 @@
+name: AI Agency worker discovery
+
+on:
+  pull_request:
+    paths:
+      - 'scripts/agency/**'
+      - '.github/workflows/agency-worker-discovery.yml'
+  workflow_dispatch:
+
+permissions:
+  contents: read
+
+jobs:
+  discovery-tests:
+    if: vars.AGENCY_CI_ENABLED == 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - uses: actions/checkout@v4
+      - uses: actions/setup-python@v5
+        with:
+          python-version: '3.x'
+      - name: Run worker discovery tests
+        run: python -m unittest discover -s scripts/agency -p 'test_discover_workers.py' -v
+      - name: Smoke-test discovery CLI
+        run: python scripts/agency/discover_workers.py --capability code
+
+  opt-in-notice:
+    if: vars.AGENCY_CI_ENABLED != 'true'
+    runs-on: ubuntu-latest
+    steps:
+      - name: Report safe opt-in state
+        run: echo "Discovery tests are opt-in. Set repository variable AGENCY_CI_ENABLED=true to run them."
