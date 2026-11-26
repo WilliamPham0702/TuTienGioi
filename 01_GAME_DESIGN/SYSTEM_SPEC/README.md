@@ -30,5 +30,8 @@ Nguyên tắc chung cho mọi spec:
 | SS-15 | `SS-15_anti_spam_live_edge.md` | Chống spam, điều kiện LIVE, reconnect, AFK | CONFIRMED + TUNABLE + OPEN |
 | SS-16 | `SS-16_post_tien_canh.md` | Hậu Tiên Cảnh và Phase 2+ | OPEN |
 | SS-17 | `SS-17_notification_narration.md` | Hàng đợi thông báo, TTS, tường thuật AI | CONFIRMED + TUNABLE |
+| SS-18 | `SS-18_data_persistence_recovery.md` | Dữ liệu cần lưu, không xóa nhân vật, khôi phục tất định | CONFIRMED + TUNABLE + OPEN |
 
 Sổ OPEN đầy đủ: `../GDD_MASTER.md`, Phụ lục A.
+
+Audit tình trạng sẵn sàng code và roadmap: `../../00_PROJECT/CODE_READINESS_AUDIT.md`.
