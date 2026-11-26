@@ -132,7 +132,7 @@ def main():
                         read(a.receipts, []), read(a.recovery_history, []),
                         read(a.human_approvals, []), now, max(0, a.limit), a.workspace)
     out = Path(a.out); out.parent.mkdir(parents=True, exist_ok=True)
-    out.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\\n", encoding="utf-8")
+    out.write_text(json.dumps(result, indent=2, ensure_ascii=False) + "\n", encoding="utf-8")
     print(json.dumps({"output": str(out), **result["summary"], "ai_invoked": False,
                       "dispatch_enabled": False, "auto_merge": False}, indent=2))
 if __name__ == "__main__": main()
