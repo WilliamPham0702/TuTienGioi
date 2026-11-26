@@ -4,6 +4,7 @@ on:
   push:
     branches:
       - feat/ai-agency-auto-dispatch-v1
+      - fix/ai-dispatch-notice-escaping
   issues:
     types: [opened, edited, labeled, reopened]
 
