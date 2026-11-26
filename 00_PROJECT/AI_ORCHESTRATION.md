@@ -85,3 +85,11 @@ Product Owner approval is required for changes to approved product decisions, bu
 - When the Product Owner asks ChatGPT to check connections, ChatGPT must inspect the report directory/files directly on GitHub, compare report claims against accessible repository evidence, and return the status table. Missing report = NOT VERIFIED, not a request for the user to copy/paste results.
 - A report is self-reported. A status is CONNECTED only when required docs were read, workflow understood, and the report was successfully committed to this repository. Read access without successful report publication is PARTIAL.
 - Reports are connection evidence only; they do not grant task ownership or permission to modify project code.
+
+
+## Shared-artifact handoff requirement (AI Agency)
+- A completed AI task must publish its deliverable and manifest to the shared workspace; a chat-only answer is not a completed handoff.
+- Downstream AI must retrieve the exact upstream artifact directly from GitHub/shared storage. The Product Owner must not download, re-upload, or copy results between agents.
+- For small artifacts, use the repository workspace. For large binary assets, use approved object storage only after it is provisioned. R2 is planned, not yet configured.
+- Read `00_PROJECT/AI_AGENCY_ARCHITECTURE.md`, `00_PROJECT/AI_SHARED_WORKSPACE.md`, and `00_PROJECT/AI_AGENCY_CONNECTION_TEST.md` before the connection test.
+- Autonomous dispatch requires a separate runner/adapters. Do not claim fully autonomous wake-up is implemented merely because these protocols/files exist.
