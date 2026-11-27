@@ -22,23 +22,45 @@ export const GAME_CONFIG = {
   presenceTimeoutMs: 30_000,
   maxTickGapMs: 60_000,
 
-  /** Tu Vi mỗi Tiểu Cảnh theo Đại Cảnh (mỗi Đại Cảnh 4 Tiểu Cảnh). Chân Tiên = cuối. */
+  /** Ngưỡng Tu Vi tích lũy để đạt từng Đại Cảnh, theo GDD checkpoint 2026-11-26. */
+  realmThresholds: [
+    1_200,
+    6_000,
+    24_000,
+    72_000,
+    180_000,
+    420_000,
+    900_000,
+    1_800_000,
+    3_600_000,
+    7_200_000,
+  ],
   realms: [
-    { name: 'Luyện Khí', perMinor: 300, breakChance: 0.95 },
-    { name: 'Trúc Cơ', perMinor: 1_500, breakChance: 0.9 },
-    { name: 'Kim Đan', perMinor: 6_000, breakChance: 0.8 },
-    { name: 'Nguyên Anh', perMinor: 20_000, breakChance: 0.7 },
-    { name: 'Hóa Thần', perMinor: 60_000, breakChance: 0.6 },
-    { name: 'Luyện Hư', perMinor: 150_000, breakChance: 0.5 },
-    { name: 'Hợp Thể', perMinor: 350_000, breakChance: 0.4 },
-    { name: 'Đại Thừa', perMinor: 750_000, breakChance: 0.3 },
-    { name: 'Độ Kiếp', perMinor: 1_500_000, breakChance: 0.2 },
-    { name: 'Chân Tiên', perMinor: 0, breakChance: 0 },
+    { name: 'Luyện Khí', perMinor: 300, breakChance: 1 },
+    { name: 'Trúc Cơ', perMinor: 1_200, breakChance: 1 },
+    { name: 'Kim Đan', perMinor: 4_500, breakChance: 1 },
+    { name: 'Nguyên Anh', perMinor: 12_000, breakChance: 1 },
+    { name: 'Hóa Thần', perMinor: 27_000, breakChance: 1 },
+    { name: 'Luyện Hư', perMinor: 60_000, breakChance: 1 },
+    { name: 'Hợp Thể', perMinor: 120_000, breakChance: 1 },
+    { name: 'Đại Thừa', perMinor: 240_000, breakChance: 1 },
+    { name: 'Độ Kiếp', perMinor: 540_000, breakChance: 1 },
+    { name: 'Tiên Cảnh', perMinor: 0, breakChance: 1 },
   ],
   minorNames: ['Sơ Kỳ', 'Trung Kỳ', 'Hậu Kỳ', 'Đại Viên Mãn'],
   autoBreakthrough: true,
-  breakCooldownMs: 60_000,
-  breakPillBonus: 0.2,
+  breakCooldownMs: 0,
+  breakPillBonus: 0,
+
+  /** Đan dược cộng thẳng Tu Vi; nhận/dùng không giới hạn, không cooldown. */
+  pills: {
+    tuKhiDan: { name: 'Tụ Khí Đan', tuVi: 100 },
+    ngungKhiDan: { name: 'Ngưng Khí Đan', tuVi: 500 },
+    trucCoDan: { name: 'Trúc Cơ Đan', tuVi: 1_500 },
+    kimDan: { name: 'Kim Đan Đan', tuVi: 5_000 },
+    nguyenAnhDan: { name: 'Nguyên Anh Đan', tuVi: 15_000 },
+    hoaThanDan: { name: 'Hóa Thần Đan', tuVi: 40_000 },
+  },
 
   // Like hợp lệ cộng trực tiếp Tu Vi theo Linh Căn; giữ giới hạn chống spam hiện tại.
   tuViPerLike: 5,
