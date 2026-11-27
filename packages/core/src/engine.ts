@@ -157,7 +157,7 @@ export class Game {
   private measureRoot(p: Player, at: number): void {
     const r = weightedPick(this.cfg.roots, this.rng);
     p.root = r.id;
-    const rare = r.id === 'thien' || r.id === 'di';
+    const rare = r.id === 'di' || r.id === 'tien' || r.id === 'thanhthe';
     this.say(rare ? 'high' : 'low', 'root', `Chúc mừng đạo hữu ${p.name} sở hữu ${r.name}!`, true, at);
   }
 
@@ -167,11 +167,12 @@ export class Game {
       p.likeWindowCount = 0;
     }
     const room = Math.max(0, this.cfg.likeCapPerMinute - p.likeWindowCount);
-    const stones = Math.min(Math.max(0, Math.floor(count)) * this.cfg.likeToLowStone, room);
-    p.likeWindowCount += stones;
-    if (stones > 0) {
-      this.addTuVi(p, stones * this.cfg.tuViPerLowStone, at, false);
-      this.addHearts(stones, at, p.id);
+    const likes = Math.min(Math.max(0, Math.floor(count)), room);
+    p.likeWindowCount += likes;
+    if (likes > 0) {
+      const rootMultiplier = this.cfg.roots.find((r) => r.id === p.root)?.mult ?? 1;
+      this.addTuVi(p, likes * this.cfg.tuViPerLike * rootMultiplier, at, false);
+      this.addHearts(likes, at, p.id);
     }
   }
 

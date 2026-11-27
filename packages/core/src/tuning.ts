@@ -130,7 +130,7 @@ function applyTuningUnchecked(cfg: GameConfig, o: TuningOverrides): { config: Ga
     if (x.perMinor !== undefined) set(`realms.${r.name}.perMinor`, r.perMinor, Math.round(x.perMinor), (v) => (r.perMinor = v));
     if (x.breakChance !== undefined) set(`realms.${r.name}.breakChance`, r.breakChance, x.breakChance, (v) => (r.breakChance = v));
   }
-  const scalar = ['baseTuViPerSec', 'tuViPerLowStone', 'likeCapPerMinute', 'tuViPerDiamond', 'assistPowerPerDiamond', 'powerSwing'] as const;
+  const scalar = ['baseTuViPerSec', 'likeCapPerMinute', 'tuViPerDiamond', 'assistPowerPerDiamond', 'powerSwing'] as const;
   for (const k of scalar) if (o[k] !== undefined) set(k, c[k], o[k]!, (v) => ((c as Record<string, unknown>)[k] = v));
   for (const r of c.roots) {
     const m = o.rootMults?.[r.id];
