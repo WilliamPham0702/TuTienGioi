@@ -131,52 +131,68 @@ describe('thả tim và quà', () => {
   });
 });
 
-describe('cảnh giới & đột phá (D-011)', () => {
-  it('lên Tiểu Cảnh tự động; Đại Viên Mãn thì dừng chờ đột phá', () => {
-    const g = new Game(fixed(0.99)); // 0.99 → luôn thất bại đột phá khi chance < 0.99
-    join(g, 'a');
-    const p = g.state.players.a!;
-    p.root = 'tap';
-    g.handle(ev({ type: 'gift', playerId: 'a', diamonds: 1000, at: 1 })); // 20.000 Tu Vi
-    expect(p.realm).toBe(0);
-    expect(p.minor).toBe(3);
-    expect(g.readyToBreak(p)).toBe(true);
-    expect(p.tuViTotal).toBe(20000); // không mất gì
+describe('cảnh giới tích lũy & đột phá tự động', () => {
+  it('đúng ngưỡng Tu Vi tích lũy theo checkpoint', () => {
+    expect(GAME_CONFIG.realmThresholds).toEqual([1200, 6000, 24000, 72000, 180000, 420000, 900000, 1800000, 3600000, 7200000]);
   });
 
-  it('thất bại: không mất Tu Vi, phải chờ hồi 60 giây rồi thử lại', () => {
-    const g = new Game(fixed(0.99));
-    join(g, 'a');
-    const p = g.state.players.a!;
-    p.minor = 3;
-    p.progress = 600;
-    p.tuViTotal = 5000;
-    expect(g.tryBreakthrough(p, 1000)).toBe('fail');
-    expect(p.tuViTotal).toBe(5000);
-    expect(p.realm).toBe(0);
-    expect(g.tryBreakthrough(p, 30_000)).toBe('cooldown');
-    expect(g.tryBreakthrough(p, 61_001)).toBe('fail');
-  });
-
-  it('thành công: lên Đại Cảnh mới, trở về Sơ Kỳ', () => {
+  it('tự động đạt cảnh giới khi chạm ngưỡng', () => {
     const g = new Game(fixed(0.1));
     join(g, 'a');
     const p = g.state.players.a!;
-    p.minor = 3;
-    p.progress = 600;
-    expect(g.tryBreakthrough(p, 1)).toBe('success');
-    expect([p.realm, p.minor, p.progress]).toEqual([1, 0, 0]);
+    p.root = 'tap';
+    g.handle(ev({ type: 'gift', playerId: 'a', diamonds: 60, at: 1 })); // 1,200 Tu Vi
+    expect(p.tuViTotal).toBe(1200);
+    expect(p.realm).toBe(0);
+    expect(p.minor).toBe(0);
   });
 
-  it('Trúc Cơ Đan tăng tỉ lệ một lần duy nhất', () => {
-    const g = new Game(fixed(0.97)); // 0.95 + 0.2 > 0.97
+  it('một lần cộng Tu Vi có thể vượt nhiều cảnh giới', () => {
+    const g = new Game(fixed(0.1));
     join(g, 'a');
     const p = g.state.players.a!;
-    p.minor = 3;
-    p.progress = 600;
-    p.breakBonus = 0.2;
-    expect(g.tryBreakthrough(p, 1)).toBe('success');
-    expect(p.breakBonus).toBe(0);
+    g.handle(ev({ type: 'gift', playerId: 'a', diamonds: 1200, at: 1 })); // 24,000 Tu Vi
+    expect(p.tuViTotal).toBe(24000);
+    expect(p.realm).toBe(2); // Kim Đan
+    expect(g.readyToBreak(p)).toBe(false);
+  });
+
+  it('không có thất bại, mất Tu Vi hoặc cooldown khi đột phá', () => {
+    const g = new Game(fixed(0.99));
+    join(g, 'a');
+    const p = g.state.players.a!;
+    p.tuViTotal = 72_000;
+    g.handle(ev({ type: 'gift', playerId: 'a', diamonds: 1, at: 1 }));
+    expect(p.realm).toBe(3);
+    expect(p.tuViTotal).toBe(72_020);
+    expect(g.tryBreakthrough(p, 999_999)).toBe('none');
+    expect(p.breakCooldownUntil).toBe(0);
+  });
+
+  it('đan dược cộng đúng Tu Vi, dùng không giới hạn và không cooldown', () => {
+    const g = new Game(fixed(0.1));
+    join(g, 'a');
+    const p = g.state.players.a!;
+    const cases = [
+      ['tuKhiDan', 100],
+      ['ngungKhiDan', 500],
+      ['trucCoDan', 1500],
+      ['kimDan', 5000],
+      ['nguyenAnhDan', 15000],
+      ['hoaThanDan', 40000],
+    ] as const;
+    for (const [pill, value] of cases) {
+      const before = p.tuViTotal;
+      expect(g.usePill('a', pill, 1)).toBe(true);
+      expect(p.tuViTotal - before).toBe(value);
+      expect(g.usePill('a', pill, 2)).toBe(true);
+    }
+    expect(p.breakCooldownUntil).toBe(0);
+  });
+
+  it('không dùng được đan dược cho người chơi không tồn tại', () => {
+    const g = new Game(fixed(0.1));
+    expect(g.usePill('missing', 'tuKhiDan', 1)).toBe(false);
   });
 });
 

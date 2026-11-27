@@ -290,58 +290,55 @@ export class Game {
 
   private addTuVi(p: Player, amount: number, at: number, announceBig: boolean): void {
     if (amount <= 0) return;
+    const previousRealm = p.realm;
     p.tuViTotal += amount;
-    let left = amount;
-    const last = this.cfg.realms.length - 1;
-    while (left > 0 && p.realm < last) {
-      const cost = this.cfg.realms[p.realm]!.perMinor;
-      const room = cost - p.progress;
-      if (left < room) {
-        p.progress += left;
-        break;
-      }
-      left -= room;
-      if (p.minor < 3) {
-        p.minor++;
-        p.progress = 0;
-        this.say('textOnly', 'minor', `${p.name} đạt ${this.cfg.realms[p.realm]!.name} ${this.cfg.minorNames[p.minor]}`, false, at);
-      } else {
-        p.progress = cost; // Đại Viên Mãn: đầy, chờ đột phá. Phần dư vẫn nằm trong tuViTotal.
-        break;
+    const thresholds = this.cfg.realmThresholds;
+    let realm = 0;
+    for (let i = 0; i < thresholds.length; i++) {
+      if (p.tuViTotal >= thresholds[i]!) realm = i;
+      else break;
+    }
+    p.realm = realm;
+    if (realm >= thresholds.length - 1) {
+      p.minor = 3;
+      p.progress = 0;
+    } else {
+      const floor = thresholds[realm]!;
+      const ceiling = thresholds[realm + 1]!;
+      const span = ceiling - floor;
+      const within = Math.max(0, p.tuViTotal - floor);
+      const segment = span / 4;
+      p.minor = Math.min(3, Math.floor(within / segment));
+      p.progress = within - p.minor * segment;
+    }
+    if (realm > previousRealm) {
+      for (let i = previousRealm + 1; i <= realm; i++) {
+        const name = this.cfg.realms[i]!.name;
+        this.award(p, i >= 1 ? 'nhapDao' : 'tanTu', at);
+        if (i === 2) this.award(p, 'kimDan', at);
+        if (i >= 8) this.award(p, 'doKiep', at);
+        this.say(i >= 8 ? 'high' : 'medium', 'breakthrough', `${p.name} tự động đột phá đạt ${name}!`, true, at);
       }
     }
     if (announceBig) this.say('medium', 'gift', `Đa tạ đạo hữu ${p.name} đã tặng quà!`, true, at);
   }
 
-  readyToBreak(p: Player): boolean {
-    return p.realm < this.cfg.realms.length - 1 && p.minor === 3 && p.progress >= this.cfg.realms[p.realm]!.perMinor;
+  /** Đan dược cộng trực tiếp Tu Vi; không giới hạn số lần, không cooldown. */
+  usePill(playerId: string, pillId: keyof GameConfig['pills'], at: number): boolean {
+    const p = this.state.players[playerId];
+    const pill = this.cfg.pills[pillId];
+    if (!p || !pill) return false;
+    this.addTuVi(p, pill.tuVi, at, false);
+    return true;
   }
 
-  /** Đột phá có thể thất bại nhưng không mất Tu Vi; chờ hồi rồi thử lại (D-011). */
-  tryBreakthrough(p: Player, now: number): 'none' | 'cooldown' | 'success' | 'fail' {
-    if (!this.readyToBreak(p)) return 'none';
-    if (now < p.breakCooldownUntil) return 'cooldown';
-    const chance = Math.min(1, this.cfg.realms[p.realm]!.breakChance + p.breakBonus);
-    p.breakBonus = 0; // Đan dược đột phá dùng một lần
-    if (this.rng.next() < chance) {
-      const from = this.cfg.realms[p.realm]!.name;
-      p.realm++;
-      p.minor = 0;
-      p.progress = 0;
-      p.xinMa = null;
-      if (p.realm >= 1) this.award(p, 'nhapDao', now);
-      if (p.realm >= 2) this.award(p, 'kimDan', now);
-      if (p.realm >= 8) this.award(p, 'doKiep', now);
-      const to = this.cfg.realms[p.realm]!.name;
-      const big = p.realm >= 3;
-      this.say(big ? 'high' : 'medium', 'breakthrough', `${p.name} đột phá từ ${from} lên ${to}!`, true, now);
-      // Tu Vi dư (tuViTotal) không chuyển vào tiểu cảnh mới: giữ đơn giản và dễ cân bằng.
-      return 'success';
-    }
-    p.breakCooldownUntil = now + this.cfg.breakCooldownMs;
-    p.xinMa = { until: now + this.cfg.xinMa.windowMs, hearts: 0 };
-    this.say('low', 'breakfail', `${p.name} đột phá thất bại, tu vi không tổn hao. Chờ hồi rồi thử lại.`, false, now);
-    return 'fail';
+  readyToBreak(_p: Player): boolean {
+    return false;
+  }
+
+  /** Đột phá đã được tự động hóa theo ngưỡng tích lũy; API cũ giữ tương thích. */
+  tryBreakthrough(_p: Player, _now: number): 'none' {
+    return 'none';
   }
 
   // ---------- Chiến Lực & khiêu chiến ----------
